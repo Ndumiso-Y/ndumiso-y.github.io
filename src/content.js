@@ -304,7 +304,6 @@ I could guess a letter only once. After I guessed a letter, my programming disab
       details:
         "Makweleng Butchery is joining our roster as client #5. I'm building a clean, informative site that highlights product quality, weekly specials, and conversions.",
       tags: ["New Client", "Website Build"],
-      progress: 60,
       video: {
         poster: "/assets/graphic-1.jpg", // Placeholder until real poster
       },
@@ -315,7 +314,6 @@ I could guess a letter only once. After I guessed a letter, my programming disab
       details:
         "End-to-end digital setup for a recruitment brand — website build for trust and clarity, plus ongoing social media management to drive awareness and leads.",
       tags: ["Website", "Social Management"],
-      progress: 35,
       video: {
         poster: "/assets/graphic-2.jpg", // Placeholder until real poster
       },
@@ -326,7 +324,6 @@ I could guess a letter only once. After I guessed a letter, my programming disab
       details:
         "Ntombi Fashions is a Yedwa family business. I'm grateful to use my digital marketing skills to craft their logo, run their social channels, and launch their e-commerce store.",
       tags: ["Family Business", "Logo", "Social", "E-commerce", "Video"],
-      progress: 80,
       video: {
         poster: "/assets/ntombis-thumb.jpg",
         mp4: "/assets/ntombis-1080.mp4",

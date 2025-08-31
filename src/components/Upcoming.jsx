@@ -10,7 +10,7 @@ export default function Upcoming() {
   
   const [expanded, setExpanded] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [playingVideo, setPlayingVideo] = useState(null);
+  const [playingFullVideo, setPlayingFullVideo] = useState(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -30,7 +30,7 @@ export default function Upcoming() {
   };
 
   const handleVideoClick = (index) => {
-    setPlayingVideo(playingVideo === index ? null : index);
+    setPlayingFullVideo(playingFullVideo === index ? null : index);
   };
 
   return (
@@ -43,39 +43,68 @@ export default function Upcoming() {
           {visible.map((it, i) => (
             <article key={i} className="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-sm">
               
-              {/* Video thumbnail or poster */}
+              {/* Video content */}
               {it.video?.poster && (
                 <div className="relative">
-                  {playingVideo === i ? (
-                    <video
-                      controls
-                      autoPlay
-                      preload="auto"
-                      poster={withBase(it.video.poster)}
-                      className="w-full aspect-[16/9] object-cover bg-slate-100"
-                      onEnded={() => setPlayingVideo(null)}
-                      onError={() => setPlayingVideo(null)}
-                    >
-                      {it.video.webm && <source src={withBase(it.video.webm)} type="video/webm" />}
-                      {it.video.mp4 && <source src={withBase(it.video.mp4)} type="video/mp4" />}
-                      <p className="text-sm text-slate-500 p-4">
-                        Your browser doesn't support HTML5 video.
-                      </p>
-                    </video>
-                  ) : (
+                  {playingFullVideo === i ? (
+                    /* Full video with controls */
+                    <div className="relative">
+                      <video
+                        controls
+                        autoPlay
+                        preload="auto"
+                        poster={withBase(it.video.poster)}
+                        className="w-full aspect-[16/9] object-cover bg-slate-100"
+                        onEnded={() => setPlayingFullVideo(null)}
+                        onError={() => setPlayingFullVideo(null)}
+                      >
+                        {it.video.webm && <source src={withBase(it.video.webm)} type="video/webm" />}
+                        {it.video.mp4 && <source src={withBase(it.video.mp4)} type="video/mp4" />}
+                        <p className="text-sm text-slate-500 p-4">
+                          Your browser doesn't support HTML5 video.
+                        </p>
+                      </video>
+                      <button 
+                        onClick={() => setPlayingFullVideo(null)}
+                        className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors flex items-center justify-center"
+                        aria-label="Close video"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ) : it.video.mp4 || it.video.webm ? (
+                    /* Autoplay muted video with click overlay */
                     <div className="relative cursor-pointer group" onClick={() => handleVideoClick(i)}>
-                      <picture>
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        poster={withBase(it.video.poster)}
+                        className="w-full aspect-[16/9] object-cover bg-slate-100"
+                        onError={(e) => {
+                          // Fallback to poster image if video fails
+                          e.target.style.display = 'none';
+                          e.target.nextElementSibling.style.display = 'block';
+                        }}
+                      >
+                        {it.video.webm && <source src={withBase(it.video.webm)} type="video/webm" />}
+                        {it.video.mp4 && <source src={withBase(it.video.mp4)} type="video/mp4" />}
+                      </video>
+                      
+                      {/* Fallback poster image */}
+                      <picture style={{ display: 'none' }}>
                         <source srcSet={withBase(it.video.poster.replace(/\.[^/.]+$/, '.avif'))} type="image/avif" />
                         <source srcSet={withBase(it.video.poster.replace(/\.[^/.]+$/, '.webp'))} type="image/webp" />
                         <img
                           src={withBase(it.video.poster)}
                           alt={it.name || "Project preview"}
                           className="w-full aspect-[16/9] object-cover bg-slate-100"
-                          loading="lazy"
                         />
                       </picture>
                       
-                      {/* Play button overlay */}
+                      {/* Play button overlay for full video */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
                         <div 
                           className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110"
@@ -86,6 +115,37 @@ export default function Upcoming() {
                           </svg>
                         </div>
                       </div>
+                      
+                      {/* "Coming Soon" badge */}
+                      <div className="absolute top-3 left-3">
+                        <span 
+                          className="text-xs px-2 py-1 rounded-full text-white font-medium"
+                          style={{ backgroundColor: brand }}
+                        >
+                          Coming Soon
+                        </span>
+                      </div>
+                      
+                      {/* Click for sound indicator */}
+                      <div className="absolute bottom-3 right-3">
+                        <span className="text-xs px-2 py-1 rounded-full bg-black/50 text-white">
+                          🔊 Click for sound
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Static poster image for projects without video */
+                    <div className="relative">
+                      <picture>
+                        <source srcSet={withBase(it.video.poster.replace(/\.[^/.]+$/, '.avif'))} type="image/avif" />
+                        <source srcSet={withBase(it.video.poster.replace(/\.[^/.]+$/, '.webp'))} type="image/webp" />
+                        <img
+                          src={withBase(it.video.poster)}
+                          alt={it.name || "Project preview"}
+                          className="w-full aspect-[16/9] object-cover bg-slate-100"
+                          loading="lazy"
+                        />
+                      </picture>
                       
                       {/* "Coming Soon" badge */}
                       <div className="absolute top-3 left-3">
@@ -116,22 +176,6 @@ export default function Upcoming() {
                         {t}
                       </span>
                     ))}
-                  </div>
-                )}
-                
-                {/* Progress indicator */}
-                {it.progress && (
-                  <div className="mt-4">
-                    <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
-                      <span>Progress</span>
-                      <span>{it.progress}%</span>
-                    </div>
-                    <div className="w-full bg-slate-200 rounded-full h-1.5">
-                      <div 
-                        className="h-1.5 rounded-full transition-all duration-300"
-                        style={{ backgroundColor: brand, width: `${it.progress}%` }}
-                      />
-                    </div>
                   </div>
                 )}
               </div>
