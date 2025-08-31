@@ -94,13 +94,6 @@ export default function Hero() {
               <li className="flex items-start gap-2"><span>✓</span><span>Conversion-focused messaging</span></li>
               <li className="flex items-start gap-2"><span>✓</span><span>Reliable delivery</span></li>
             </ul>
-
-
-            {/* scroll cue */}
-            <div className="mt-10 hidden md:flex items-center gap-2 text-xs text-slate-500">
-              <span className="scroll-dot" />
-              <span>Scroll</span>
-            </div>
           </div>
 
           {/* RIGHT – Portrait with stronger ring + parallax */}

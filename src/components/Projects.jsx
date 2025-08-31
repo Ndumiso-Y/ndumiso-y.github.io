@@ -10,6 +10,8 @@ export default function Projects() {
 
   const [expanded, setExpanded] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [modalProject, setModalProject] = useState(null);
+
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const set = () => { setIsDesktop(mq.matches); setExpanded(mq.matches); };
@@ -60,10 +62,13 @@ export default function Projects() {
                   <p className="mt-3 text-sm text-slate-700">
                     {clip(p)}{" "}
                     {p.desc && p.desc.length > (p.preview?.length || 160) && (
-                      <details className="inline">
-                        <summary className="inline cursor-pointer underline" style={{ color: brand }}>Read more</summary>
-                        <span className="ml-1">{p.desc}</span>
-                      </details>
+                      <button 
+                        onClick={() => setModalProject(p)}
+                        className="inline cursor-pointer underline" 
+                        style={{ color: brand }}
+                      >
+                        Read more
+                      </button>
                     )}
                   </p>
                 )}
@@ -101,6 +106,63 @@ export default function Projects() {
           </div>
         )}
       </div>
+
+      {/* Read More Modal */}
+      {modalProject && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 p-4 flex items-center justify-center"
+          onClick={() => setModalProject(null)}
+        >
+          <div
+            className="bg-white rounded-2xl p-6 max-w-2xl max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <h3 className="text-xl font-bold">{modalProject.name}</h3>
+              <button 
+                onClick={() => setModalProject(null)}
+                className="text-slate-500 hover:text-slate-700 text-xl leading-none"
+              >
+                ×
+              </button>
+            </div>
+            
+            {modalProject.thumb && (
+              <div className="mb-4">
+                <picture>
+                  <source srcSet={modalProject.thumb.replace(/\.[^/.]+$/, '.avif')} type="image/avif" />
+                  <source srcSet={modalProject.thumb.replace(/\.[^/.]+$/, '.webp')} type="image/webp" />
+                  <img 
+                    src={modalProject.thumb} 
+                    alt={modalProject.name||"Project"} 
+                    className="w-full aspect-[16/9] object-cover bg-slate-100 rounded-lg" 
+                  />
+                </picture>
+              </div>
+            )}
+            
+            <div className="prose prose-sm max-w-none">
+              <p className="text-slate-700 leading-relaxed">
+                {modalProject.desc}
+              </p>
+              
+              {modalProject.url && (
+                <div className="mt-6 pt-4 border-t border-slate-200">
+                  <a 
+                    href={modalProject.url} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 hover:bg-slate-50"
+                    style={{ color: brand }}
+                  >
+                    Go to website →
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

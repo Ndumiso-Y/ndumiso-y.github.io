@@ -40,7 +40,6 @@ export const content = {
     bio:
       "Founder of Embark Digitals. I design and build fast, modern websites and brand assets for SMEs—combining clean UI, conversion-focused messaging, and reliable delivery.",
     headshot: "/assets/ndu-headshot.jpg",
-    stats: { years: 3, activeClients: 4 },
     skills: [
       "HTML",
       "CSS",
@@ -100,6 +99,7 @@ export const content = {
       year: "2025",
       cover: "/assets/filament-ppt-thumb.jpg",
       note: "Clean, modern wordmark focusing on clarity and scalability.",
+      download: "/assets/filament-ppt.pdf",
     },
     {
       name: "Liaisons Logo",
@@ -107,6 +107,7 @@ export const content = {
       year: "2025",
       cover: "/assets/liaisons-ppt-thumb.jpg",
       note: "Refined mark emphasizing connection and trust.",
+      download: "/assets/liaisons-ppt.pdf",
     },
     {
       name: "VLC Brand Brief",
@@ -114,6 +115,7 @@ export const content = {
       year: "2025",
       cover: "/assets/vlc-brief-cover.jpg", // ensure this exists
       note: "Brand brief with logo usage, color, and type.",
+      download: "/assets/vlc-brief.pdf",
     },
   ],
 
