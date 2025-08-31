@@ -1,4 +1,5 @@
 // src/components/LogoShowCase.jsx
+import { withBase } from '../lib/withBase';
 import React, { useEffect, useState } from "react";
 import { content } from "../content";
 
@@ -35,7 +36,7 @@ export default function LogoShowCase() {
     return () => mq.removeEventListener("change", set);
   }, []);
 
-  const pdfLink = (href) => (href ? `${href}#view=FitH` : null);
+  const pdfLink = (href) => (href ? `${withBase(href)}#view=FitH` : null);
 
   // ----- Modal & gallery for TVEI -----
   const [modal, setModal] = useState({ open:false, mode:null, itemIdx:-1, imgIdx:0, scale:1 });
