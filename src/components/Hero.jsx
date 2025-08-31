@@ -1,4 +1,5 @@
 // src/components/Hero.jsx
+import { withBase } from '../lib/withBase';
 import React, { useEffect, useRef } from "react";
 import { content } from "../content";
 import AccentFX from "./AccentFX";
@@ -124,10 +125,11 @@ export default function Hero() {
               style={{ background: `linear-gradient(145deg,#fff,${brand}66)` }}
             >
               <img
-                src={h.portrait || "/assets/ndu-portrait.jpg"}
-                alt={h.name}
-                className="w-full h-full rounded-full object-cover bg-slate-100"
-              />
+  src={withBase(h.portrait || "/assets/ndu-portrait.jpg")}
+  alt={h.name}
+  className="w-full h-full rounded-full object-cover bg-slate-100"
+/>
+
             </div>
           </div>
 

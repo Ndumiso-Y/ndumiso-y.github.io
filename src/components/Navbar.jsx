@@ -1,4 +1,5 @@
 // src/components/Navbar.jsx
+import { withBase } from '../lib/withBase';
 import React, { useState } from "react";
 import { content } from "../content";
 
@@ -14,7 +15,14 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const icon = content?.contact?.icon || "/assets/ndu-icon.png";
+  const icon = content?.contact?.icon ? withBase(content.contact.icon) : null;
+
+{icon ? (
+  <img src={icon} alt="logo" className="w-8 h-8 rounded-lg object-contain" />
+) : (
+  <div className="w-8 h-8 rounded-lg border border-slate-200 grid place-items-center text-xs">NY</div>
+)}
+
 
   return (
     <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
