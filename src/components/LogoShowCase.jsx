@@ -36,7 +36,12 @@ export default function LogoShowCase() {
     return () => mq.removeEventListener("change", set);
   }, []);
 
-  const pdfLink = (href) => (href ? `${withBase(href)}#view=FitH` : null);
+  const pdfLink = (href) => {
+    if (!href) return null;
+    const url = withBase(href);
+    console.log(`PDF Link: ${href} -> ${url}`);
+    return url;
+  };
 
   // ----- Modal & gallery for TVEI -----
   const [modal, setModal] = useState({ open:false, mode:null, itemIdx:-1, imgIdx:0, scale:1 });
