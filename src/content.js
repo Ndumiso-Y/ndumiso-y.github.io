@@ -78,7 +78,7 @@ export const content = {
       brief:
         "Program hub for TVEI — highlights, sectors, gallery, and donation call-to-action.",
       thumb: "/assets/tvei-shot.jpg",
-      url: "https://ndumisoyedwa.wixstudio.com/my-site-14",
+      url: "https://ndumiso-y.github.io/village-econonomy-indaba-website/#/about",
       repo: "",
     },
     {
