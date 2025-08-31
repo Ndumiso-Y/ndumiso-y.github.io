@@ -124,11 +124,16 @@ export default function Hero() {
               className="relative w-60 h-60 md:w-[19rem] md:h-[19rem] rounded-full p-[6px] ring-glow parallax-portrait"
               style={{ background: `linear-gradient(145deg,#fff,${brand}66)` }}
             >
-              <img
-  src={withBase(h.portrait || "/assets/ndu-portrait.jpg")}
-  alt={h.name}
-  className="w-full h-full rounded-full object-cover bg-slate-100"
-/>
+              <picture>
+                <source srcSet={withBase("/assets/ndu-portrait.avif")} type="image/avif" />
+                <source srcSet={withBase("/assets/ndu-portrait.webp")} type="image/webp" />
+                <img
+                  src={withBase(h.portrait || "/assets/ndu-portrait.jpg")}
+                  alt={h.name}
+                  className="w-full h-full rounded-full object-cover bg-slate-100"
+                  loading="eager"
+                />
+              </picture>
 
             </div>
           </div>

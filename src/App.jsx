@@ -8,6 +8,7 @@ import Websites from "./components/Websites";
 import LogoShowCase from "./components/LogoShowCase";
 import SocialMgmt from "./components/SocialMgmt";
 import Projects from "./components/Projects";
+import Upcoming from "./components/Upcoming";
 import Badges from "./components/Badges";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -23,6 +24,7 @@ export default function App() {
       <LogoShowCase />
       <SocialMgmt />
       <Projects />
+      <Upcoming />
       <Badges />
       <Contact />
       <Footer />

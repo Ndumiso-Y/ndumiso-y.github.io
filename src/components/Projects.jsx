@@ -42,7 +42,11 @@ export default function Projects() {
           {visible.map((p, i)=>(
             <article key={p.name || i} className="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-sm flex flex-col">
               {p.thumb && (
-                <img src={p.thumb} alt={p.name||"Project"} className="w-full aspect-[16/9] object-cover bg-slate-100" loading="lazy" />
+                <picture>
+                  <source srcSet={p.thumb.replace(/\.[^/.]+$/, '.avif')} type="image/avif" />
+                  <source srcSet={p.thumb.replace(/\.[^/.]+$/, '.webp')} type="image/webp" />
+                  <img src={p.thumb} alt={p.name||"Project"} className="w-full aspect-[16/9] object-cover bg-slate-100" loading="lazy" />
+                </picture>
               )}
               <div className="p-4 flex flex-col flex-1">
                 <h3 className="font-semibold">{p.name || "—"}</h3>
