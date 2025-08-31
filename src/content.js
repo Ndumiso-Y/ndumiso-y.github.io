@@ -358,7 +358,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
   contact: {
     name: "Ndumiso Yedwa",
     email: "contact@embarkdigitals.com",
-    phone: "+27 76 123 4567",
+    phone: "+27 60 714 7939",
     whatsapp: "https://wa.me/message/MDL4XKDNZVLHE1",
     linkedin: "https://www.linkedin.com/company/embark-digitals/",
     facebook: "https://facebook.com/embarkdigitals",

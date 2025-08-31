@@ -2,6 +2,18 @@
 import { withBase } from '../lib/withBase';
 import React, { useMemo, useState } from "react";
 import { content } from "../content";
+import { 
+  FaWhatsapp, 
+  FaEnvelope, 
+  FaPhone, 
+  FaLinkedin, 
+  FaFacebook, 
+  FaInstagram, 
+  FaTwitter,
+  FaIdCard,
+  FaCreditCard,
+  FaDownload 
+} from 'react-icons/fa';
 
 // Reusable safe image: falls back to a styled badge if the image can't load
 function SafeLogo({ src, alt = "", className = "", fallbackType = "badge" }) {
@@ -149,12 +161,12 @@ export default function Contact() {
               <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
                 {c.whatsapp && (
                   <ActionButton href={c.whatsapp} variant="solid" isPrimary={true} ariaLabel="WhatsApp me">
-                    <span>💬</span> <span>WhatsApp</span>
+                    <FaWhatsapp className="w-4 h-4" /> <span>WhatsApp</span>
                   </ActionButton>
                 )}
                 {c.email && (
                   <ActionButton href={`mailto:${c.email}`} variant="solid" ariaLabel="Email me">
-                    <span>✉️</span> <span>Email</span>
+                    <FaEnvelope className="w-4 h-4" /> <span>Email</span>
                   </ActionButton>
                 )}
               </div>
@@ -163,21 +175,21 @@ export default function Contact() {
               <div className="grid sm:grid-cols-2 gap-3">
                 {c.ecard && (
                   <ActionButton href={c.ecard} variant="outline" ariaLabel="Open e-card">
-                    <span>💳</span> <span>View e-Card</span>
+                    <FaCreditCard className="w-4 h-4" /> <span>View e-Card</span>
                   </ActionButton>
                 )}
                 {c.phone && (
                   <ActionButton href={`tel:${(c.phone || "").replace(/\s+/g, "")}`} variant="outline" ariaLabel="Call me">
-                    <span>📞</span> <span>{c.phone}</span>
+                    <FaPhone className="w-4 h-4" /> <span>{c.phone}</span>
                   </ActionButton>
                 )}
                 {c.vcf ? (
                   <ActionButton href={withBase(c.vcf)} ariaLabel="Save contact">
-                    <span>💾</span> <span>Save contact (.vcf)</span>
+                    <FaDownload className="w-4 h-4" /> <span>Save contact (.vcf)</span>
                   </ActionButton>
                 ) : (
                   <ActionButton href={vcardUrl} variant="outline" ariaLabel="Save contact">
-                    <span>💾</span> <span>Save contact (.vcf)</span>
+                    <FaDownload className="w-4 h-4" /> <span>Save contact (.vcf)</span>
                   </ActionButton>
                 )}
               </div>
@@ -188,22 +200,22 @@ export default function Contact() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {c.linkedin && (
                     <ActionButton href={c.linkedin} variant="outline" ariaLabel="LinkedIn">
-                      <span>🔗</span> <span>LinkedIn</span>
+                      <FaLinkedin className="w-4 h-4" /> <span>LinkedIn</span>
                     </ActionButton>
                   )}
                   {c.facebook && (
                     <ActionButton href={c.facebook} variant="outline" ariaLabel="Facebook">
-                      <span>📘</span> <span>Facebook</span>
+                      <FaFacebook className="w-4 h-4" /> <span>Facebook</span>
                     </ActionButton>
                   )}
                   {c.instagram && (
                     <ActionButton href={c.instagram} variant="outline" ariaLabel="Instagram">
-                      <span>📷</span> <span>Instagram</span>
+                      <FaInstagram className="w-4 h-4" /> <span>Instagram</span>
                     </ActionButton>
                   )}
                   {c.twitter && (
                     <ActionButton href={c.twitter} variant="outline" ariaLabel="X (Twitter)">
-                      <span>🐦</span> <span>X</span>
+                      <FaTwitter className="w-4 h-4" /> <span>X</span>
                     </ActionButton>
                   )}
                 </div>
