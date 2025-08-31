@@ -115,7 +115,7 @@ export const content = {
       year: "2025",
       cover: "/assets/vlc-brief-cover.jpg", // ensure this exists
       note: "Brand brief with logo usage, color, and type.",
-      download: "/assets/vlc-brief.pdf",
+      download: "/assets/vlc-brand-brief.pdf",
     },
   ],
 
