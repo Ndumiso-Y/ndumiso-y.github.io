@@ -359,10 +359,14 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     name: "Ndumiso Yedwa",
     email: "contact@embarkdigitals.com",
     phone: "+27 76 123 4567",
-    whatsapp: "https://wa.me/27761234567",
-    linkedin: "https://www.linkedin.com/in/your-handle",
+    whatsapp: "https://wa.me/message/MDL4XKDNZVLHE1",
+    linkedin: "https://www.linkedin.com/company/embark-digitals/",
+    facebook: "https://facebook.com/embarkdigitals",
+    instagram: "https://instagram.com/embarkdigitals?utm_source=qr&igshid=ZTM4ZDRiNzUwMw==",
+    twitter: "https://x.com/EmbarkDigitals?t=do3jV9xUNbQMcIrGY-xglQ&s=08",
     location: "Johannesburg, South Africa",
     icon: "/assets/ndu-icon.png",                 // navbar/footer logo
-    ecard: "https://www.embarkdigitals.com/ecard" // e-card button
+    ecard: "https://www.embarkdigitals.com/ecard", // e-card button
+    vcf: "/assets/Embark-Digitals.vcf"            // VCF contact file
   },
 };

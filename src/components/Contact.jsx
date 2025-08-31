@@ -1,4 +1,5 @@
 // src/components/Contact.jsx
+import { withBase } from '../lib/withBase';
 import React, { useMemo, useState } from "react";
 import { content } from "../content";
 
@@ -170,14 +171,42 @@ export default function Contact() {
                     <span>📞</span> <span>{c.phone}</span>
                   </ActionButton>
                 )}
-                {c.linkedin && (
-                  <ActionButton href={c.linkedin} variant="outline" ariaLabel="Open LinkedIn">
-                    <span>🔗</span> <span>LinkedIn</span>
+                {c.vcf ? (
+                  <ActionButton href={withBase(c.vcf)} ariaLabel="Save contact">
+                    <span>💾</span> <span>Save contact (.vcf)</span>
+                  </ActionButton>
+                ) : (
+                  <ActionButton href={vcardUrl} variant="outline" ariaLabel="Save contact">
+                    <span>💾</span> <span>Save contact (.vcf)</span>
                   </ActionButton>
                 )}
-                <ActionButton href={vcardUrl} variant="outline" ariaLabel="Save contact">
-                  <span>💾</span> <span>Save contact (.vcf)</span>
-                </ActionButton>
+              </div>
+              
+              {/* Social Media Links */}
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-slate-500 mb-3">Follow Embark Digitals</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {c.linkedin && (
+                    <ActionButton href={c.linkedin} variant="outline" ariaLabel="LinkedIn">
+                      <span>🔗</span> <span>LinkedIn</span>
+                    </ActionButton>
+                  )}
+                  {c.facebook && (
+                    <ActionButton href={c.facebook} variant="outline" ariaLabel="Facebook">
+                      <span>📘</span> <span>Facebook</span>
+                    </ActionButton>
+                  )}
+                  {c.instagram && (
+                    <ActionButton href={c.instagram} variant="outline" ariaLabel="Instagram">
+                      <span>📷</span> <span>Instagram</span>
+                    </ActionButton>
+                  )}
+                  {c.twitter && (
+                    <ActionButton href={c.twitter} variant="outline" ariaLabel="X (Twitter)">
+                      <span>🐦</span> <span>X</span>
+                    </ActionButton>
+                  )}
+                </div>
               </div>
             </div>
 
