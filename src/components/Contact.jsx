@@ -36,20 +36,30 @@ function SafeLogo({ src, alt = "", className = "", fallbackType = "badge" }) {
   );
 }
 
-function ActionButton({ href, onClick, children, variant = "solid", ariaLabel }) {
-  const base = "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-sm transition";
-  const solid = "bg-slate-900 text-white hover:bg-slate-800";
-  const outline = "border border-slate-200 hover:bg-slate-50";
+function ActionButton({ href, onClick, children, variant = "solid", ariaLabel, isPrimary = false }) {
+  const brand = content?.brandColor || "#48aab7";
+  const base = "inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-105 active:scale-95";
+  const solid = isPrimary 
+    ? `text-white shadow-lg hover:shadow-xl` 
+    : "bg-slate-900 text-white hover:bg-slate-800 shadow-md hover:shadow-lg";
+  const outline = "border-2 border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 shadow-sm hover:shadow-md";
+  
+  const primaryStyle = isPrimary ? { 
+    background: `linear-gradient(135deg, ${brand} 0%, ${brand}dd 100%)`,
+    boxShadow: `0 4px 20px ${brand}40`
+  } : {};
+  
   const cls = `${base} ${variant === "solid" ? solid : outline}`;
+  
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={cls} aria-label={ariaLabel}>
+      <a href={href} target="_blank" rel="noreferrer" className={cls} style={primaryStyle} aria-label={ariaLabel}>
         {children}
       </a>
     );
   }
   return (
-    <button onClick={onClick} className={cls} aria-label={ariaLabel}>
+    <button onClick={onClick} className={cls} style={primaryStyle} aria-label={ariaLabel}>
       {children}
     </button>
   );
@@ -92,10 +102,10 @@ export default function Contact() {
         }}
       />
 
-      <div className="max-w-4xl mx-auto px-4 py-12 md:py-16">
+      <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
         <div className="flex justify-center">
           {/* Main contact card */}
-          <article className="relative rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-6 md:p-8 overflow-hidden w-full max-w-2xl">
+          <article className="relative rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-slate-50/30 backdrop-blur-sm shadow-xl shadow-slate-900/5 p-8 md:p-10 overflow-hidden w-full max-w-3xl transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/10">
             {/* ndu-icon watermark (hidden automatically if image fails) */}
             <SafeLogo
               src={c.icon}
@@ -104,51 +114,71 @@ export default function Contact() {
               className="pointer-events-none select-none absolute -right-10 -bottom-10 w-56 md:w-72 opacity-10"
             />
 
-            <div className="flex items-center gap-4">
-              {/* Small logo square with safe fallback */}
-              <SafeLogo
-                src={c.icon}
-                alt="Ndumiso icon"
-                className="shrink-0 w-16 h-16 rounded-2xl object-contain"
-              />
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold">Let’s work together</h2>
-                <p className="text-slate-600">
+            <div className="flex items-center gap-6">
+              {/* Enhanced logo with subtle glow */}
+              <div className="relative">
+                <div 
+                  className="absolute inset-0 rounded-2xl blur-md opacity-20" 
+                  style={{ backgroundColor: brand }}
+                />
+                <SafeLogo
+                  src={c.icon}
+                  alt="Ndumiso icon"
+                  className="relative shrink-0 w-18 h-18 md:w-20 md:h-20 rounded-2xl object-contain shadow-lg ring-2 ring-white"
+                />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent mb-2">
+                  Let's work together
+                </h2>
+                <p className="text-slate-600 text-base md:text-lg leading-relaxed">
                   Fast, modern websites, branding, and digital assets — tailored to your goals.
                 </p>
+                {/* Added subtle accent */}
+                <div className="mt-3 flex items-center gap-2">
+                  <div className="w-12 h-0.5 rounded-full" style={{ backgroundColor: brand }} />
+                  <span className="text-sm text-slate-500 font-medium">Ready to start?</span>
+                </div>
               </div>
             </div>
 
-            {/* Contact actions */}
-            <div className="mt-6 grid sm:grid-cols-2 gap-3">
-              {c.ecard && (
-                <ActionButton href={c.ecard} variant="solid" ariaLabel="Open e-card">
-                  <span>💳</span> <span>View e-Card</span>
+            {/* Enhanced Contact actions */}
+            <div className="mt-8 space-y-4">
+              {/* Primary CTAs */}
+              <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+                {c.whatsapp && (
+                  <ActionButton href={c.whatsapp} variant="solid" isPrimary={true} ariaLabel="WhatsApp me">
+                    <span>💬</span> <span>WhatsApp</span>
+                  </ActionButton>
+                )}
+                {c.email && (
+                  <ActionButton href={`mailto:${c.email}`} variant="solid" ariaLabel="Email me">
+                    <span>✉️</span> <span>Email</span>
+                  </ActionButton>
+                )}
+              </div>
+              
+              {/* Secondary actions */}
+              <div className="grid sm:grid-cols-2 gap-3">
+                {c.ecard && (
+                  <ActionButton href={c.ecard} variant="outline" ariaLabel="Open e-card">
+                    <span>💳</span> <span>View e-Card</span>
+                  </ActionButton>
+                )}
+                {c.phone && (
+                  <ActionButton href={`tel:${(c.phone || "").replace(/\s+/g, "")}`} variant="outline" ariaLabel="Call me">
+                    <span>📞</span> <span>{c.phone}</span>
+                  </ActionButton>
+                )}
+                {c.linkedin && (
+                  <ActionButton href={c.linkedin} variant="outline" ariaLabel="Open LinkedIn">
+                    <span>🔗</span> <span>LinkedIn</span>
+                  </ActionButton>
+                )}
+                <ActionButton href={vcardUrl} variant="outline" ariaLabel="Save contact">
+                  <span>💾</span> <span>Save contact (.vcf)</span>
                 </ActionButton>
-              )}
-              {c.email && (
-                <ActionButton href={`mailto:${c.email}`} variant="outline" ariaLabel="Email me">
-                  <span>✉️</span> <span>{c.email}</span>
-                </ActionButton>
-              )}
-              {c.whatsapp && (
-                <ActionButton href={c.whatsapp} variant="outline" ariaLabel="WhatsApp me">
-                  <span>💬</span> <span>WhatsApp me</span>
-                </ActionButton>
-              )}
-              {c.phone && (
-                <ActionButton href={`tel:${(c.phone || "").replace(/\s+/g, "")}`} variant="outline" ariaLabel="Call me">
-                  <span>📞</span> <span>{c.phone}</span>
-                </ActionButton>
-              )}
-              {c.linkedin && (
-                <ActionButton href={c.linkedin} variant="outline" ariaLabel="Open LinkedIn">
-                  <span>🔗</span> <span>LinkedIn</span>
-                </ActionButton>
-              )}
-              <ActionButton href={vcardUrl} variant="outline" ariaLabel="Save contact">
-                <span>💾</span> <span>Save contact (.vcf)</span>
-              </ActionButton>
+              </div>
             </div>
 
             {/* Inline e-Card preview trigger */}

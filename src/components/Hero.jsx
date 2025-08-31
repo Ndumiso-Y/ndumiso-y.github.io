@@ -97,7 +97,7 @@ export default function Hero() {
           </div>
 
           {/* RIGHT – Portrait with stronger ring + parallax */}
-          <div className="relative justify-self-center reveal">
+          <div className="relative flex justify-center items-center reveal">
             <div
               className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-70"
               style={{ background: `radial-gradient(45% 45% at 50% 50%, ${brand}33, transparent 70%)` }}

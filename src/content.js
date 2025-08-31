@@ -358,8 +358,8 @@ I could guess a letter only once. After I guessed a letter, my programming disab
   contact: {
     name: "Ndumiso Yedwa",
     email: "contact@embarkdigitals.com",
-    phone: "+27 00 000 0000",
-    whatsapp: "https://wa.me/27XXXXXXXXX",
+    phone: "+27 76 123 4567",
+    whatsapp: "https://wa.me/27761234567",
     linkedin: "https://www.linkedin.com/in/your-handle",
     location: "Johannesburg, South Africa",
     icon: "/assets/ndu-icon.png",                 // navbar/footer logo
