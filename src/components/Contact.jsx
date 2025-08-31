@@ -92,10 +92,10 @@ export default function Contact() {
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
-        <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-stretch">
-          {/* Left: Hero-ish contact card */}
-          <article className="relative rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-6 md:p-8 overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 py-12 md:py-16">
+        <div className="flex justify-center">
+          {/* Main contact card */}
+          <article className="relative rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-6 md:p-8 overflow-hidden w-full max-w-2xl">
             {/* ndu-icon watermark (hidden automatically if image fails) */}
             <SafeLogo
               src={c.icon}
@@ -164,50 +164,6 @@ export default function Contact() {
               </div>
             )}
           </article>
-
-          {/* Right: profile/details */}
-          <aside className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8">
-            <div className="flex items-start gap-4">
-              {c.headshot || content?.about?.headshot ? (
-                <img
-                  src={c.headshot || content.about.headshot}
-                  alt={c.name || content?.about?.name || "Profile"}
-                  className="w-20 h-20 rounded-2xl object-cover border border-slate-200"
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : null}
-              <div>
-                <h3 className="text-lg font-semibold">{c.name || content?.about?.name}</h3>
-                <p className="text-slate-600">{c.title || content?.about?.title}</p>
-                {c.location && <p className="text-slate-600 mt-1">{c.location}</p>}
-              </div>
-            </div>
-
-            <p className="mt-4 text-sm text-slate-700">
-              I combine clean UI, conversion-focused messaging, and reliable delivery to build brand-ready
-              web experiences for SMEs and founders.
-            </p>
-
-            <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
-              <li className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full" style={{ background: brand }} />
-                <span>Websites & landing pages</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full" style={{ background: brand }} />
-                <span>Logos & brand kits</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full" style={{ background: brand }} />
-                <span>Design systems</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full" style={{ background: brand }} />
-                <span>Social media assets</span>
-              </li>
-            </ul>
-          </aside>
         </div>
       </div>
 

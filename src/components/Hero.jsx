@@ -95,17 +95,6 @@ export default function Hero() {
               <li className="flex items-start gap-2"><span>✓</span><span>Reliable delivery</span></li>
             </ul>
 
-            {/* Quick stats strip */}
-            <div className="mt-8 flex flex-wrap gap-4 text-slate-900">
-              <div className="chip-stat">
-                <span className="text-xl font-extrabold">{content?.about?.stats?.years || 3}+</span>
-                <span className="text-sm">years coding</span>
-              </div>
-              <div className="chip-stat">
-                <span className="text-xl font-extrabold">{content?.about?.stats?.activeClients || 4}</span>
-                <span className="text-sm">active clients</span>
-              </div>
-            </div>
 
             {/* scroll cue */}
             <div className="mt-10 hidden md:flex items-center gap-2 text-xs text-slate-500">

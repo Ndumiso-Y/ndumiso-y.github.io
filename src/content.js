@@ -100,7 +100,6 @@ export const content = {
       year: "2025",
       cover: "/assets/filament-ppt-thumb.jpg",
       note: "Clean, modern wordmark focusing on clarity and scalability.",
-      download: "/assets/filament-ppt.pdf",
     },
     {
       name: "Liaisons Logo",
@@ -108,7 +107,6 @@ export const content = {
       year: "2025",
       cover: "/assets/liaisons-ppt-thumb.jpg",
       note: "Refined mark emphasizing connection and trust.",
-      download: "/assets/liaisons-ppt.pdf",
     },
     {
       name: "VLC Brand Brief",
@@ -116,7 +114,6 @@ export const content = {
       year: "2025",
       cover: "/assets/vlc-brief-cover.jpg", // ensure this exists
       note: "Brand brief with logo usage, color, and type.",
-      download: "/assets/vlc-brief.pdf",    // ensure this exists
     },
   ],
 
@@ -299,10 +296,22 @@ I could guess a letter only once. After I guessed a letter, my programming disab
   // --- Upcoming Projects (incl. Ntombi Fashions video) ---
   upcoming: [
     {
-      name: "Makweleng Butchery",
-      note: "New client (#5). Full website build underway.",
+      name: "Ntombi Fashions",
+      note: "Family business — Logo, Social, E-commerce + promo video",
       details:
-        "Makweleng Butchery is joining our roster as client #5. I'm building a clean, informative site that highlights product quality, weekly specials, and conversions.",
+        "Ntombi Fashions is a Yedwa family business. I'm grateful to use my digital marketing skills to craft their logo, run their social channels, and launch their e-commerce store.",
+      tags: ["Family Business", "Logo", "Social", "E-commerce", "Video"],
+      video: {
+        poster: "/assets/ntombis-thumb.jpg",
+        mp4: "/assets/ntombis-1080.mp4",
+        webm: "/assets/ntombis-1080.webm",
+      },
+    },
+    {
+      name: "Makweleng Butchery",
+      note: "New website build underway.",
+      details:
+        "Makweleng Butchery is joining our roster. I'm building a clean, informative site that highlights product quality, weekly specials, and conversions.",
       tags: ["New Client", "Website Build"],
       video: {
         poster: "/assets/graphic-1.jpg", // Placeholder until real poster
@@ -316,18 +325,6 @@ I could guess a letter only once. After I guessed a letter, my programming disab
       tags: ["Website", "Social Management"],
       video: {
         poster: "/assets/graphic-2.jpg", // Placeholder until real poster
-      },
-    },
-    {
-      name: "Ntombi Fashions",
-      note: "Family business — Logo, Social, E-commerce + promo video",
-      details:
-        "Ntombi Fashions is a Yedwa family business. I'm grateful to use my digital marketing skills to craft their logo, run their social channels, and launch their e-commerce store.",
-      tags: ["Family Business", "Logo", "Social", "E-commerce", "Video"],
-      video: {
-        poster: "/assets/ntombis-thumb.jpg",
-        mp4: "/assets/ntombis-1080.mp4",
-        webm: "/assets/ntombis-1080.webm",
       },
     },
   ],
