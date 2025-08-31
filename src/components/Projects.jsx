@@ -1,4 +1,5 @@
 // src/components/Projects.jsx
+import { withBase } from '../lib/withBase';
 import React, { useEffect, useState } from "react";
 import { content } from "../content";
 
