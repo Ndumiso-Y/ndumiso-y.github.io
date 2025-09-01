@@ -62,7 +62,7 @@ function SkillPill({ skill, onMobileToggle, showMobileDescription, isMobile }) {
         </button>
         
         {showMobileDescription && description && (
-          <div className="mt-2 px-3 py-2 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-700 animate-in slide-in-from-top-2 duration-200">
+          <div className="mt-2 px-3 py-2 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-700 transition-all duration-200">
             {description}
           </div>
         )}
