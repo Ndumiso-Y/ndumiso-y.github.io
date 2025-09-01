@@ -41,17 +41,17 @@ export const content = {
       "Founder of Embark Digitals. I design and build fast, modern websites and brand assets for SMEs—combining clean UI, conversion-focused messaging, and reliable delivery.",
     headshot: "/assets/ndu-headshot.jpg",
     skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React",
-      "Tailwind",
-      "Canva",
-      "Adobe Photoshop",
-      "Adobe Illustrator",
-      "Adobe InDesign",
-      "Claude Code",
-      "Lovable",
+      { name: "HTML", description: "Semantic markup and modern HTML5 features" },
+      { name: "CSS", description: "Advanced styling, animations, and responsive design" },
+      { name: "JavaScript", description: "ES6+, DOM manipulation, and modern JavaScript" },
+      { name: "React", description: "Component-based UI development and state management" },
+      { name: "Tailwind", description: "Utility-first CSS framework for rapid styling" },
+      { name: "Canva", description: "Graphic design and visual content creation" },
+      { name: "Adobe Photoshop", description: "Photo editing and digital image manipulation" },
+      { name: "Adobe Illustrator", description: "Vector graphics and logo design" },
+      { name: "Adobe InDesign", description: "Layout design and print publication" },
+      { name: "Claude Code", description: "AI-powered development and code assistance" },
+      { name: "Lovable", description: "Full-stack web application development platform" },
     ],
   },
 
@@ -200,7 +200,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     {
       name: "07 — Web App Dashboard",
       thumb: "/assets/p7-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project7--WebAppDashBoard/", // update if different
+      url: "https://ndumiso-y.github.io/https---github.com-Ndumiso-Y-Project7--WebAppDashBoard/",
       audio: "/assets/p7.mp3",
       audioDesc: "Charts & forms",
       desc:
