@@ -1,0 +1,39 @@
+{
+  "baselineSha": "cf1bf12bfcf687c0bf7e9323f8c2c32f3172e547",
+  "router": {
+    "default": "HashRouter",
+    "alternate": "BrowserRouter",
+    "selector": "VITE_HOST_TARGET",
+    "source": "src/main.jsx"
+  },
+  "formalRoutes": [
+    {
+      "route": "/",
+      "source": "src/main.jsx",
+      "layout": "src/AppModern.jsx",
+      "pageComponent": "AppModern",
+      "components": ["FloatingNav", "HeroModern", "AboutModern", "WorkShowcase", "LogoShowCase", "SocialMgmt", "ProjectCarousel", "MiniAudioPlayer", "Contact"],
+      "dynamicParameters": [],
+      "redirectBehavior": "No React redirect; host-level SPA fallbacks only",
+      "directRefreshExpectation": "Root loads on all targets; alternate clean paths require _redirects or .htaccess",
+      "preservation": "P0"
+    }
+  ],
+  "anchors": [
+    {"route":"#hero","source":"src/features/modern/HeroModern.jsx","component":"HeroModern","navigationEntry":"FloatingNav logo","internalLinks":["#hero"],"externalLinks":[],"specialLogic":"Active-section detection","preservation":"P1"},
+    {"route":"#about","source":"src/features/modern/AboutModern.jsx","component":"AboutModern","navigationEntry":"About","internalLinks":["#contact"],"externalLinks":["badge site/post URLs"],"specialLogic":"Badge/recognition modal","preservation":"P1"},
+    {"route":"#websites","source":"src/features/modern/WorkShowcase.jsx","component":"WorkShowcase","navigationEntry":"Websites","internalLinks":[],"externalLinks":["six website URLs"],"specialLogic":"Whole cards open new tabs and track events","preservation":"P1"},
+    {"route":"#graphics","source":"src/components/LogoShowCase.jsx","component":"LogoShowCase","navigationEntry":"Graphics","internalLinks":["#graphics"],"externalLinks":["three local PDF public URLs"],"specialLogic":"Mobile expansion; 3-second gallery; modal zoom/keyboard","preservation":"P1"},
+    {"route":"#social","source":"src/components/SocialMgmt.jsx","component":"SocialMgmt","navigationEntry":"Social","internalLinks":["#social"],"externalLinks":["TVEI/Easy Documents social URLs"],"specialLogic":"Mobile expansion and tracked external links","preservation":"P1"},
+    {"route":"#projects","source":"src/features/modern/ProjectCarousel.jsx","component":"ProjectCarousel","navigationEntry":"Projects","internalLinks":[],"externalLinks":["eight project URLs"],"specialLogic":"Horizontal carousel, autoplay video and eight audio players","preservation":"P1"},
+    {"route":"#contact","source":"src/components/Contact.jsx","component":"Contact","navigationEntry":"Contact","internalLinks":[],"externalLinks":["WhatsApp","mailto","tel","VCF","LinkedIn","Facebook","Instagram","e-card dormant iframe"],"specialLogic":"Protocol links, static/dynamic vCard and logo fallback","preservation":"P1"}
+  ],
+  "redirects": [
+    {"source":"public/_redirects","target":"/index.html","pattern":"/*","status":200,"host":"Netlify-compatible","preservation":"P0"},
+    {"source":"public/.htaccess","target":"index.html","pattern":"non-file/non-directory paths","host":"Apache/cPanel","preservation":"P0"}
+  ],
+  "routeGuards": [],
+  "dynamicRoutes": [],
+  "catchAllRoutes": [],
+  "application404": null
+}

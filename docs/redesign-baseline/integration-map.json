@@ -1,0 +1,67 @@
+{
+  "baselineSha": "cf1bf12bfcf687c0bf7e9323f8c2c32f3172e547",
+  "environmentVariableNames": ["BUILD_TARGET", "BASE_PATH", "VITE_HOST_TARGET", "BASE_URL", "DEV"],
+  "integrations": [
+    {
+      "service": "Google Analytics 4",
+      "implementationLocations": ["index.html", "src/lib/analytics.js", "src/main.jsx", "src/components/modern/FloatingNav.jsx", "src/features/modern/HeroModern.jsx", "src/features/modern/WorkShowcase.jsx", "src/components/LogoShowCase.jsx", "src/components/SocialMgmt.jsx", "src/components/Contact.jsx"],
+      "purpose": "Manual SPA page views and selected interaction analytics",
+      "configSource": "hardcoded public identifier",
+      "publicIdentifier": "G-2ZPD8342CY",
+      "environmentVariables": [],
+      "events": ["page_view", "cta_get_in_touch_click", "cta_view_work_click", "nav_about_click", "nav_websites_click", "nav_graphics_click", "nav_social_click", "nav_projects_click", "nav_contact_click", "nav_click", "contact_whatsapp_click", "contact_email_click", "contact_linkedin_click", "ecard_link_click", "web_project_view_click", "graphics_slides_view_click", "social_profile_click"],
+      "dependencies": ["https://www.googletagmanager.com/gtag/js", "window.dataLayer", "window.gtag"],
+      "redesignRisk": "loss/duplication of bootstrap, manual page views, public ID, event names or handlers",
+      "preservation": "P0/P1"
+    },
+    {
+      "service": "GitHub Pages and GitHub Actions",
+      "implementationLocations": [".github/workflows/deploy.yml", "package.json", "vite.config.js"],
+      "purpose": "Build and deploy main branch dist artifact",
+      "configSource": "tracked workflow and package scripts",
+      "publicIdentifier": "https://ndumiso-y.github.io/",
+      "environmentVariables": ["BUILD_TARGET", "BASE_PATH", "VITE_HOST_TARGET"],
+      "events": ["push to main", "workflow_dispatch"],
+      "dependencies": ["actions/checkout@v4", "actions/setup-node@v4", "actions/upload-pages-artifact@v3", "actions/deploy-pages@v4"],
+      "redesignRisk": "wrong router target, base path, output directory or workflow command",
+      "preservation": "P0"
+    },
+    {
+      "service": "Netlify-compatible SPA fallback",
+      "implementationLocations": ["public/_redirects", "package.json"],
+      "purpose": "Serve index.html for client routes on alternate host",
+      "configSource": "tracked static file",
+      "publicIdentifier": null,
+      "environmentVariables": ["BUILD_TARGET", "BASE_PATH"],
+      "events": [],
+      "dependencies": [],
+      "redesignRisk": "direct refresh failure if omitted",
+      "preservation": "P0/P1"
+    },
+    {
+      "service": "Apache/cPanel SPA fallback",
+      "implementationLocations": ["public/.htaccess", "package.json"],
+      "purpose": "Rewrite unknown requests to index.html on alternate host",
+      "configSource": "tracked static file",
+      "publicIdentifier": null,
+      "environmentVariables": ["BUILD_TARGET", "BASE_PATH"],
+      "events": [],
+      "dependencies": [],
+      "redesignRisk": "direct refresh failure if omitted",
+      "preservation": "P0/P1"
+    },
+    {
+      "service": "Contact/outbound protocols",
+      "implementationLocations": ["src/content.js", "src/components/Contact.jsx", "src/components/SocialMgmt.jsx", "src/content/websites.json", "src/content/projects.json"],
+      "purpose": "WhatsApp, email, phone, VCF, e-card, social and portfolio navigation",
+      "configSource": "tracked content data",
+      "publicIdentifier": null,
+      "environmentVariables": [],
+      "events": ["selected GA4 click events"],
+      "dependencies": ["browser protocol handlers", "external destination sites"],
+      "redesignRisk": "changed destinations, lost target semantics or lost tracking",
+      "preservation": "P0/P1/P2"
+    }
+  ],
+  "notFound": ["Google Tag Manager container", "Meta Pixel", "Microsoft Clarity", "Hotjar", "Plausible", "Supabase", "Firebase", "CMS", "form provider", "email API", "webhooks", "maps", "YouTube/Vimeo embeds", "authentication", "payments"]
+}
