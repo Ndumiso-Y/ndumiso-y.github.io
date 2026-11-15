@@ -58,7 +58,7 @@ export default function FloatingNav() {
   }, [menuOpen])
 
   // Light glass over redesigned (light) sections, dark glass over the still-dark ones
-  const LIGHT_SECTIONS = ['hero', 'about']
+  const LIGHT_SECTIONS = ['hero', 'about'] // 'websites' is a deliberate charcoal band
   const onLight = LIGHT_SECTIONS.includes(activeSection)
   const shell = onLight ? 'hero-glass-light text-[#121417]' : 'nav-glass-dark text-white'
   const linkIdle = onLight ? 'text-[#26302f] hover:text-[#0e5c66]' : 'text-white/75 hover:text-white'
