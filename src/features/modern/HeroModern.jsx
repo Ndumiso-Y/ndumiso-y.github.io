@@ -108,7 +108,7 @@ export default function HeroModern() {
   return (
     <section id="hero" aria-label="Hero section" className="relative bg-[#f3f3f1] text-[#121417] overflow-hidden">
       {/* ===== First screen ===== */}
-      <div className="relative xl:min-h-[max(100svh,760px)] xl:max-h-[1040px] flex flex-col">
+      <div className="relative xl:min-h-[clamp(760px,100svh,1040px)] flex flex-col">
         {/* Teal field (desktop): flat, matches the portrait's original backdrop */}
         <div className="hidden xl:block absolute inset-y-0 right-0 left-[60%] bg-[#48aab7]" aria-hidden="true">
           <img
