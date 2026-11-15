@@ -1,114 +1,134 @@
-import React from 'react'
-import contactData from '@/content/contact.json'
-import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope } from 'react-icons/fa'
+import React, { useMemo } from 'react'
+import { FaWhatsapp, FaEnvelope, FaPhone, FaLinkedin, FaFacebook, FaInstagram, FaDownload, FaIdCard } from 'react-icons/fa'
+import { content } from '../../content'
+import { withBase } from '../../lib/withBase'
+import { trackWhatsAppClick, trackEmailClick, trackLinkedInClick, trackECardClick } from '../../lib/analytics'
+
+// Contact — static redesign. Charcoal closing band (pairs with Websites). WhatsApp-first,
+// then Email; Call, Save Contact (VCF) and the existing e-Card; then the three social profiles.
+
+const btn = 'inline-flex items-center justify-center gap-3 min-h-[52px] px-6 rounded-full text-[15px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#10191b]'
+const btnLine = `${btn} border border-white/25 text-white hover:bg-white/10`
 
 export default function ContactModern() {
-  const socialLinks = [
-    { icon: FaLinkedin, href: contactData.linkedin, label: 'LinkedIn' },
-    { icon: FaTwitter, href: contactData.twitter, label: 'Twitter' },
-    { icon: FaEnvelope, href: `mailto:${contactData.email}`, label: 'Email' },
-  ]
+  const c = content?.contact || {}
+
+  // Fallback vCard (only used if no VCF file is configured), as before
+  const vcardUrl = useMemo(() => {
+    const lines = [
+      'BEGIN:VCARD', 'VERSION:3.0', 'N:Yedwa;Ndumiso;;;', `FN:${c.name || 'Ndumiso Yedwa'}`,
+      c.title ? `TITLE:${c.title}` : '', c.email ? `EMAIL;TYPE=INTERNET:${c.email}` : '',
+      c.phone ? `TEL;TYPE=CELL:${c.phone}` : '',
+      c.location ? `ADR;TYPE=WORK:;;${(c.location || '').replaceAll(',', '\\,')};;;;` : '',
+      c.linkedin ? `URL:${c.linkedin}` : '', c.ecard ? `URL;TYPE=ECARD:${c.ecard}` : '', 'END:VCARD'
+    ].filter(Boolean).join('\n')
+    return `data:text/vcard;charset=utf-8;base64=${btoa(unescape(encodeURIComponent(lines)))}`
+  }, [c])
+
+  const socials = [
+    c.linkedin && { href: c.linkedin, label: 'LinkedIn', Icon: FaLinkedin, ctx: 'contact' },
+    c.facebook && { href: c.facebook, label: 'Facebook', Icon: FaFacebook, ctx: 'facebook' },
+    c.instagram && { href: c.instagram, label: 'Instagram', Icon: FaInstagram, ctx: 'instagram' }
+  ].filter(Boolean)
 
   return (
-    <section
-      id="contact"
-      className="relative py-32 px-6 md:px-12"
-      style={{ background: 'linear-gradient(to bottom, #0a0a0a, #050505)' }}
-    >
-      <div className="max-w-[800px] mx-auto text-center">
-        {/* Header */}
-        <div className="mb-12 reveal-up">
-          <span className="inline-block px-4 py-2 glass rounded-full text-sm text-accent font-medium mb-6">
-            Get In Touch
-          </span>
-          <h2 className="text-title text-white mb-6">
-            Let's Build Something <span className="text-accent">Amazing</span>
-          </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            Available for freelance projects, collaborations, or just a friendly chat about web
-            development.
-          </p>
-        </div>
+    // Inline style: overrides the legacy `#contact` rule in index.css (ID specificity)
+    <section id="contact" className="relative text-white py-16 lg:py-28 overflow-hidden" style={{ background: '#10191b', borderTop: 0 }}>
+      <img src={withBase(c.icon || '/assets/ndu-icon.png')} alt="" aria-hidden="true"
+        className="hidden lg:block absolute -left-20 -bottom-24 w-[380px] opacity-[0.05] invert select-none pointer-events-none" />
 
-        {/* Contact options */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* Email */}
-          <a
-            href={`mailto:${contactData.email}`}
-            className="card-modern p-8 text-left group reveal-up stagger-1"
-          >
-            <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <FaEnvelope className="w-6 h-6 text-accent" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Email Me</h3>
-            <p className="text-sm text-text-secondary mb-4">
-              Drop me a line for project inquiries
+      <div className="relative max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-[clamp(32px,5vw,88px)]">
+        <div className="grid gap-10 lg:grid-cols-[6fr_6fr] lg:gap-16 xl:gap-24 items-center">
+          {/* Message */}
+          <div>
+            <p className="flex items-center gap-4 text-[13px] font-semibold tracking-[0.22em] uppercase text-white/85">
+              <span className="block w-10 h-[3px] bg-[#41b3bc] rounded-full" aria-hidden="true" />
+              Contact
             </p>
-            <p className="text-sm text-accent font-medium">{contactData.email}</p>
-          </a>
+            <h2 className="hero-display mt-5 text-[clamp(40px,10vw,56px)] lg:text-[clamp(52px,5vw,84px)] leading-[0.98] tracking-[-0.025em]">
+              Let's work <span className="text-[#6fd0d7]">together</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
+            </h2>
+            <p className="mt-6 text-[18px] lg:text-[20px] text-white/75 max-w-[40ch] leading-relaxed">
+              Fast, modern websites, branding, and digital assets — tailored to your goals.
+            </p>
+            {c.location && (
+              <p className="mt-6 inline-flex items-center gap-2.5 text-[15px] text-white/70">
+                <svg className="w-4 h-4 text-[#6fd0d7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+                {c.location}
+              </p>
+            )}
+          </div>
 
-          {/* Phone */}
-          <a
-            href={contactData.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card-modern p-8 text-left group reveal-up stagger-2"
-          >
-            <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
+          {/* Actions card */}
+          <div className="rounded-[28px] bg-white/[0.04] border border-white/10 p-5 sm:p-8 lg:p-10">
+            <div className="flex items-center gap-4">
+              <span className="flex-none w-12 h-12 rounded-xl bg-white p-2">
+                <img src={withBase(c.icon || '/assets/ndu-icon.png')} alt="Ndumiso icon" className="w-full h-full object-contain" />
+              </span>
+              <div>
+                <p className="text-[17px] font-semibold">{c.name || 'Ndumiso Yedwa'}</p>
+                <p className="text-[14px] text-white/60">Embark Digitals</p>
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">WhatsApp</h3>
-            <p className="text-sm text-text-secondary mb-4">Quick chat or voice call</p>
-            <p className="text-sm text-accent font-medium">{contactData.phone}</p>
-          </a>
-        </div>
 
-        {/* CTA Button */}
-        <div className="mb-12 reveal-up stagger-3">
-          <a
-            href={`mailto:${contactData.email}`}
-            className="inline-flex items-center gap-3 px-10 py-5 bg-accent hover:bg-accent-hover rounded-full font-semibold text-base text-bg-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent-glow"
-          >
-            <span>Start a Project</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </a>
-        </div>
-
-        {/* Social links */}
-        <div className="flex items-center justify-center gap-6 reveal-up stagger-4">
-          {socialLinks.map((social, i) => {
-            const Icon = social.icon
-            return (
-              <a
-                key={i}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-glass-hover hover:scale-110 transition-all duration-300 group"
-                aria-label={social.label}
-              >
-                <Icon className="w-5 h-5 text-text-secondary group-hover:text-accent transition-colors" />
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              {c.whatsapp && (
+                <a href={c.whatsapp} onClick={trackWhatsAppClick} target="_blank" rel="noreferrer" aria-label="WhatsApp me"
+                  className={`${btn} bg-[#25D366] text-[#0b1214] hover:bg-[#3ee07a] sm:col-span-2`}>
+                  <FaWhatsapp className="w-5 h-5" aria-hidden="true" /> WhatsApp
+                </a>
+              )}
+              {c.email && (
+                <a href={`mailto:${c.email}`} onClick={trackEmailClick} aria-label="Email me"
+                  className={`${btn} bg-[#41b3bc] text-[#0b1214] hover:bg-[#6fd0d7] sm:col-span-2`}>
+                  <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Email
+                </a>
+              )}
+              {c.phone && (
+                <a href={`tel:${(c.phone || '').replace(/\s+/g, '')}`} aria-label="Call me" className={btnLine}>
+                  <FaPhone className="w-4 h-4" aria-hidden="true" /> Call
+                </a>
+              )}
+              <a href={c.vcf ? withBase(c.vcf) : vcardUrl} target="_blank" rel="noreferrer" aria-label="Save contact" className={btnLine}>
+                <FaDownload className="w-4 h-4" aria-hidden="true" /> Save Contact
               </a>
-            )
-          })}
-        </div>
+              {c.ecard && (
+                <a href={c.ecard} onClick={trackECardClick} target="_blank" rel="noreferrer" className={`${btnLine} sm:col-span-2`}>
+                  <FaIdCard className="w-4 h-4" aria-hidden="true" /> e-Card <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              )}
+            </div>
 
-        {/* Footer note */}
-        <div className="mt-16 pt-8 border-t border-glass-border reveal-up stagger-5">
-          <p className="text-sm text-text-tertiary">
-            Based in {contactData.location} • Available for remote work worldwide
-          </p>
+            {socials.length > 0 && (
+              <div className="mt-8 pt-7 border-t border-white/10">
+                <h3 className="text-[13px] font-semibold tracking-[0.2em] uppercase text-white/60">Follow</h3>
+                <div className="mt-4 flex flex-wrap gap-2.5">
+                  {socials.map(({ href, label, Icon, ctx }) => (
+                    <a key={label} href={href} onClick={() => trackLinkedInClick(ctx)} target="_blank" rel="noreferrer" aria-label={label}
+                      className="inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] text-[15px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                      <Icon className="w-4 h-4" aria-hidden="true" /> {label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
+  )
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="bg-[#0b1214] text-white/60 border-t border-white/10">
+      <div className="max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-[clamp(32px,5vw,88px)] py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[14px]">
+        <p>© {new Date().getFullYear()} Ndumiso Yedwa. Built with React &amp; Tailwind CSS.</p>
+        <a href="#hero" className="inline-flex items-center gap-2 min-h-[44px] px-3 rounded-full hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+          Back to top
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+        </a>
+      </div>
+    </footer>
   )
 }

@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import aboutData from '@/content/about.json'
 import { content } from '../../content'
+import { withBase } from '../../lib/withBase'
 import {
   SiHtml5, SiCss3, SiJavascript, SiReact, SiTailwindcss,
   SiCanva, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign
@@ -8,223 +9,267 @@ import {
 import { TbCircleLetterC } from 'react-icons/tb'
 import { AiFillHeart } from 'react-icons/ai'
 
+// About — Gate 1 static proposal, extending the accepted hero's design language
+// (off-white canvas, flat teal field, Montserrat display, glass accents).
+
 function getSkillIcon(label) {
   const n = label.trim().toLowerCase()
   if (n === 'html' || n === 'html5') return { Icon: SiHtml5, color: '#E34F26' }
   if (n === 'css' || n === 'css3') return { Icon: SiCss3, color: '#1572B6' }
-  if (n === 'javascript' || n === 'js') return { Icon: SiJavascript, color: '#F7DF1E' }
-  if (n === 'react') return { Icon: SiReact, color: '#61DAFB' }
-  if (n === 'tailwind' || n === 'tailwind css') return { Icon: SiTailwindcss, color: '#38BDF8' }
-  if (n === 'canva') return { Icon: SiCanva, color: '#00C4CC' }
+  if (n === 'javascript' || n === 'js') return { Icon: SiJavascript, color: '#d9b800' }
+  if (n === 'react') return { Icon: SiReact, color: '#149eca' }
+  if (n === 'tailwind' || n === 'tailwind css') return { Icon: SiTailwindcss, color: '#0ea5e9' }
+  if (n === 'canva') return { Icon: SiCanva, color: '#00a8b0' }
   if (n === 'adobe photoshop' || n === 'photoshop' || n === 'ps')
-    return { Icon: SiAdobephotoshop, color: '#31A8FF' }
+    return { Icon: SiAdobephotoshop, color: '#1f7ad6' }
   if (n === 'adobe illustrator' || n === 'illustrator' || n === 'ai')
-    return { Icon: SiAdobeillustrator, color: '#FF9A00' }
+    return { Icon: SiAdobeillustrator, color: '#e68a00' }
   if (n === 'adobe indesign' || n === 'indesign' || n === 'id')
-    return { Icon: SiAdobeindesign, color: '#FF3366' }
+    return { Icon: SiAdobeindesign, color: '#e2335c' }
   if (n === 'claude' || n === 'claude.ai' || n === 'claude code' || n === 'anthropic')
-    return { Icon: TbCircleLetterC, color: '#41b3bc' }
+    return { Icon: TbCircleLetterC, color: '#0e5c66' }
   if (n === 'lovable' || n === 'loveable') return { Icon: AiFillHeart, color: '#EC4899' }
-  return { Icon: null, color: '#41b3bc' }
+  return { Icon: null, color: '#0e5c66' }
+}
+
+// Draft group labels (new micro-copy, logged for owner approval). Every skill stays in its
+// original order inside its group; anything not listed falls into the last group.
+const skillGroups = [
+  { label: 'Build', names: ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind'] },
+  { label: 'Design', names: ['Canva', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign'] },
+  { label: 'AI-assisted tools', names: ['Claude Code', 'Lovable'] }
+]
+
+function groupSkills(skills) {
+  const norm = s => (typeof s === 'string' ? { name: s, description: null } : s)
+  const all = skills.map(norm)
+  const used = new Set()
+  const groups = skillGroups.map(g => {
+    const items = all.filter(s => g.names.includes(s.name))
+    items.forEach(s => used.add(s.name))
+    return { label: g.label, items }
+  })
+  const rest = all.filter(s => !used.has(s.name))
+  if (rest.length) groups[groups.length - 1].items.push(...rest)
+  return groups.filter(g => g.items.length)
+}
+
+function Eyebrow({ children, light = false }) {
+  return (
+    <p className={`flex items-center gap-4 text-[13px] font-semibold tracking-[0.22em] uppercase ${light ? 'text-white' : 'text-[#1d2a2e]'}`}>
+      <span className="block w-10 h-[3px] bg-[#41b3bc] rounded-full flex-none" aria-hidden="true" />
+      {children}
+    </p>
+  )
+}
+
+const pill = 'inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full text-[14px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-2'
+const pillSolid = `${pill} bg-[#0e5c66] text-white hover:bg-[#0b4c55]`
+const pillLine = `${pill} border border-[#c9d0d1] text-[#121417] bg-white hover:border-[#0e5c66]`
+
+function ExtIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
+    </svg>
+  )
 }
 
 export default function AboutModern() {
   const items = Array.isArray(content?.badges) ? content.badges : []
-  const [modal, setModal] = useState({ open:false, idx:-1, mode:null, scale:1 })
+  const [modal, setModal] = useState({ open: false, idx: -1, mode: null, scale: 1 })
+  const closeRef = useRef(null)
+  const [showDetails, setShowDetails] = useState(false)
+  const lastTrigger = useRef(null)
 
-  const openSnippet = (idx)=>setModal({ open:true, idx, mode:"snippet", scale:1 })
-  const openZoom    = (idx)=>setModal({ open:true, idx, mode:"zoom",    scale:1 })
-  const close       = ()=>setModal({ open:false, idx:-1, mode:null, scale:1 })
-  const zoomIn = ()=>setModal(m=>({ ...m, scale: Math.min(3, +(m.scale+0.25).toFixed(2)) }))
-  const zoomOut= ()=>setModal(m=>({ ...m, scale: Math.max(1, +(m.scale-0.25).toFixed(2)) }))
-  const zoomReset=()=>setModal(m=>({ ...m, scale:1 }))
+  const openSnippet = (idx, el) => { lastTrigger.current = el; setModal({ open: true, idx, mode: 'snippet', scale: 1 }) }
+  const openZoom = (idx, el) => { lastTrigger.current = el; setModal({ open: true, idx, mode: 'zoom', scale: 1 }) }
+  const close = () => {
+    setModal({ open: false, idx: -1, mode: null, scale: 1 })
+    lastTrigger.current?.focus?.()
+  }
+  const zoomIn = () => setModal(m => ({ ...m, scale: Math.min(3, +(m.scale + 0.25).toFixed(2)) }))
+  const zoomOut = () => setModal(m => ({ ...m, scale: Math.max(1, +(m.scale - 0.25).toFixed(2)) }))
+  const zoomReset = () => setModal(m => ({ ...m, scale: 1 }))
 
-  const brand = content?.brandColor || "#41b3bc"
+  useEffect(() => {
+    if (!modal.open) return
+    closeRef.current?.focus()
+    const onKey = e => { if (e.key === 'Escape') close() }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [modal.open])
+
+  const groups = groupSkills(aboutData.skills || [])
+  const current = modal.open ? items[modal.idx] : null
 
   return (
-    <section
-      id="about"
-      className="relative py-24 px-6 md:px-12"
-      style={{ background: 'linear-gradient(to bottom, #050505, #0a0a0a)' }}
-    >
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* LEFT: Portrait (40%) */}
-          <div className="lg:col-span-5">
-            <div className="relative reveal-up">
-              {/* Main portrait */}
-              <div className="relative w-full max-w-md mx-auto">
-                <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-[#41b3bc]/20 to-transparent p-1">
-                  <img
-                    src="/assets/Ndu_Blue Background.png"
-                    alt={aboutData.name}
-                    className="w-full h-full object-cover rounded-3xl"
-                    style={{
-                      filter: 'grayscale(20%) contrast(1.1)',
-                    }}
-                  />
-                </div>
+    <section id="about" className="relative bg-[#fbfbf9] text-[#121417] py-14 lg:py-28">
+      <div className="max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-[clamp(32px,5vw,88px)]">
 
-                {/* Floating badge */}
-                <div className="absolute -bottom-6 -right-6 glass p-4 rounded-2xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-[#41b3bc] flex items-center justify-center">
-                      <span className="text-2xl font-bold text-black">5+</span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">Years</p>
-                      <p className="text-xs text-text-secondary">Experience</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {/* ===== Intro ===== */}
+        <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16 xl:gap-24 items-center">
+          {/* Portrait panel — existing standing cut-out on the hero's flat teal */}
+          <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
+            <div className="relative aspect-[1/1] sm:aspect-[4/5] max-h-[560px] lg:max-h-none rounded-[28px] bg-[#48aab7] overflow-hidden">
+              <img
+                src={withBase('/assets/ndu-icon.png')}
+                alt=""
+                aria-hidden="true"
+                className="absolute top-[6%] right-[5%] w-[34%] opacity-[0.13] mix-blend-multiply select-none"
+              />
+              <img
+                src={withBase('/assets/ndu-standing-cutout.webp')}
+                alt={aboutData.name}
+                width="832"
+                height="1248"
+                loading="lazy"
+                className="absolute bottom-[-2%] left-1/2 -translate-x-[70%] h-[100%] w-auto max-w-none drop-shadow-[0_24px_30px_rgba(9,40,46,0.3)]"
+              />
+            </div>
+            {/* Experience chip */}
+            <div className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 hero-glass-light rounded-2xl px-4 py-3 flex items-center gap-3">
+              <span className="hero-display text-[34px] leading-none text-[#0e5c66]">5+</span>
+              <span className="text-[14px] leading-tight">
+                <span className="block font-semibold text-[#121417]">Years</span>
+                <span className="block text-[#3b4448]">Experience</span>
+              </span>
             </div>
           </div>
 
-          {/* RIGHT: Content (60%) */}
-          <div className="lg:col-span-7 space-y-8">
-            {/* Badge */}
-            <span className="inline-block px-4 py-2 glass rounded-full text-sm text-[#41b3bc] font-medium reveal-up">
-              About Me
-            </span>
-
-            {/* Title */}
-            <h2 className="text-title text-white reveal-up stagger-1">
-              Building Digital Experiences That{' '}
-              <span className="text-[#41b3bc]">Matter</span>
+          {/* Copy */}
+          <div>
+            <Eyebrow>About Me</Eyebrow>
+            <h2 className="hero-display mt-5 text-[clamp(36px,8.6vw,46px)] lg:text-[clamp(44px,4vw,64px)] leading-[1.02] tracking-[-0.02em]">
+              Building Digital Experiences That <span className="text-[#0e5c66]">Matter</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
             </h2>
+            <p className="mt-6 max-w-[56ch] text-[17px] lg:text-[19px] leading-relaxed text-[#3b4448]">{aboutData.lead}</p>
 
-            {/* Bio */}
-            <div className="space-y-4 text-lg text-text-secondary leading-relaxed reveal-up stagger-2">
-              <p>{aboutData.lead}</p>
-            </div>
-
-            {/* Bullet points */}
-            <ul className="space-y-3 reveal-up stagger-3">
+            <ul className="mt-7 border-t border-[#121417]/10">
               {aboutData.bullets.map((bullet, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <svg
-                    className="w-6 h-6 text-[#41b3bc] flex-shrink-0 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span className="text-text-secondary">{bullet}</span>
+                <li key={i} className="flex items-start gap-4 py-3 sm:py-4 border-b border-[#121417]/10">
+                  <span className="mt-0.5 flex-none w-7 h-7 rounded-full bg-[#41b3bc]/15 text-[#0e5c66] flex items-center justify-center" aria-hidden="true">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+                  </span>
+                  <span className="text-[16px] lg:text-[17px] leading-relaxed text-[#26302f]">{bullet}</span>
                 </li>
               ))}
             </ul>
 
-            {/* CTA */}
-            <div className="flex flex-wrap gap-4 pt-4 reveal-up stagger-4">
-              <a
-                href="#contact"
-                className="px-8 py-4 bg-[#41b3bc] hover:bg-[#34919a] rounded-full font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
-              >
-                Let's Work Together
-              </a>
-            </div>
+            <a
+              href="#contact"
+              className="group mt-8 inline-flex items-center gap-3 min-h-[52px] px-8 rounded-full bg-[#0e5c66] text-white text-[16px] font-semibold shadow-[0_10px_24px_-12px_rgba(14,92,102,0.8)] hover:bg-[#0b4c55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66]"
+            >
+              Let's Work Together
+              <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
           </div>
         </div>
 
-        {/* Skills & Tools Section */}
-        <div className="mt-24 pt-16 border-t border-glass-border">
-          <div className="mb-12">
-            <span className="inline-block px-4 py-2 glass rounded-full text-sm text-[#41b3bc] font-medium mb-6">
-              Skills & Tools
-            </span>
-            <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Technical <span className="text-[#41b3bc]">Expertise</span>
-            </h3>
-            <p className="text-lg text-text-secondary max-w-2xl">
-              Proficient in modern development tools and design platforms
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {aboutData.skills.map((skill, i) => {
-              const skillName = typeof skill === 'string' ? skill : skill.name
-              const description = typeof skill === 'string' ? null : skill.description
-              const { Icon, color } = getSkillIcon(skillName)
-
-              return (
-                <div
-                  key={i}
-                  className="reveal-up group"
-                  style={{ animationDelay: `${i * 0.05}s` }}
-                >
-                  <div className="card-modern p-6 flex flex-col items-center gap-4 text-center hover:scale-105 transition-transform duration-300 accent-glow">
-                    {Icon && (
-                      <div
-                        className="w-12 h-12 flex items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
-                        style={{ backgroundColor: `${color}20` }}
-                      >
-                        <Icon className="w-7 h-7" style={{ color }} />
-                      </div>
-                    )}
-
-                    <div>
-                      <h3 className="text-sm font-semibold text-white mb-1">{skillName}</h3>
-                      {description && (
-                        <p className="text-xs text-text-tertiary line-clamp-2">{description}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Badges & Recognition Section */}
-        {items.length > 0 && (
-          <div className="mt-24 pt-16 border-t border-glass-border">
-            <div className="mb-12">
-              <span className="inline-block px-4 py-2 glass rounded-full text-sm text-[#41b3bc] font-medium mb-6">
-                Achievements
-              </span>
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Badges & <span className="text-[#41b3bc]">Recognition</span>
+        {/* ===== Skills & Tools ===== */}
+        <div className="mt-14 lg:mt-28 pt-10 lg:pt-20 border-t border-[#121417]/10">
+          <div className="grid gap-6 lg:grid-cols-[5fr_7fr] lg:gap-16 xl:gap-24 items-end">
+            <div>
+              <Eyebrow>Skills &amp; Tools</Eyebrow>
+              <h3 className="hero-display mt-5 text-[clamp(32px,7.5vw,40px)] lg:text-[clamp(38px,3.2vw,52px)] leading-[1.05] tracking-[-0.02em]">
+                Technical <span className="text-[#0e5c66]">Expertise</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
               </h3>
             </div>
+            <p className="text-[17px] lg:text-[18px] text-[#3b4448]">Proficient in modern development tools and design platforms</p>
+          </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+          <button
+            type="button"
+            onClick={() => setShowDetails(v => !v)}
+            aria-expanded={showDetails}
+            className={`md:hidden mt-6 ${pillLine}`}
+          >
+            {showDetails ? 'Hide tool details' : 'Show tool details'}
+          </button>
+
+          <div className="mt-8 md:mt-10 grid gap-x-10 gap-y-8 md:gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+            {groups.map(group => (
+              <div key={group.label}>
+                <h4 className="text-[13px] font-semibold tracking-[0.18em] uppercase text-[#0e5c66] pb-3 border-b-2 border-[#121417]">{group.label}</h4>
+                <ul className={showDetails ? '' : 'grid grid-cols-2 gap-x-4 md:block'}>
+                  {group.items.map(skill => {
+                    const { Icon, color } = getSkillIcon(skill.name)
+                    return (
+                      <li key={skill.name} className="flex items-start gap-3 md:gap-4 py-3 md:py-4 border-b border-[#121417]/10">
+                        <span className="flex-none w-9 h-9 md:w-11 md:h-11 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${color}1a` }} aria-hidden="true">
+                          {Icon && <Icon className="w-5 h-5 md:w-6 md:h-6" style={{ color }} />}
+                        </span>
+                        <span>
+                          <span className="block text-[15px] md:text-[16px] font-semibold leading-snug text-[#121417] pt-1.5 md:pt-0">{skill.name}</span>
+                          {skill.description && <span className={`${showDetails ? 'block' : 'hidden md:block'} mt-0.5 text-[15px] leading-snug text-[#4a5458]`}>{skill.description}</span>}
+                        </span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ===== Badges & Recognition ===== */}
+        {items.length > 0 && (
+          <div className="mt-14 lg:mt-28 pt-10 lg:pt-20 border-t border-[#121417]/10">
+            <div className="grid gap-6 lg:grid-cols-[5fr_7fr] lg:gap-16 xl:gap-24 items-end">
+              <div>
+                <Eyebrow>Achievements</Eyebrow>
+                <h3 className="hero-display mt-5 text-[clamp(32px,7.5vw,40px)] lg:text-[clamp(38px,3.2vw,52px)] leading-[1.05] tracking-[-0.02em]">
+                  Badges &amp; <span className="text-[#0e5c66]">Recognition</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
+                </h3>
+              </div>
+              {content?.sectionIntros?.badges && (
+                <p className="text-[17px] lg:text-[18px] text-[#3b4448]">{content.sectionIntros.badges}</p>
+              )}
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {items.map((b, i) => {
                 const isSnippet = !!b.snippetImg || !!b.snippet
                 const isZoom = !!b.zoom
-                const onCardClick = isSnippet ? ()=>openSnippet(i) : isZoom ? ()=>openZoom(i) : undefined
-                const aspectClass = b.aspect === "4/3" ? "aspect-[4/3]" : "aspect-[16/9]"
+                // Same priority as before: the evidence letter opens first, otherwise zoom
+                const openMain = isSnippet ? el => openSnippet(i, el) : isZoom ? el => openZoom(i, el) : null
+
+                const media = (
+                  <img
+                    src={withBase(b.img)}
+                    alt={b.name || 'Badge'}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-sm transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none"
+                  />
+                )
 
                 return (
-                  <article
-                    key={b.name || i}
-                    className={`group card-modern overflow-hidden transition-all duration-500 ${onCardClick ? "cursor-zoom-in" : ""}`}
-                    onClick={onCardClick}
-                  >
-                    <div className={`w-full ${aspectClass} bg-slate-50 overflow-hidden relative`}>
-                      <img
-                        src={b.img}
-                        alt={b.name || "Badge"}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="absolute inset-0 bg-[#41b3bc]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    </div>
-                    <div className="p-6 border-t-4 border-[#41b3bc]">
-                      <h4 className="text-sm font-semibold text-white">{b.name || "—"}</h4>
-                      {b.note && <p className="mt-3 text-xs text-text-secondary leading-relaxed">{b.note}</p>}
-                      <div className="mt-4 flex flex-wrap gap-4 text-[10px] uppercase tracking-wider font-semibold">
-                        {b.url && <a className="text-[#41b3bc] hover:translate-x-1 transition-all" href={b.url} target="_blank" rel="noreferrer" onClick={(e)=>e.stopPropagation()}>Visit site →</a>}
-                        {b.post && <a className="text-[#41b3bc] hover:translate-x-1 transition-all" href={b.post} target="_blank" rel="noreferrer" onClick={(e)=>e.stopPropagation()}>LinkedIn →</a>}
-                        {isSnippet && <button className="text-[#41b3bc] hover:translate-x-1 transition-all" onClick={(e)=>{e.stopPropagation(); openSnippet(i);}}>Letter →</button>}
-                        {isZoom && <button className="text-[#41b3bc] hover:translate-x-1 transition-all" onClick={(e)=>{e.stopPropagation(); openZoom(i);}}>Zoom →</button>}
+                  <article key={b.key || b.name || i} className="group grid grid-cols-[104px_1fr] md:flex md:flex-col rounded-[22px] bg-white border border-[#121417]/10 overflow-hidden shadow-[0_18px_36px_-28px_rgba(10,30,34,0.5)]">
+                    {openMain ? (
+                      <button
+                        type="button"
+                        onClick={e => openMain(e.currentTarget)}
+                        className="relative md:aspect-[4/3] bg-[#eef1f1] p-3 md:p-7 flex items-center justify-center cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0e5c66]"
+                        aria-label={`Open ${b.name}`}
+                      >
+                        {media}
+                        <span className="hidden md:flex absolute right-3 top-3 w-10 h-10 rounded-full bg-white/90 text-[#0e5c66] items-center justify-center shadow-sm" aria-hidden="true">
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="11" cy="11" r="6" /><path d="M20 20l-4.5-4.5M11 8v6M8 11h6" /></svg>
+                        </span>
+                      </button>
+                    ) : (
+                      <div className="md:aspect-[4/3] bg-[#eef1f1] p-3 md:p-7 flex items-center justify-center">{media}</div>
+                    )}
+
+                    <div className="flex-1 flex flex-col p-4 md:p-6 border-l-4 md:border-l-0 md:border-t-4 border-[#41b3bc]">
+                      <h4 className="text-[16px] md:text-[18px] font-semibold leading-snug text-[#121417]">{b.name || '—'}</h4>
+                      {b.note && <p className="mt-2 text-[15px] leading-relaxed text-[#4a5458]">{b.note}</p>}
+                      <div className="mt-auto pt-4 md:pt-5 flex flex-wrap gap-2">
+                        {b.url && <a className={pillLine} href={b.url} target="_blank" rel="noreferrer">Visit site <ExtIcon /></a>}
+                        {b.post && <a className={pillLine} href={b.post} target="_blank" rel="noreferrer">LinkedIn <ExtIcon /></a>}
+                        {isSnippet && <button type="button" className={pillSolid} onClick={e => openSnippet(i, e.currentTarget)}>Letter</button>}
+                        {isZoom && <button type="button" className={isSnippet ? pillLine : pillSolid} onClick={e => openZoom(i, e.currentTarget)}>Zoom</button>}
                       </div>
                     </div>
                   </article>
@@ -235,55 +280,49 @@ export default function AboutModern() {
         )}
       </div>
 
-      {/* Modal */}
-      {modal.open && items[modal.idx] && (
-        <div className="fixed inset-0 z-50 bg-black/70 p-4 grid place-items-center" onClick={close} role="dialog" aria-modal="true">
-          <div className="max-w-3xl w-full rounded-xl glass p-5 relative" onClick={(e)=>e.stopPropagation()}>
-            <button onClick={close} className="absolute top-3 right-3 rounded-full glass px-2 py-1 text-sm text-white">✕</button>
-            <h3 className="text-lg font-semibold text-white">{items[modal.idx].name}</h3>
+      {/* ===== Modal (same modes and zoom controls as before) ===== */}
+      {current && (
+        <div className="fixed inset-0 z-[60] bg-[#0b1416]/70 backdrop-blur-sm p-4 grid place-items-center" onClick={close}>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="about-modal-title"
+            className="max-w-3xl w-full max-h-[92vh] overflow-auto rounded-[22px] bg-white text-[#121417] p-5 sm:p-7 relative shadow-2xl"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              ref={closeRef}
+              onClick={close}
+              aria-label="Close"
+              className="absolute top-3 right-3 w-11 h-11 rounded-full bg-[#eef1f1] hover:bg-[#dfe4e4] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+            <h3 id="about-modal-title" className="pr-14 text-[20px] font-semibold">{current.name}</h3>
 
-            {modal.mode === "snippet" && (
-              <>
-                {items[modal.idx].snippet && <p className="mt-3 text-sm text-text-secondary whitespace-pre-line">{items[modal.idx].snippet}</p>}
-                {items[modal.idx].snippetImg && (
-                  <>
-                    <div className="mt-3 border border-glass-border rounded-xl overflow-auto bg-bg-secondary">
-                      <div className="w-full grid place-items-center" style={{ minHeight: 320 }}>
-                        <img src={items[modal.idx].snippetImg} alt="Acceptance letter snippet"
-                          onContextMenu={(e)=>e.preventDefault()}
-                          style={{ transform:`scale(${modal.scale})`, transformOrigin:"center center", transition:"transform 120ms ease" }}
-                          className="max-w-full max-h-[70vh] object-contain" />
-                      </div>
-                    </div>
-                    <div className="mt-4 flex flex-wrap items-center gap-3">
-                      <button onClick={zoomOut} className="px-3 py-1.5 rounded-full glass hover:bg-glass-hover text-sm text-white">− Zoom out</button>
-                      <button onClick={zoomIn} className="px-3 py-1.5 rounded-full glass hover:bg-glass-hover text-sm text-white">+ Zoom in</button>
-                      <button onClick={zoomReset} className="px-3 py-1.5 rounded-full glass hover:bg-glass-hover text-sm text-white">Reset</button>
-                    </div>
-                  </>
-                )}
-              </>
+            {modal.mode === 'snippet' && current.snippet && (
+              <p className="mt-3 text-[16px] leading-relaxed text-[#3b4448] whitespace-pre-line">{current.snippet}</p>
             )}
 
-            {modal.mode === "zoom" && (
+            {((modal.mode === 'snippet' && current.snippetImg) || modal.mode === 'zoom') && (
               <>
-                <div className="mt-3 border border-glass-border rounded-xl overflow-auto bg-bg-secondary">
-                  <div className="w-full grid place-items-center" style={{ minHeight: 360 }}>
+                <div className="mt-4 border border-[#121417]/10 rounded-xl overflow-auto bg-[#eef1f1]">
+                  <div className="w-full grid place-items-center" style={{ minHeight: modal.mode === 'zoom' ? 360 : 320 }}>
                     <img
-                      src={items[modal.idx].modalImg || items[modal.idx].img}
-                      alt={items[modal.idx].name}
-                      onContextMenu={(e)=>e.preventDefault()}
-                      style={{ transform:`scale(${modal.scale})`, transformOrigin:"center center", transition:"transform 120ms ease" }}
+                      src={withBase(modal.mode === 'zoom' ? (current.modalImg || current.img) : current.snippetImg)}
+                      alt={modal.mode === 'zoom' ? current.name : 'Acceptance letter snippet'}
+                      onContextMenu={e => e.preventDefault()}
+                      style={{ transform: `scale(${modal.scale})`, transformOrigin: 'center center', transition: 'transform 120ms ease' }}
                       className="max-w-full max-h-[70vh] object-contain"
                     />
                   </div>
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-3">
-                  <button onClick={zoomOut} className="px-3 py-1.5 rounded-full glass hover:bg-glass-hover text-sm text-white">− Zoom out</button>
-                  <button onClick={zoomIn} className="px-3 py-1.5 rounded-full glass hover:bg-glass-hover text-sm text-white">+ Zoom in</button>
-                  <button onClick={zoomReset} className="px-3 py-1.5 rounded-full glass hover:bg-glass-hover text-sm text-white">Reset</button>
-                  {items[modal.idx].post && (
-                    <a href={items[modal.idx].post} target="_blank" rel="noreferrer" className="ml-auto px-3 py-1.5 rounded-full bg-[#41b3bc] text-white hover:bg-[#34919a] text-sm">See LinkedIn post</a>
+                <div className="mt-4 flex flex-wrap items-center gap-2.5">
+                  <button onClick={zoomOut} className={pillLine}>− Zoom out</button>
+                  <button onClick={zoomIn} className={pillLine}>+ Zoom in</button>
+                  <button onClick={zoomReset} className={pillLine}>Reset</button>
+                  {modal.mode === 'zoom' && current.post && (
+                    <a href={current.post} target="_blank" rel="noreferrer" className={`${pillSolid} sm:ml-auto`}>See LinkedIn post <ExtIcon /></a>
                   )}
                 </div>
               </>

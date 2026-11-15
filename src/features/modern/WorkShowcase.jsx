@@ -1,120 +1,143 @@
-import React, { useState } from 'react'
+import React from 'react'
 import websitesData from '@/content/websites.json'
 import { trackWebProjectClick } from '../../lib/analytics'
+import { withBase } from '../../lib/withBase'
 
-function WebsiteCard({ website, index }) {
-  const [isHovered, setIsHovered] = useState(false)
+// Websites — Gate 1 static proposal. Charcoal band for rhythm after the light About;
+// screenshots are shown whole inside a browser frame (never cropped).
+
+// Lighter WebP copies of the same screenshots (checked side by side:
+// docs/redesign-qa/websites-gate1/jpg-vs-webp-*.png). Dr Benzi keeps its JPG because
+// its WebP copy is larger. The JSON paths are unchanged.
+const lighter = {
+  '/assets/krfthumbnail.png': '/assets/krfthumbnail.webp',
+  '/assets/vlc-shot.jpg': '/assets/vlc-shot.webp',
+  '/assets/tvei-shot.jpg': '/assets/tvei-shot.webp',
+  '/assets/MakwelengThumbnail.png': '/assets/MakwelengThumbnail.webp',
+  '/assets/embark-shot.jpg': '/assets/embark-shot.webp'
+}
+
+function hostOf(url) {
+  try { return new URL(url).hostname.replace(/^www\./, '') } catch { return '' }
+}
+
+function SiteCard({ site, index, featured = false, flip = false }) {
+  const src = withBase(lighter[site.thumb] || site.thumb)
+  const host = hostOf(site.url)
 
   return (
-    <div
-      className="group card-modern overflow-hidden cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <a
+      href={site.url}
+      onClick={() => trackWebProjectClick(site.name)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group block rounded-[24px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6fd0d7] focus-visible:ring-offset-4 focus-visible:ring-offset-[#10191b] ${
+        featured
+          ? `lg:grid lg:gap-12 xl:gap-16 lg:items-center ${flip ? 'lg:grid-cols-[5fr_7fr]' : 'lg:grid-cols-[7fr_5fr]'}`
+          : ''
+      }`}
     >
-      {/* Image only */}
-      <div className="aspect-[4/3] overflow-hidden relative">
-        <img
-          src={website.thumb}
-          alt={website.name}
-          className={`w-full h-full object-cover transition-transform duration-700 ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
-        />
-        <div className="absolute inset-0 bg-[#41b3bc]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      </div>
-
-      {/* Details below image */}
-      <div className="p-6">
-        {/* Tags - filter out React/Vite/Tailwind */}
-        {website.stack && website.stack.filter(tech => !['React', 'Vite', 'Tailwind'].includes(tech)).length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-3">
-            {website.stack
-              .filter(tech => !['React', 'Vite', 'Tailwind'].includes(tech))
-              .slice(0, 3)
-              .map((tech, i) => (
-                <span
-                  key={i}
-                  className="px-2 py-1 text-xs font-medium bg-glass rounded-full text-text-secondary"
-                >
-                  {tech}
-                </span>
-              ))}
-          </div>
-        )}
-
-        {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-2">{website.name}</h3>
-
-        {/* Description */}
-        <p className="text-sm text-text-secondary mb-4 line-clamp-2">
-          {website.outcome}
-        </p>
-
-        {/* Link */}
-        <div className="flex items-center gap-2 text-[#41b3bc] font-medium text-sm">
-          <span>View Website</span>
-          <svg
-            className={`w-4 h-4 transition-transform ${
-              isHovered ? 'translate-x-2' : 'translate-x-0'
-            }`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
+      {/* Browser frame */}
+      <div className={`${flip ? 'lg:order-2' : ''} rounded-[18px] lg:rounded-[22px] overflow-hidden bg-[#0b1214] border border-white/10 shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:-translate-y-1 motion-reduce:transition-none`}>
+        <div className="flex items-center gap-3 px-4 h-9 border-b border-white/10 bg-[#152225]" aria-hidden="true">
+          <span className="flex gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-white/25" />
+            <span className="w-2.5 h-2.5 rounded-full bg-white/25" />
+            <span className="w-2.5 h-2.5 rounded-full bg-white/25" />
+          </span>
+          <span className="flex-1 truncate text-center text-[12px] text-white/55 tracking-wide">{host}</span>
+          <span className="w-[42px]" />
+        </div>
+        <div className="aspect-[1200/625] bg-[#0b1214] flex items-center justify-center">
+          <img
+            src={src}
+            alt={`${site.name} website`}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
-    </div>
+
+      {/* Caption */}
+      <div className={`${featured ? 'pt-5 lg:pt-0' : 'pt-4 sm:pt-5'} ${flip ? 'lg:order-1' : ''}`}>
+        <span className="hero-display text-[#6fd0d7] text-[15px] tracking-[0.12em]">{String(index + 1).padStart(2, '0')}</span>
+        <h3 className={`hero-display mt-1.5 text-white leading-[1.08] tracking-[-0.01em] ${featured ? 'text-[28px] sm:text-[34px] xl:text-[44px]' : 'text-[22px] sm:text-[26px]'}`}>
+          {site.name}
+        </h3>
+        <p className={`mt-2.5 text-white/70 leading-relaxed ${featured ? 'text-[17px] lg:text-[19px] max-w-[40ch]' : 'text-[16px] max-w-[46ch]'}`}>
+          {site.outcome}
+        </p>
+        <span className="mt-5 inline-flex items-center gap-2.5 min-h-[44px] px-5 rounded-full border border-white/25 text-white text-[15px] font-semibold transition-colors group-hover:bg-white group-hover:text-[#10191b]">
+          View Website
+          <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
+          </svg>
+          <span className="sr-only">(opens {host} in a new tab)</span>
+        </span>
+      </div>
+    </a>
   )
 }
 
 export default function WorkShowcase() {
+  const [first, ...others] = websitesData
+  // With an odd number left over, the last project closes the section full-width (mirrored)
+  const closing = others.length % 2 === 1 ? others[others.length - 1] : null
+  const rest = closing ? others.slice(0, -1) : others
+
   return (
+    // Inline style: legacy `#websites` rules in index.css (light gradient + an infinite
+    // opacity pulse) would otherwise win over classes because of ID specificity.
     <section
       id="websites"
-      className="relative py-24 px-6 md:px-12"
-      style={{ background: 'linear-gradient(to bottom, #0a0a0a, #050505)' }}
+      className="relative text-white py-14 lg:py-28 overflow-hidden"
+      style={{ background: '#10191b', animation: 'none', borderTop: 0 }}
     >
-      <div className="max-w-[1400px] mx-auto">
-        {/* Section header */}
-        <div className="mb-16">
-          <span className="inline-block px-4 py-2 glass rounded-full text-sm text-[#41b3bc] font-medium mb-6">
-            Websites
-          </span>
-          <h2 className="text-title text-white mb-4">
-            Websites That <span className="text-[#41b3bc]">Convert</span>
-          </h2>
-          <p className="text-lg text-text-secondary max-w-2xl">
-            Modern, fast, and built for results. Each project combines clean design with
-            performance optimization.
+      {/* Watermark: the real personal icon, as in the hero */}
+      <img
+        src={withBase('/assets/ndu-icon.png')}
+        alt=""
+        aria-hidden="true"
+        className="hidden lg:block absolute -top-10 right-[4%] w-[300px] opacity-[0.05] invert select-none pointer-events-none"
+      />
+
+      <div className="relative max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-[clamp(32px,5vw,88px)]">
+        {/* Header */}
+        <div className="grid gap-6 lg:grid-cols-[5fr_7fr] lg:gap-16 xl:gap-24 items-end">
+          <div>
+            <p className="flex items-center gap-4 text-[13px] font-semibold tracking-[0.22em] uppercase text-white/85">
+              <span className="block w-10 h-[3px] bg-[#41b3bc] rounded-full" aria-hidden="true" />
+              Websites
+            </p>
+            <h2 className="hero-display mt-5 text-[clamp(36px,8.6vw,46px)] lg:text-[clamp(44px,4vw,64px)] leading-[1.02] tracking-[-0.02em]">
+              Websites That <span className="text-[#6fd0d7]">Convert</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
+            </h2>
+          </div>
+          <p className="text-[17px] lg:text-[18px] text-white/70 max-w-[52ch]">
+            Modern, fast, and built for results. Each project combines clean design with performance optimization.
           </p>
         </div>
 
-        {/* Grid Layout - 2 columns on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {websitesData.map((website, i) => (
-            <a
-              key={website.name}
-              href={website.url}
-              onClick={() => trackWebProjectClick(website.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="reveal-up group"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <WebsiteCard
-                website={website}
-                index={i}
-              />
-            </a>
+        {/* Featured (first project in the existing order) */}
+        {first && (
+          <div className="mt-10 lg:mt-16">
+            <SiteCard site={first} index={0} featured />
+          </div>
+        )}
+
+        {/* Remaining projects, original order */}
+        <div className="mt-12 lg:mt-20 grid gap-x-10 xl:gap-x-14 gap-y-10 lg:gap-y-16 md:grid-cols-2">
+          {rest.map((site, i) => (
+            <SiteCard key={site.name} site={site} index={i + 1} />
           ))}
         </div>
+
+        {closing && (
+          <div className="mt-10 lg:mt-20">
+            <SiteCard site={closing} index={websitesData.length - 1} featured flip />
+          </div>
+        )}
       </div>
     </section>
   )

@@ -172,32 +172,6 @@
   @keyframes shine{0%{background-position:200% 0}100%{background-position:-100% 0}}
 }
 
-/* ===== minimalist section backgrounds ===== */
-#websites{
-  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
-  border-top: 1px solid rgba(148,163,184,0.1);
-}
-#graphics{
-  background: #ffffff;
-  border-top: 1px solid rgba(148,163,184,0.08);
-}
-#social{
-  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-  border-top: 1px solid rgba(148,163,184,0.1);
-}
-#projects{
-  background: #fafafa;
-  border-top: 1px solid rgba(148,163,184,0.1);
-}
-#badges{
-  background: #ffffff;
-  border-top: 1px solid rgba(148,163,184,0.08);
-}
-#contact{
-  background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
-  border-top: 1px solid rgba(148,163,184,0.1);
-}
-
 /* minimalist navbar */
 nav a{
   font-weight: 400;
@@ -279,28 +253,6 @@ nav a:hover { color: var(--brand-700); }
 @keyframes textShimmer {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
-}
-
-/* Bold section backgrounds with moving gradients */
-#websites {
-  background:
-    linear-gradient(45deg, transparent, rgba(72, 170, 183, 0.1), transparent),
-    radial-gradient(1200px 600px at 20% 0%, color-mix(in oklab, var(--brand-200) 70%, transparent), transparent 70%),
-    linear-gradient(180deg, #fff, #f8fafc);
-  animation: sectionPulse 8s ease-in-out infinite;
-}
-
-#projects {
-  background:
-    linear-gradient(-45deg, transparent, rgba(139, 92, 246, 0.1), transparent),
-    radial-gradient(1200px 600px at 80% 0%, color-mix(in oklab, #a855f7 30%, transparent), transparent 70%),
-    linear-gradient(180deg, #fff, #f8fafc);
-  animation: sectionPulse 10s ease-in-out infinite reverse;
-}
-
-@keyframes sectionPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.95; }
 }
 
 /* Floating elements with rotation */

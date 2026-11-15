@@ -1,0 +1,2261 @@
+{
+  "baselineSha": "cf1bf12bfcf687c0bf7e9323f8c2c32f3172e547",
+  "definitionCount": 54,
+  "activeDefinitionCount": 19,
+  "moduleCount": 45,
+  "components": [
+    {
+      "component": "App",
+      "file": "src/App.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [
+        "src/Theme.jsx",
+        "src/components/Navbar.jsx",
+        "src/features/hero/Hero.jsx",
+        "src/features/about/About.jsx",
+        "src/features/websites/Websites.jsx",
+        "src/components/LogoShowCase.jsx",
+        "src/components/SocialMgmt.jsx",
+        "src/features/projects/Projects.jsx",
+        "src/components/Upcoming.jsx",
+        "src/components/Badges.jsx",
+        "src/features/contact/Contact.jsx",
+        "src/components/Footer.jsx",
+        "src/components/ui/SectionDivider.jsx"
+      ],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "AppModern",
+      "file": "src/AppModern.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/main.jsx"
+      ],
+      "children": [
+        "src/components/modern/FloatingNav.jsx",
+        "src/features/modern/HeroModern.jsx",
+        "src/features/modern/AboutModern.jsx",
+        "src/features/modern/WorkShowcase.jsx",
+        "src/components/LogoShowCase.jsx",
+        "src/components/SocialMgmt.jsx",
+        "src/features/modern/ProjectCarousel.jsx",
+        "src/components/Contact.jsx"
+      ],
+      "purpose": "Current root composition",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "SkillPill",
+      "file": "src/components/About.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #about",
+      "props": "{ skill, onMobileToggle, showMobileDescription, isMobile }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "about"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/si",
+        "react-icons/tb",
+        "react-icons/ai",
+        "react-icons/hi2"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "About",
+      "file": "src/components/About.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #about",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "about"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/si",
+        "react-icons/tb",
+        "react-icons/ai",
+        "react-icons/hi2"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "AccentFX",
+      "file": "src/components/AccentFX.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Badges",
+      "file": "src/components/Badges.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #badges",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick",
+        "onContextMenu"
+      ],
+      "routing": {
+        "sectionIds": [
+          "badges"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "SafeLogo",
+      "file": "src/components/Contact.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #contact",
+      "props": "{ src, alt = \"\", className = \"\", fallbackType = \"badge\" }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useMemo"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onError",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "contact"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "ActionButton",
+      "file": "src/components/Contact.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #contact",
+      "props": "{ href, onClick, children, variant = \"solid\", ariaLabel, isPrimary = false }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useMemo"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onError",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "contact"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "Contact",
+      "file": "src/components/Contact.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #contact",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useMemo"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onError",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "contact"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "Footer",
+      "file": "src/components/Footer.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [
+        "/assets/ndu-icon.png"
+      ],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": [
+          "#home",
+          "#about",
+          "#websites",
+          "#contact",
+          "https://www.facebook.com/",
+          "https://www.linkedin.com/",
+          "https://www.instagram.com/"
+        ]
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "GraphicsSection",
+      "file": "src/components/GraphicsCarousel.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Hero",
+      "file": "src/components/Hero.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [
+        "/assets/NdumisoNobackground.png",
+        "/assets/QRcodeBusiness.jpg"
+      ],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": [
+          "#contact",
+          "#websites"
+        ]
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg, xl, sm",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Lightbox",
+      "file": "src/components/Lightbox.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/components/TVEI.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "{ images, start = 0, title = '', onClose }",
+      "state": "local React state",
+      "hooks": [
+        "useMemo",
+        "useState",
+        "useRef",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Chip",
+      "file": "src/components/LogoShowCase.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/App.jsx",
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #graphics",
+      "props": "{ children }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [
+        "/assets/nduproj-01.jpg",
+        "/assets/nduproj-02.jpg"
+      ],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "graphics"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "LogoShowCase",
+      "file": "src/components/LogoShowCase.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/App.jsx",
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #graphics",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [
+        "/assets/nduproj-01.jpg",
+        "/assets/nduproj-02.jpg"
+      ],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "graphics"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "FloatingNav",
+      "file": "src/components/modern/FloatingNav.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Fixed section navigation",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": [
+          "#hero"
+        ]
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "MiniAudioPlayer",
+      "file": "src/components/modern/MiniAudioPlayer.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/features/modern/ProjectCarousel.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "{ src, description }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useRef",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "Navbar",
+      "file": "src/components/Navbar.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": [
+          "#home"
+        ]
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "NduCodes",
+      "file": "src/components/NduCodes.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #nducodes",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [
+          "nducodes"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Projects",
+      "file": "src/components/Projects.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #projects",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "projects"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "PlatformBadge",
+      "file": "src/components/SocialMgmt.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/App.jsx",
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #social",
+      "props": "{ type }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick",
+        "onMouseEnter",
+        "onMouseLeave"
+      ],
+      "routing": {
+        "sectionIds": [
+          "social"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "SocialLink",
+      "file": "src/components/SocialMgmt.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/App.jsx",
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #social",
+      "props": "{ type, url, brand }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick",
+        "onMouseEnter",
+        "onMouseLeave"
+      ],
+      "routing": {
+        "sectionIds": [
+          "social"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "Thumb",
+      "file": "src/components/SocialMgmt.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/App.jsx",
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #social",
+      "props": "{ src, brand, aspect=\"16/9\" }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick",
+        "onMouseEnter",
+        "onMouseLeave"
+      ],
+      "routing": {
+        "sectionIds": [
+          "social"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "SocialMgmt",
+      "file": "src/components/SocialMgmt.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/App.jsx",
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #social",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick",
+        "onMouseEnter",
+        "onMouseLeave"
+      ],
+      "routing": {
+        "sectionIds": [
+          "social"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, sm, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "CarouselCard",
+      "file": "src/components/TVEI.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [
+        "src/components/Lightbox.jsx"
+      ],
+      "purpose": "Owns section #tvei",
+      "props": "{ item }",
+      "state": "local React state",
+      "hooks": [
+        "useState"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "tvei"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "TVEI",
+      "file": "src/components/TVEI.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [
+        "src/components/Lightbox.jsx"
+      ],
+      "purpose": "Owns section #tvei",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "tvei"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Button",
+      "file": "src/components/ui/Button.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/features/about/About.jsx",
+        "src/features/contact/Contact.jsx"
+      ],
+      "children": [
+        "src/lib/cn.jsx"
+      ],
+      "purpose": "Reusable or supporting component",
+      "props": "{\r\n  className = '',\r\n  variant = 'primary',\r\n  as = 'button',\r\n  href,\r\n  children,\r\n  icon = false,\r\n  ...props\r\n}",
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Card",
+      "file": "src/components/ui/Card.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/features/projects/Projects.jsx",
+        "src/features/websites/Websites.jsx"
+      ],
+      "children": [
+        "src/lib/cn.jsx"
+      ],
+      "purpose": "Reusable or supporting component",
+      "props": "{ className = '', children, hover = true, glass = true, ...props }",
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "SectionDivider",
+      "file": "src/components/ui/SectionDivider.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "{ variant = 'gradient' }",
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "SectionHeading",
+      "file": "src/components/ui/SectionHeading.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/features/contact/Contact.jsx",
+        "src/features/projects/Projects.jsx",
+        "src/features/websites/Websites.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "{ eyebrow, title, sub, align = 'left', gradient = false }",
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Tag",
+      "file": "src/components/ui/Tag.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/features/projects/Projects.jsx",
+        "src/features/websites/Websites.jsx"
+      ],
+      "children": [
+        "src/lib/cn.jsx"
+      ],
+      "purpose": "Reusable or supporting component",
+      "props": "{ children, className = '', variant = 'default' }",
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Upcoming",
+      "file": "src/components/Upcoming.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #upcoming",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onError",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "upcoming"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "VideoModal",
+      "file": "src/components/VideoModal.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "{ title = 'Promo Video', poster = '', mp4 = '', webm = '', onClose }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useRef",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "VideoTeaser",
+      "file": "src/components/VideoTeaser.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "{ poster = \"\", mp4 = \"\", webm = \"\", onClick }",
+      "state": "local React state",
+      "hooks": [
+        "useRef",
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Websites",
+      "file": "src/components/Websites.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #websites",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "../content"
+      ],
+      "media": [],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "websites"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "ErrorBoundary",
+      "file": "src/ErrorBoundary.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": "props",
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "SkillPill",
+      "file": "src/features/about/About.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/Button.jsx"
+      ],
+      "purpose": "Owns section #about",
+      "props": "{ skill, onMobileToggle, showMobileDescription, isMobile }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "@/content/about.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "about"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/si",
+        "react-icons/tb",
+        "react-icons/ai"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "About",
+      "file": "src/features/about/About.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/Button.jsx"
+      ],
+      "purpose": "Owns section #about",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "@/content/about.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "about"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/si",
+        "react-icons/tb",
+        "react-icons/ai"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Contact",
+      "file": "src/features/contact/Contact.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/SectionHeading.jsx",
+        "src/components/ui/Button.jsx"
+      ],
+      "purpose": "Owns section #contact",
+      "props": null,
+      "state": "none detected",
+      "hooks": [
+        "useMemo"
+      ],
+      "dataSource": [
+        "@/content/contact.json"
+      ],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [
+          "contact"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Hero",
+      "file": "src/features/hero/Hero.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #hero",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [
+        "/assets/NdumisoNobackground.png",
+        "/assets/QRcodeBusiness.jpg"
+      ],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "hero"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg, xl",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "AboutModern",
+      "file": "src/features/modern/AboutModern.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #about",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState"
+      ],
+      "dataSource": [
+        "@/content/about.json",
+        "../../content"
+      ],
+      "media": [
+        "/assets/Ndu_Blue Background.png"
+      ],
+      "interactions": [
+        "onClick",
+        "onContextMenu"
+      ],
+      "routing": {
+        "sectionIds": [
+          "about"
+        ],
+        "staticHrefs": [
+          "#contact"
+        ]
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/si",
+        "react-icons/tb",
+        "react-icons/ai"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "ContactModern",
+      "file": "src/features/modern/ContactModern.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #contact",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [
+        "@/content/contact.json"
+      ],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [
+          "contact"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/fa"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "HeroModern",
+      "file": "src/features/modern/HeroModern.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #hero",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [
+        "/assets/NdumisoNobackground.png",
+        "/assets/QRcodeBusiness.jpg"
+      ],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "hero"
+        ],
+        "staticHrefs": [
+          "#contact",
+          "#websites"
+        ]
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg, xl, sm",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "ProjectCard",
+      "file": "src/features/modern/ProjectCarousel.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [
+        "src/components/modern/MiniAudioPlayer.jsx"
+      ],
+      "purpose": "Owns section #projects",
+      "props": "{ project }",
+      "state": "none detected",
+      "hooks": [
+        "useRef"
+      ],
+      "dataSource": [
+        "@/content/projects.json"
+      ],
+      "media": [
+        "/media/learning-journey-intro.mp4"
+      ],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "projects"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "ProjectCarousel",
+      "file": "src/features/modern/ProjectCarousel.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [
+        "src/components/modern/MiniAudioPlayer.jsx"
+      ],
+      "purpose": "Owns section #projects",
+      "props": null,
+      "state": "none detected",
+      "hooks": [
+        "useRef"
+      ],
+      "dataSource": [
+        "@/content/projects.json"
+      ],
+      "media": [
+        "/media/learning-journey-intro.mp4"
+      ],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "projects"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "SkillsModern",
+      "file": "src/features/modern/SkillsModern.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [],
+      "children": [],
+      "purpose": "Owns section #skills",
+      "props": null,
+      "state": "none detected",
+      "hooks": [],
+      "dataSource": [
+        "@/content/about.json"
+      ],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [
+          "skills"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react",
+        "react-icons/si",
+        "react-icons/tb",
+        "react-icons/ai"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "WebsiteCard",
+      "file": "src/features/modern/WorkShowcase.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #websites",
+      "props": "{ website, index }",
+      "state": "local React state",
+      "hooks": [
+        "useState"
+      ],
+      "dataSource": [
+        "@/content/websites.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "websites"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "WorkShowcase",
+      "file": "src/features/modern/WorkShowcase.jsx",
+      "type": "active-render",
+      "usedBy": [
+        "src/AppModern.jsx"
+      ],
+      "children": [],
+      "purpose": "Owns section #websites",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState"
+      ],
+      "dataSource": [
+        "@/content/websites.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onMouseEnter",
+        "onMouseLeave",
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "websites"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P2/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "ProjectCard",
+      "file": "src/features/projects/Projects.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/Card.jsx",
+        "src/components/ui/SectionHeading.jsx",
+        "src/components/ui/Tag.jsx"
+      ],
+      "purpose": "Owns section #projects",
+      "props": "{ project, index }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "@/content/projects.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "projects"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Projects",
+      "file": "src/features/projects/Projects.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/Card.jsx",
+        "src/components/ui/SectionHeading.jsx",
+        "src/components/ui/Tag.jsx"
+      ],
+      "purpose": "Owns section #projects",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "@/content/projects.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "projects"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "WebsiteCard",
+      "file": "src/features/websites/Websites.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/Card.jsx",
+        "src/components/ui/SectionHeading.jsx",
+        "src/components/ui/Tag.jsx"
+      ],
+      "purpose": "Owns section #websites",
+      "props": "{ website, index }",
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "@/content/websites.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "websites"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "Websites",
+      "file": "src/features/websites/Websites.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [
+        "src/components/ui/Card.jsx",
+        "src/components/ui/SectionHeading.jsx",
+        "src/components/ui/Tag.jsx"
+      ],
+      "purpose": "Owns section #websites",
+      "props": null,
+      "state": "local React state",
+      "hooks": [
+        "useState",
+        "useEffect"
+      ],
+      "dataSource": [
+        "@/content/websites.json"
+      ],
+      "media": [],
+      "interactions": [
+        "onClick"
+      ],
+      "routing": {
+        "sectionIds": [
+          "websites"
+        ],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "Tailwind variants: md, lg",
+      "animation": "CSS transition/animation or timed state present",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    },
+    {
+      "component": "AnalyticsTracker",
+      "file": "src/main.jsx",
+      "type": "infrastructure",
+      "usedBy": [],
+      "children": [
+        "src/AppModern.jsx"
+      ],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "none detected",
+      "hooks": [
+        "useLocation",
+        "useEffect"
+      ],
+      "dataSource": [],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react",
+        "react-dom/client",
+        "react-router-dom"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Yes, subject to preservation contract",
+      "preservation": "P1/P3",
+      "notes": "Reachable from src/main.jsx at baseline SHA"
+    },
+    {
+      "component": "Theme",
+      "file": "src/Theme.jsx",
+      "type": "inactive-or-alternate",
+      "usedBy": [
+        "src/App.jsx"
+      ],
+      "children": [],
+      "purpose": "Reusable or supporting component",
+      "props": null,
+      "state": "none detected",
+      "hooks": [
+        "useEffect"
+      ],
+      "dataSource": [
+        "./content"
+      ],
+      "media": [],
+      "interactions": [],
+      "routing": {
+        "sectionIds": [],
+        "staticHrefs": []
+      },
+      "responsiveBehavior": "No breakpoint prefix detected in module",
+      "animation": "none detected",
+      "externalDependencies": [
+        "react"
+      ],
+      "stylingSource": [
+        "Tailwind class strings",
+        "src/index.css",
+        "src/styles/modern.css"
+      ],
+      "safeToRestyle": "Do not change during redesign without ownership review",
+      "preservation": "P4",
+      "notes": "Not reachable from src/main.jsx at baseline SHA; preserve pending review"
+    }
+  ]
+}
