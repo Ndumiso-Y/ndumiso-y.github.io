@@ -58,6 +58,30 @@ body {
   background: var(--glass-hover);
 }
 
+/* ================ HERO REDESIGN (Gate 1) ================ */
+.hero-display {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-weight: 800;
+}
+
+/* Light frosted glass: absorbs the colour behind it (off-white or teal) */
+.hero-glass-light {
+  background: rgba(255, 255, 255, 0.58);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 32px -18px rgba(10, 40, 46, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Dark frosted glass for the nav once it sits over the dark sections */
+.nav-glass-dark {
+  background: rgba(14, 16, 17, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 32px -18px rgba(0, 0, 0, 0.6);
+}
+
 /* Card styles */
 .card-modern {
   background: var(--card-bg);
