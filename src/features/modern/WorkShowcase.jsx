@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import websitesData from '@/content/websites.json'
 import { trackWebProjectClick } from '../../lib/analytics'
 import { withBase } from '../../lib/withBase'
@@ -10,11 +10,9 @@ import { withBase } from '../../lib/withBase'
 // docs/redesign-qa/websites-gate1/jpg-vs-webp-*.png). Dr Benzi keeps its JPG because
 // its WebP copy is larger. The JSON paths are unchanged.
 const lighter = {
-  '/assets/krfthumbnail.png': '/assets/krfthumbnail.webp',
   '/assets/vlc-shot.jpg': '/assets/vlc-shot.webp',
   '/assets/tvei-shot.jpg': '/assets/tvei-shot.webp',
-  '/assets/MakwelengThumbnail.png': '/assets/MakwelengThumbnail.webp',
-  '/assets/embark-shot.jpg': '/assets/embark-shot.webp'
+  '/assets/MakwelengThumbnail.png': '/assets/MakwelengThumbnail.webp'
 }
 
 function hostOf(url) {
@@ -85,6 +83,14 @@ export default function WorkShowcase() {
   // With an odd number left over, the last project closes the section full-width (mirrored)
   const closing = others.length % 2 === 1 ? others[others.length - 1] : null
   const rest = closing ? others.slice(0, -1) : others
+  // Phones: show the first 4 sites, the rest behind a button (tablet and up always show all)
+  const PHONE_LIMIT = 4
+  const [showAll, setShowAll] = useState(false)
+  const phoneHidden = i => (!showAll && i >= PHONE_LIMIT ? 'max-md:hidden' : '')
+  const collapse = () => {
+    setShowAll(false)
+    document.getElementById('websites')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
     // Inline style: legacy `#websites` rules in index.css (light gradient + an infinite
@@ -127,16 +133,30 @@ export default function WorkShowcase() {
         )}
 
         {/* Remaining projects, original order */}
-        <div className="mt-12 lg:mt-20 grid gap-x-10 xl:gap-x-14 gap-y-10 lg:gap-y-16 md:grid-cols-2">
+        <div id="website-list" className="mt-12 lg:mt-20 grid gap-x-10 xl:gap-x-14 gap-y-10 lg:gap-y-16 md:grid-cols-2">
           {rest.map((site, i) => (
-            <SiteCard key={site.name} site={site} index={i + 1} />
+            <div key={site.name} className={phoneHidden(i + 1)}>
+              <SiteCard site={site} index={i + 1} />
+            </div>
           ))}
         </div>
 
         {closing && (
-          <div className="mt-10 lg:mt-20">
+          <div className={`mt-10 lg:mt-20 ${phoneHidden(websitesData.length - 1)}`}>
             <SiteCard site={closing} index={websitesData.length - 1} featured flip />
           </div>
+        )}
+
+        {websitesData.length > PHONE_LIMIT && (
+          <button
+            type="button"
+            onClick={() => (showAll ? collapse() : setShowAll(true))}
+            aria-expanded={showAll}
+            aria-controls="website-list"
+            className="md:hidden mt-10 inline-flex items-center justify-center min-h-[44px] px-5 rounded-full border border-white/25 text-white text-[15px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6fd0d7]"
+          >
+            {showAll ? 'Show fewer websites' : `View all ${websitesData.length} websites`}
+          </button>
         )}
       </div>
     </section>

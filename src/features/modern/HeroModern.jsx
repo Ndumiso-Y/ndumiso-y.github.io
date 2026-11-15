@@ -31,7 +31,7 @@ const proofPoints = ['Clean UI & brand consistency', 'Conversion-focused messagi
 
 // Draft micro-copy for the shortcut cards is logged in docs/redesign-qa/hero-gate1/GATE1_REPORT.md
 const shortcuts = [
-  { href: '#websites', title: 'Websites', sub: 'Design · Build · Launch', img: '/assets/embark-shot.webp', icon: 'code' },
+  { href: '#websites', title: 'Websites', sub: 'Design · Build · Launch', img: '/assets/embark-site-2026.webp', icon: 'code' },
   { href: '#graphics', title: 'Graphics & Branding', sub: 'Logos · Brand guides · Print', img: '/assets/vlc-brief-cover.webp', icon: 'pen' },
   { href: '#social', title: 'Social Media Management', sub: 'Content · Design · Scheduling', img: '/assets/tvei-social.webp', icon: 'megaphone' },
   { href: '#projects', title: 'Learning Journey', sub: 'Treehouse · 8 projects', img: '/assets/p1-thumb.webp', icon: 'cap' }

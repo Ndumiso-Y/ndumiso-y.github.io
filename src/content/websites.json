@@ -1,10 +1,9 @@
 [
   {
-    "name": "Koketso Rakhudu Foundation",
-    "outcome": "Non-profit foundation website promoting education and community impact",
-    "stack": ["React", "Vite", "Tailwind"],
-    "thumb": "/assets/krfthumbnail.png",
-    "url": "https://www.drkoketsorakhudu.com/krf-website"
+    "name": "Prime Specs",
+    "outcome": "Optometrist site for two Rustenburg branches, with eye care, eyewear and WhatsApp booking",
+    "thumb": "/assets/primespecs-shot.webp",
+    "url": "https://www.primespecs.co.za/"
   },
   {
     "name": "Dr Benzi",
@@ -38,7 +37,31 @@
     "name": "Embark Digitals",
     "outcome": "Agency site with services, case studies, and contact",
     "stack": ["React", "Vite", "Tailwind"],
-    "thumb": "/assets/embark-shot.jpg",
+    "thumb": "/assets/embark-site-2026.webp",
     "url": "https://www.embarkdigitals.com"
+  },
+  {
+    "name": "JNL Traders",
+    "outcome": "Industrial engineering site for structural, mechanical and plant-operation services in mining",
+    "thumb": "/assets/jnl-shot.webp",
+    "url": "https://jnltraders.co.za/"
+  },
+  {
+    "name": "Funeka Placements",
+    "outcome": "Recruitment agency site connecting employers with talent and job seekers with opportunities",
+    "thumb": "/assets/funeka-shot.webp",
+    "url": "https://www.funekaplacements.co.za/"
+  },
+  {
+    "name": "Ntombis Fashion",
+    "outcome": "Custom African fashion studio site for wedding, matric dance and traditional wear",
+    "thumb": "/assets/ntombis-shot.webp",
+    "url": "https://www.ntombis.com/"
+  },
+  {
+    "name": "Filament",
+    "outcome": "Productivity-transformation consultancy site for mining operations",
+    "thumb": "/assets/filament-site-shot.webp",
+    "url": "https://www.filament-transformation.com/"
   }
 ]
