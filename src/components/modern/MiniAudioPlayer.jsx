@@ -1,95 +1,93 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-export default function MiniAudioPlayer({ src, description }) {
-  const [isPlaying, setIsPlaying] = useState(false)
+// Audio walkthrough player. 44 px play button, keyboard-seekable progress, and only one
+// walkthrough plays at a time (starting one pauses the others).
+const EVT = 'ndu-audio-play'
+
+const fmt = t => {
+  if (!isFinite(t)) return '0:00'
+  return `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, '0')}`
+}
+
+export default function MiniAudioPlayer({ src, description, title }) {
+  const [playing, setPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState(0)
+  const [time, setTime] = useState(0)
   const audioRef = useRef(null)
 
   useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const setAudioData = () => {
-      setDuration(audio.duration)
-    }
-
-    const setAudioTime = () => {
-      setCurrentTime(audio.currentTime)
-    }
-
-    audio.addEventListener('loadeddata', setAudioData)
-    audio.addEventListener('timeupdate', setAudioTime)
-    audio.addEventListener('ended', () => setIsPlaying(false))
-
+    const a = audioRef.current
+    if (!a) return
+    const onMeta = () => setDuration(a.duration)
+    const onTime = () => setTime(a.currentTime)
+    const onPlay = () => setPlaying(true)
+    const onPause = () => setPlaying(false)
+    const onOther = e => { if (e.detail !== a) a.pause() }
+    a.addEventListener('loadedmetadata', onMeta)
+    a.addEventListener('timeupdate', onTime)
+    a.addEventListener('play', onPlay)
+    a.addEventListener('pause', onPause)
+    a.addEventListener('ended', onPause)
+    window.addEventListener(EVT, onOther)
     return () => {
-      audio.removeEventListener('loadeddata', setAudioData)
-      audio.removeEventListener('timeupdate', setAudioTime)
-      audio.removeEventListener('ended', () => setIsPlaying(false))
+      a.removeEventListener('loadedmetadata', onMeta)
+      a.removeEventListener('timeupdate', onTime)
+      a.removeEventListener('play', onPlay)
+      a.removeEventListener('pause', onPause)
+      a.removeEventListener('ended', onPause)
+      window.removeEventListener(EVT, onOther)
     }
   }, [])
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current?.pause()
+  const toggle = () => {
+    const a = audioRef.current
+    if (!a) return
+    if (a.paused) {
+      window.dispatchEvent(new CustomEvent(EVT, { detail: a }))
+      a.play().catch(() => setPlaying(false))
     } else {
-      audioRef.current?.play()
+      a.pause()
     }
-    setIsPlaying(!isPlaying)
   }
 
-  const formatTime = (time) => {
-    if (isNaN(time)) return '0:00'
-    const minutes = Math.floor(time / 60)
-    const seconds = Math.floor(time % 60)
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-  }
-
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0
+  const name = title ? ` — ${title}` : ''
 
   return (
-    <div className="glass rounded-lg p-3 space-y-2">
+    <div className="rounded-2xl bg-[#eef4f4] border border-[#0e5c66]/10 p-3">
       <audio ref={audioRef} src={src} preload="metadata" />
-
       <div className="flex items-center gap-3">
-        {/* Play/Pause button */}
         <button
-          onClick={togglePlay}
-          className="w-8 h-8 rounded-full bg-accent hover:bg-accent-hover flex items-center justify-center transition-colors flex-shrink-0"
-          aria-label={isPlaying ? 'Pause' : 'Play'}
+          type="button"
+          onClick={toggle}
+          aria-label={`${playing ? 'Pause' : 'Play'} audio walkthrough${name}`}
+          className="flex-none w-11 h-11 rounded-full bg-[#0e5c66] hover:bg-[#0b4c55] text-white flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-2"
         >
-          {isPlaying ? (
-            <svg className="w-3 h-3 text-bg-primary" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-            </svg>
+          {playing ? (
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" /></svg>
           ) : (
-            <svg className="w-3 h-3 text-bg-primary ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+            <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
           )}
         </button>
-
-        {/* Progress bar */}
-        <div className="flex-1 space-y-1">
-          <div className="h-1 bg-glass-border rounded-full overflow-hidden">
-            <div
-              className="h-full bg-accent transition-all duration-100"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          {/* Time */}
-          <div className="flex items-center justify-between text-xs text-text-tertiary">
-            <span>{formatTime(currentTime)}</span>
-            <span>{formatTime(duration)}</span>
+        <div className="flex-1 min-w-0">
+          <input
+            type="range"
+            min={0}
+            max={duration || 0}
+            step={0.1}
+            value={Math.min(time, duration || 0)}
+            onChange={e => { if (audioRef.current) audioRef.current.currentTime = +e.target.value }}
+            aria-label={`Seek audio walkthrough${name}`}
+            aria-valuetext={`${fmt(time)} of ${fmt(duration)}`}
+            className="audio-range w-full"
+            style={{ '--p': `${duration ? (time / duration) * 100 : 0}%` }}
+          />
+          <div className="flex items-center justify-between text-[12px] text-[#4a5357] tabular-nums">
+            <span>{fmt(time)}</span>
+            <span>{fmt(duration)}</span>
           </div>
         </div>
       </div>
-
-      {/* Description */}
-      {description && (
-        <p className="text-xs text-text-secondary line-clamp-1">{description}</p>
-      )}
+      {description && <p className="mt-2 text-[14px] text-[#26302f]">{description}</p>}
     </div>
   )
 }

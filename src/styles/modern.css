@@ -207,3 +207,56 @@ body {
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
+
+/* Audio walkthrough seek bar (Learning Journey) */
+.audio-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.audio-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #0e5c66 var(--p, 0%), rgba(14, 92, 102, 0.18) var(--p, 0%));
+}
+.audio-range::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(14, 92, 102, 0.18);
+}
+.audio-range::-moz-range-progress {
+  height: 4px;
+  border-radius: 9999px;
+  background: #0e5c66;
+}
+.audio-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border-radius: 9999px;
+  background: #0e5c66;
+  border: 2px solid #fff;
+}
+.audio-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: #0e5c66;
+  border: 2px solid #fff;
+}
+.audio-range:focus-visible {
+  outline: 2px solid #0e5c66;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Horizontal project row on phones (Learning Journey) */
+.snap-row {
+  scrollbar-width: none;
+}
+.snap-row::-webkit-scrollbar {
+  display: none;
+}
