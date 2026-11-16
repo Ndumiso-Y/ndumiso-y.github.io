@@ -51,6 +51,9 @@ export default function ContactModern() {
             <p className="mt-6 text-[18px] lg:text-[20px] text-white/75 max-w-[40ch] leading-relaxed">
               Fast, modern websites, branding, and digital assets — tailored to your goals.
             </p>
+            <p className="mt-3 text-[16px] lg:text-[18px] text-white/75 max-w-[40ch] leading-relaxed">
+              Need an app, dashboard or business system? Tell me what you need it to do.
+            </p>
             {c.location && (
               <p className="mt-6 inline-flex items-center gap-2.5 text-[15px] text-white/70">
                 <svg className="w-4 h-4 text-[#6fd0d7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
