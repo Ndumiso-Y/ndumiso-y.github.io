@@ -144,6 +144,9 @@ export default function AboutModern() {
               Building Digital Experiences That <span className="text-[#0e5c66]">Matter</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
             </h2>
             <p className="mt-6 max-w-[56ch] text-[17px] lg:text-[19px] leading-relaxed text-[#3b4448]">{aboutData.lead}</p>
+            {aboutData.software && (
+              <p className="mt-4 max-w-[56ch] text-[16px] lg:text-[17px] leading-relaxed text-[#3b4448]">{aboutData.software}</p>
+            )}
 
             <ul className="mt-7 border-t border-[#121417]/10">
               {aboutData.bullets.map((bullet, i) => (
