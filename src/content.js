@@ -305,6 +305,19 @@ I could guess a letter only once. After I guessed a letter, my programming disab
   },
   social: [
     {
+      brand: "Prime Specs",
+      desc:
+        "Embark Digitals runs the Prime Specs ZA Facebook page — branded posts on eye care, eyewear and WhatsApp bookings for the Rustenburg optometrist, alongside the website we built.",
+      platforms: ["Facebook"],
+      links: [
+        {
+          type: "facebook",
+          url: "https://www.facebook.com/profile.php?id=61594838014235",
+        },
+      ],
+      thumb: "/assets/primespecs-social.webp"
+    },
+    {
       brand: "The Village Economy Indaba",
       desc:
         "Embark Digitals manages The Village Economy Indaba’s Facebook and LinkedIn presence — creating event-driven content and growing a community around entrepreneurship.",
