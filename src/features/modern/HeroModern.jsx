@@ -21,6 +21,10 @@ const services = [
     description: 'I design and build fast, modern websites that look sharp and convert visitors into clients.'
   },
   {
+    title: 'Business Software & Dashboards',
+    description: 'Custom apps that bring quotations, records, approvals, tasks and reports into one place.'
+  },
+  {
     title: 'Branding & Graphics',
     description: 'Logos, marketing visuals, and digital assets that keep your brand consistent and memorable.'
   },
@@ -133,7 +137,7 @@ export default function HeroModern() {
           <div className="lg:max-w-[54%]">
             <p className="flex items-start sm:items-center gap-3 sm:gap-4 text-[12px] sm:text-[13px] xl:text-[14px] font-bold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-[#1d2a2e]">
               <span className="block w-9 xl:w-12 h-[4px] mt-[6px] sm:mt-0 bg-[#1c8c97] rounded-full flex-none" aria-hidden="true" />
-              <span>Websites · Business<span className="sm:hidden"><br /></span><span className="hidden sm:inline"> </span>Software · AI Solutions</span>
+              <span>Websites · Business Software<span className="xl:hidden"><br /></span><span className="hidden xl:inline"> · </span>AI-Assisted Development</span>
             </p>
 
             <h1 className="hero-display mt-4 lg:mt-5 uppercase leading-[0.95] tracking-[-0.03em] text-[clamp(40px,11.4vw,64px)] lg:text-[clamp(42px,4.3vw,80px)]">
@@ -143,7 +147,7 @@ export default function HeroModern() {
             </h1>
 
             <p className="hero-display mt-3 lg:mt-4 text-[20px] sm:text-[22px] lg:text-[clamp(20px,1.9vw,32px)] leading-tight tracking-[-0.01em] text-[#121417]" style={{ fontWeight: 700 }}>
-              Custom Apps, Dashboards &amp; AI&nbsp;Solutions
+              Custom Apps, Dashboards &amp; Business&nbsp;Systems
             </p>
             <p className="mt-2.5 max-w-[38ch] sm:max-w-[44ch] text-[16px] sm:text-[18px] lg:text-[clamp(17px,1.45vw,23px)] leading-snug text-[#2b3336]">
               I build the websites your customers see and the software that helps you run your business.
@@ -227,7 +231,7 @@ export default function HeroModern() {
               ))}
             </ul>
           </div>
-          <ol className="grid gap-8 sm:grid-cols-3 sm:gap-8">
+          <ol className="grid gap-8 sm:grid-cols-2 xl:grid-cols-4 sm:gap-x-8 sm:gap-y-10">
             {services.map((s, i) => (
               <li key={s.title} className="border-t-2 border-[#121417] pt-5">
                 <span className="hero-display text-[#0e5c66] text-[28px]">0{i + 1}</span>

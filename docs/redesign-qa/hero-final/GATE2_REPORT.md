@@ -40,11 +40,22 @@ Copy exactly as `COPY_LOCK.md`. The h1 reads "Ndumiso Yedwa: Websites & Business
 5. **Teal** is slightly lighter than the mock-up's glow-heavy render; kept within the existing palette.
 6. **Removed from the hero (no loss):** the four section shortcut cards (duplicated the nav; images remain in their sections), the ndu-icon watermark (still in nav, Websites, Social, Contact), the QR panel (moved to Contact), the old eyebrow "Web Designer & Front-End Developer" and tagline (replaced by the locked copy; same message remains in About and Contact).
 
-## Flags for the owner
-- **"AI Solutions"** appears in the eyebrow and service line as approved in the visual. Neither software project contains AI features; keep any AI project claim out of the portfolio until there is real AI work to show (COPY_LOCK note).
-- **"What I do" band** still lists three services without software (row 5 of the copy review, deferred to this review). Not changed here.
-- **Meta description** still says websites only (row 6, needs owner authorisation). Not changed.
-- `src/content/hero.json` still holds the old hero copy; it is not rendered. Not changed.
+## Owner follow-up changes (17 Nov 2026, on this PR)
+The owner asked to correct the AI wording, add software to "What I do" and fix the link-preview text:
+1. **AI wording.** COPY_LOCK's "AI Solutions" was replaced, because neither software project contains AI features (the review's rule: "AI-assisted development", never an AI product claim).
+   - Eyebrow: "Websites · Business Software · AI-Assisted Development". Below 1280 px it breaks after "Business Software".
+   - Service line: "Custom Apps, Dashboards & Business Systems", matching the Contact sentence.
+2. **"What I do"** (copy-review row 5):
+   - New service 02, "Business Software & Dashboards — Custom apps that bring quotations, records, approvals, tasks and reports into one place." (ChatGPT's wording).
+   - Layout: 4 columns at ≥1280 px, 2 at tablet, stacked on phone. The other three services are unchanged, renumbered 01/03/04.
+3. **Link previews** for Google, WhatsApp, LinkedIn and X (copy-review row 6, `index.html`):
+   - Title: "Ndumiso Yedwa — Websites & Business Software | Embark Digitals" (62 characters).
+   - Description: "Ndumiso Yedwa builds websites, custom business software and dashboards for South African businesses and organisations. Founder of Embark Digitals." (146 characters).
+   - Applied to the description, title, og: and twitter: tags. The og:image alt is updated. The image and URLs are unchanged.
+
+## Still open
+- `src/content/hero.json` still holds the old hero copy; it is not rendered.
+- Proof cards for the software work (row 8) need design approval and client permission.
 
 ## Next
 Owner Gate 2 decision → Gate 3 motion audit per `MOTION_SPEC.md` (glass drift, one sheen, soft entrance, reduced-motion) → merge/deploy only after owner sign-off.
