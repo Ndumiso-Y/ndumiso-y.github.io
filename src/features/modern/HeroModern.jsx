@@ -4,7 +4,6 @@ import {
   SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiCanva, SiClaude
 } from 'react-icons/si'
 import { trackGetInTouchClick, trackViewWorkClick, trackEvent } from '../../lib/analytics'
-import { content } from '../../content'
 import { withBase } from '../../lib/withBase'
 
 // Hero — Gate 1 static build of the owner-approved final reference
@@ -172,7 +171,6 @@ function PerspectiveName({ className = '' }) {
 }
 
 export default function HeroModern() {
-  const location = content?.contact?.location || 'Remote'
 
   return (
     <section id="hero" aria-label="Hero section" className="relative bg-[#f3f3f1] text-[#121417] overflow-hidden">
@@ -239,8 +237,6 @@ export default function HeroModern() {
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
               </li>
-              <li className="w-px h-5 bg-[#121417]/25" aria-hidden="true" />
-              <li className="flex items-center gap-2"><Icon name={/remote/i.test(location) ? 'globe' : 'pin'} className="w-[18px] h-[18px] text-[#3b4448]" />{location}</li>
             </ul>
           </div>
 

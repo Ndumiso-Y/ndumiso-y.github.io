@@ -406,7 +406,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     facebook: "https://facebook.com/embarkdigitals",
     instagram: "https://instagram.com/embarkdigitals?utm_source=qr&igshid=ZTM4ZDRiNzUwMw==",
     twitter: "https://x.com/EmbarkDigitals?t=do3jV9xUNbQMcIrGY-xglQ&s=08",
-    location: "Remote", // owner works remotely (17 Nov 2026)
+    location: "", // no location shown for now (owner, 17 Nov 2026)
     icon: "/assets/ndu-icon.png",                 // navbar/footer logo
     ecard: "https://www.embarkdigitals.com/ecard", // e-card button
     vcf: "/assets/Embark-Digitals.vcf"            // VCF contact file
