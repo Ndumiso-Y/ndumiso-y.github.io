@@ -19,7 +19,7 @@ export default function ContactModern() {
       'BEGIN:VCARD', 'VERSION:3.0', 'N:Yedwa;Ndumiso;;;', `FN:${c.name || 'Ndumiso Yedwa'}`,
       c.title ? `TITLE:${c.title}` : '', c.email ? `EMAIL;TYPE=INTERNET:${c.email}` : '',
       c.phone ? `TEL;TYPE=CELL:${c.phone}` : '',
-      c.location ? `ADR;TYPE=WORK:;;${(c.location || '').replaceAll(',', '\\,')};;;;` : '',
+      c.location && !/remote/i.test(c.location) ? `ADR;TYPE=WORK:;;${(c.location || '').replaceAll(',', '\\,')};;;;` : '',
       c.linkedin ? `URL:${c.linkedin}` : '', c.ecard ? `URL;TYPE=ECARD:${c.ecard}` : '', 'END:VCARD'
     ].filter(Boolean).join('\n')
     return `data:text/vcard;charset=utf-8;base64=${btoa(unescape(encodeURIComponent(lines)))}`
@@ -56,7 +56,7 @@ export default function ContactModern() {
             </p>
             {c.location && (
               <p className="mt-6 inline-flex items-center gap-2.5 text-[15px] text-white/70">
-                <svg className="w-4 h-4 text-[#6fd0d7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+                <svg className="w-4 h-4 text-[#6fd0d7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 010 18M12 3a14 14 0 000 18" /></svg>
                 {c.location}
               </p>
             )}
