@@ -102,6 +102,19 @@ export default function ContactModern() {
               )}
             </div>
 
+            {/* QR e-card (moved from the hero, 2026-11-17): scan from another device */}
+            {c.ecard && (
+              <figure className="mt-6 flex items-center gap-4 rounded-2xl bg-white/[0.04] border border-white/10 p-3">
+                <span className="flex-none w-[104px] bg-white rounded-xl p-1.5">
+                  <img src={withBase('/assets/QRcodeBusiness.jpg')} alt="QR code that opens Ndumiso's e-card" width="370" height="370" loading="lazy" className="w-full h-auto rounded-md" />
+                </span>
+                <figcaption>
+                  <span className="block text-[16px] font-semibold">My e-card</span>
+                  <span className="block mt-1 text-[14px] text-white/70 leading-snug">Scan to open my e-card and save my contact details.</span>
+                </figcaption>
+              </figure>
+            )}
+
             {socials.length > 0 && (
               <div className="mt-8 pt-7 border-t border-white/10">
                 <h3 className="text-[13px] font-semibold tracking-[0.2em] uppercase text-white/60">Follow</h3>

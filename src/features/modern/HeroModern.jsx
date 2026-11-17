@@ -3,14 +3,17 @@ import {
   SiReact, SiTailwindcss, SiJavascript, SiHtml5,
   SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiCanva
 } from 'react-icons/si'
-import { trackGetInTouchClick, trackViewWorkClick, trackECardClick } from '../../lib/analytics'
+import { trackGetInTouchClick, trackViewWorkClick } from '../../lib/analytics'
 import { content } from '../../content'
 import { withBase } from '../../lib/withBase'
 
-// Hero — Gate 1 static build of the owner-approved reference
-// (ndumiso_portfolio_design_reference_pack/approved_hero_reference.png).
-// Every image is an existing repository asset; the portrait cut-out is generated
-// from "Ndu_Blue Background.png" by scripts/make-hero-cutout.mjs.
+// Hero — Gate 1 static build of the owner-approved final reference
+// (Ndumiso_Hero_Approved_Reference_Pack_2026-11-17/references/01_FINAL_HERO_APPROVED.png).
+// Copy follows that pack's COPY_LOCK.md. The portrait is the real photo
+// ("Ndu_Blue Background.png" cut out by scripts/make-hero-cutout.mjs); no generated imagery.
+// No motion at this gate (ED-WEB-001 Gate 3 is separate).
+// Relocated from the previous hero: the QR e-card now sits in Contact; the four section
+// shortcut cards duplicated the nav and were removed; the full skills list stays in About.
 
 const services = [
   {
@@ -29,19 +32,12 @@ const services = [
 
 const proofPoints = ['Clean UI & brand consistency', 'Conversion-focused messaging', 'Reliable delivery']
 
-// Draft micro-copy for the shortcut cards is logged in docs/redesign-qa/hero-gate1/GATE1_REPORT.md
-const shortcuts = [
-  { href: '#websites', title: 'Websites', sub: 'Design · Build · Launch', img: '/assets/embark-site-2026.webp', icon: 'code' },
-  { href: '#graphics', title: 'Graphics & Branding', sub: 'Logos · Brand guides · Print', img: '/assets/vlc-brief-cover.webp', icon: 'pen' },
-  { href: '#social', title: 'Social Media Management', sub: 'Content · Design · Scheduling', img: '/assets/tvei-social.webp', icon: 'megaphone' },
-  { href: '#projects', title: 'Learning Journey', sub: 'Treehouse · 8 projects', img: '/assets/p1-thumb.webp', icon: 'cap' }
-]
-
-// Curated preview only — the full list of 11 skills stays in the About section.
+// Curated preview only — the full list of 11 skills stays in About → Skills & Tools.
+// (The reference shows Figma, which is not one of Ndumiso's listed skills; HTML is shown instead.)
 const coreSkills = [
   { name: 'React', Icon: SiReact, color: '#149eca' },
   { name: 'Tailwind', Icon: SiTailwindcss, color: '#0ea5e9' },
-  { name: 'JavaScript', Icon: SiJavascript, color: '#e8c400' },
+  { name: 'JavaScript', Icon: SiJavascript, color: '#d9b400' },
   { name: 'HTML', Icon: SiHtml5, color: '#E34F26' },
   { name: 'Photoshop', Icon: SiAdobephotoshop, color: '#1f7ad6' },
   { name: 'Illustrator', Icon: SiAdobeillustrator, color: '#e68a00' },
@@ -49,16 +45,22 @@ const coreSkills = [
   { name: 'Canva', Icon: SiCanva, color: '#00a8b0' }
 ]
 
+// Glass blocks, positioned in % of the portrait box (measured from the reference).
+// "front" blocks sit over the shoulders only — never the face, copy or controls.
+const glassBlocks = [
+  { l: 19, t: 20, w: 13, h: 15, front: false },
+  { l: 76, t: 10, w: 29, h: 37, front: false },
+  { l: 96, t: 2, w: 11, h: 11, front: false },
+  { l: 92, t: 37, w: 19, h: 26, front: false },
+  { l: 85, t: 59, w: 9, h: 10, front: true },
+  { l: 68, t: 66, w: 20, h: 13, front: true }
+]
+
 const icons = {
-  code: <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />,
-  pen: <path d="M12 3l5 7-5 11-5-11 5-7zM12 3v8m0 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />,
-  megaphone: <path d="M3 10v4h3l7 4V6L6 10H3zM16 9a4 4 0 010 6M19 7a7 7 0 010 10" />,
-  cap: <path d="M2 9l10-5 10 5-10 5L2 9zM6 11v5c3 2 9 2 12 0v-5M22 9v6" />,
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
-  chat: <path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.7A8 8 0 1121 12z" />,
+  send: <path d="M21 3L10 14M21 3l-7 18-4-7-7-4 18-7z" />,
   building: <path d="M4 21V5l8-2v18M12 8h8v13M4 21h17M7 8h2M7 12h2M7 16h2M15 12h2M15 16h2" />,
-  pin: <path d="M12 21s-7-6.2-7-11.5A7 7 0 0112 2.5a7 7 0 017 7C19 14.8 12 21 12 21zm0-9a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />,
-  external: <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
+  pin: <path d="M12 21s-7-6.2-7-11.5A7 7 0 0112 2.5a7 7 0 017 7C19 14.8 12 21 12 21zm0-9a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
 }
 
 function Icon({ name, className = 'w-5 h-5' }) {
@@ -69,184 +71,142 @@ function Icon({ name, className = 'w-5 h-5' }) {
   )
 }
 
-function ECard({ compact = false }) {
-  const ecard = content?.contact?.ecard
+// Portrait with glass blocks behind and in front of the shoulders.
+function PortraitStage({ className = '', eager = true }) {
   return (
-    <a
-      href={ecard}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={trackECardClick}
-      className={`hero-glass-light group block rounded-[22px] text-[#10262b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
-        compact ? 'p-2.5 w-[132px]' : 'p-3.5 w-[188px]'
-      }`}
-    >
-      <span className="block bg-white rounded-2xl p-2 shadow-sm">
-        <img
-          src={withBase('/assets/QRcodeBusiness.jpg')}
-          alt="QR code that opens Ndumiso's e-card"
-          width="370"
-          height="370"
-          className="w-full h-auto rounded-lg"
-          loading="eager"
-        />
-      </span>
-      <span className={`flex items-center justify-between gap-2 font-semibold ${compact ? 'mt-2 text-sm px-0.5' : 'mt-3 text-base px-1'}`}>
-        My e-card
-        <Icon name="external" className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </span>
-      {!compact && (
-        <span className="block px-1 mt-1 text-[12px] leading-snug text-[#10262b]/75">
-          Scan to open my e-card and save my contact details.
-        </span>
-      )}
-    </a>
+    <div className={className}>
+      {glassBlocks.filter(b => !b.front).map((b, i) => (
+        <span key={`b${i}`} aria-hidden="true" className="hero-glass-block"
+          style={{ left: `${b.l}%`, top: `${b.t}%`, width: `${b.w}%`, height: `${b.h}%` }} />
+      ))}
+      <img
+        src={withBase('/assets/ndu-hero-cutout.webp')}
+        alt="Ndumiso Yedwa, founder of Embark Digitals"
+        width="1080"
+        height="1080"
+        className="hero-portrait relative w-full h-full object-contain object-bottom"
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : undefined}
+      />
+      {glassBlocks.filter(b => b.front).map((b, i) => (
+        <span key={`f${i}`} aria-hidden="true" className="hero-glass-block hero-glass-block--front"
+          style={{ left: `${b.l}%`, top: `${b.t}%`, width: `${b.w}%`, height: `${b.h}%` }} />
+      ))}
+    </div>
+  )
+}
+
+// Signature perspective lettering. Decorative: the name is in the h1 for assistive tech.
+function PerspectiveName({ className = '' }) {
+  return (
+    <div className={`hero-name ${className}`} aria-hidden="true">
+      <div className="hero-name__plane">
+        <span className="hero-name__first">Ndumiso</span>
+        <span className="hero-name__last">Yedwa<span className="hero-name__dot">.</span></span>
+      </div>
+      {/* Low-key floor reflection: the same plane mirrored about its bottom edge */}
+      <div className="hero-name__mirror">
+        <div className="hero-name__plane">
+          <span className="hero-name__first">Ndumiso</span>
+          <span className="hero-name__last">Yedwa<span className="hero-name__dot">.</span></span>
+        </div>
+      </div>
+    </div>
   )
 }
 
 export default function HeroModern() {
+  const location = content?.contact?.location || 'Johannesburg, South Africa'
+
   return (
     <section id="hero" aria-label="Hero section" className="relative bg-[#f3f3f1] text-[#121417] overflow-hidden">
-      {/* ===== First screen ===== */}
-      <div className="relative xl:min-h-[clamp(760px,100svh,1040px)] flex flex-col">
-        {/* Teal field (desktop): flat, matches the portrait's original backdrop */}
-        <div className="hidden xl:block absolute inset-y-0 right-0 left-[60%] bg-[#48aab7]" aria-hidden="true">
-          <img
-            src={withBase('/assets/ndu-icon.png')}
-            alt=""
-            className="absolute top-[9%] right-[7%] w-[19vw] max-w-[300px] opacity-[0.13] mix-blend-multiply select-none"
-          />
-        </div>
+      <div className="relative lg:min-h-[clamp(760px,100svh,1040px)] flex flex-col">
+        {/* Background (desktop): soft teal field from the right + restrained technical grid */}
+        <div className="hidden lg:block absolute inset-0 hero-teal-field" aria-hidden="true" />
+        <div className="hidden lg:block absolute inset-0 hero-grid" aria-hidden="true" />
 
-        {/* Portrait (desktop): straddles the split, sits behind the cards */}
-        <div
-          className="hidden xl:block absolute top-[clamp(96px,12vh,124px)] bottom-0 left-[63%] -translate-x-1/2 aspect-square pointer-events-none"
-        >
-          <img
-            src={withBase('/assets/ndu-hero-cutout.webp')}
-            alt="Ndumiso Yedwa, founder of Embark Digitals"
-            width="1080"
-            height="1080"
-            className="w-full h-full object-contain object-bottom drop-shadow-[0_24px_40px_rgba(9,40,46,0.25)]"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
+        {/* Portrait (desktop) */}
+        <PortraitStage className="hidden lg:block absolute z-[1] left-[64%] -translate-x-1/2 bottom-[clamp(120px,10vw,170px)] w-[min(52vw,calc(max(100svh,760px)-230px),800px)] aspect-square pointer-events-none" />
 
-        <div className="relative w-full max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-[clamp(32px,5vw,88px)] pt-[104px] lg:pt-[120px] xl:pt-[128px] flex-1 flex flex-col">
-          <div className="lg:grid lg:grid-cols-[1.15fr_1fr] lg:gap-10 lg:items-center xl:block">
+        <div className="relative z-[2] w-full max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-[clamp(32px,5vw,88px)] pt-[100px] lg:pt-[clamp(120px,15vh,156px)] flex-1 flex flex-col">
           {/* Copy */}
-          <div className="relative z-10 xl:max-w-[46%]">
-            <p className="flex items-center gap-4 text-[12px] sm:text-[13px] xl:text-[14px] font-semibold tracking-[0.16em] sm:tracking-[0.28em] uppercase text-[#1d2a2e]">
-              <span className="block w-10 xl:w-14 h-[3px] bg-[#41b3bc] rounded-full flex-none" aria-hidden="true" />
-              Web Designer &amp; Front-End Developer
+          <div className="lg:max-w-[54%]">
+            <p className="flex items-start sm:items-center gap-3 sm:gap-4 text-[12px] sm:text-[13px] xl:text-[14px] font-bold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-[#1d2a2e]">
+              <span className="block w-9 xl:w-12 h-[4px] mt-[6px] sm:mt-0 bg-[#1c8c97] rounded-full flex-none" aria-hidden="true" />
+              <span>Websites · Business<span className="sm:hidden"><br /></span><span className="hidden sm:inline"> </span>Software · AI Solutions</span>
             </p>
 
-            <h1 className="hero-display mt-5 lg:mt-7 uppercase leading-[0.9] tracking-[-0.025em] text-[clamp(56px,15.5vw,120px)] lg:text-[80px] xl:text-[clamp(84px,6.9vw,128px)]">
-              <span className="block text-[#121417]">Ndumiso</span>
-              <span className="block text-[#0e5c66]">
-                Yedwa<span className="text-[#41b3bc]" aria-hidden="true">.</span>
-              </span>
+            <h1 className="hero-display mt-4 lg:mt-5 uppercase leading-[0.95] tracking-[-0.03em] text-[clamp(40px,11.4vw,64px)] lg:text-[clamp(42px,4.3vw,80px)]">
+              <span className="sr-only">Ndumiso Yedwa: </span>
+              <span className="block lg:whitespace-nowrap text-[#121417]">Websites &amp;</span>{' '}
+              <span className="block lg:whitespace-nowrap text-[#0e6d78]">Business Software</span>
             </h1>
 
-            <p className="mt-5 lg:mt-6 max-w-[34ch] text-[17px] sm:text-lg xl:text-[clamp(18px,1.35vw,22px)] leading-relaxed text-[#3b4448]">
-              Founder of Embark Digitals — building fast, modern websites, branding, and digital assets.
+            <p className="hero-display mt-3 lg:mt-4 text-[20px] sm:text-[22px] lg:text-[clamp(20px,1.9vw,32px)] leading-tight tracking-[-0.01em] text-[#121417]" style={{ fontWeight: 700 }}>
+              Custom Apps, Dashboards &amp; AI&nbsp;Solutions
+            </p>
+            <p className="mt-2.5 max-w-[38ch] sm:max-w-[44ch] text-[16px] sm:text-[18px] lg:text-[clamp(17px,1.45vw,23px)] leading-snug text-[#2b3336]">
+              I build the websites your customers see and the software that helps you run your business.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-2.5 sm:gap-4">
+            <div className="mt-6 lg:mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <a
                 href="#websites"
                 onClick={trackViewWorkClick}
-                className="group inline-flex items-center justify-center gap-3 min-h-[52px] px-5 sm:px-9 rounded-full bg-[#0e5c66] text-white text-[16px] sm:text-[17px] font-semibold shadow-[0_10px_24px_-12px_rgba(14,92,102,0.8)] hover:bg-[#0b4c55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
+                className="group inline-flex items-center justify-center gap-3 min-h-[52px] px-9 rounded-full bg-gradient-to-b from-[#16808b] to-[#0b5a63] text-white text-[17px] font-semibold shadow-[0_12px_26px_-12px_rgba(14,92,102,0.85)] hover:from-[#13737d] hover:to-[#094d55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
               >
                 View Work
-                <Icon name="arrow" className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                <Icon name="arrow" className="w-5 h-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
               </a>
               <a
                 href="#contact"
                 onClick={trackGetInTouchClick}
-                className="inline-flex items-center justify-center gap-3 min-h-[52px] px-5 sm:px-9 rounded-full border border-[#c9d0d1] bg-white/60 text-[#121417] text-[16px] sm:text-[17px] font-semibold hover:border-[#0e5c66] hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
+                className="inline-flex items-center justify-center gap-3 min-h-[52px] px-8 rounded-full border-[1.5px] border-[#121417] bg-white/40 text-[#121417] text-[17px] font-semibold hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
               >
-                <Icon name="chat" className="w-5 h-5 text-[#0e5c66]" />
+                <Icon name="send" className="w-5 h-5" />
                 Get in Touch
               </a>
             </div>
 
-            <ul className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-[#3b4448]">
-              <li className="flex items-center gap-2"><Icon name="building" className="w-[18px] h-[18px] text-[#5f6b6f]" />Embark Digitals</li>
-              <li className="hidden sm:block w-px h-5 bg-[#c9d0d1]" aria-hidden="true" />
-              <li className="flex items-center gap-2"><Icon name="pin" className="w-[18px] h-[18px] text-[#5f6b6f]" />{content?.contact?.location || 'Johannesburg, South Africa'}</li>
+            <ul className="mt-5 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[13px] sm:text-[15px] text-[#2b3336]">
+              <li className="flex items-center gap-2"><Icon name="building" className="w-[18px] h-[18px] text-[#3b4448]" />Embark Digitals</li>
+              <li className="w-px h-5 bg-[#121417]/25" aria-hidden="true" />
+              <li className="flex items-center gap-2"><Icon name="pin" className="w-[18px] h-[18px] text-[#3b4448]" />{location}</li>
             </ul>
           </div>
 
-          {/* e-card (desktop) */}
-          <div className="hidden xl:block absolute z-10 right-[clamp(32px,5vw,88px)] top-[36%]">
-            <ECard />
+          {/* Portrait stage (phone / tablet): composed separately, not a scaled desktop */}
+          <div className="lg:hidden relative mt-8 -mx-5 sm:-mx-8 overflow-x-clip">
+            <div className="absolute inset-0 hero-teal-field hero-teal-field--stage" aria-hidden="true" />
+            <PortraitStage className="relative mx-auto w-[86%] max-w-[560px] aspect-square" />
+            <PerspectiveName className="relative -mt-[19%] sm:-mt-[15%] px-3 text-[clamp(60px,19vw,140px)]" />
           </div>
 
-          {/* Portrait stage (mobile / tablet): composed separately, not a scaled desktop */}
-          <div className="xl:hidden relative mt-8 -mx-5 sm:-mx-8 lg:m-0 lg:rounded-[28px] h-[min(108vw,560px)] lg:h-[480px] bg-[#48aab7] overflow-hidden">
-            <img
-              src={withBase('/assets/ndu-icon.png')}
-              alt=""
-              aria-hidden="true"
-              className="absolute top-[6%] -right-[4%] w-[46%] max-w-[260px] opacity-[0.13] mix-blend-multiply select-none"
-            />
-            <img
-              src={withBase('/assets/ndu-hero-cutout.webp')}
-              alt="Ndumiso Yedwa, founder of Embark Digitals"
-              width="1080"
-              height="1080"
-              className="absolute bottom-0 left-[42%] -translate-x-1/2 h-[96%] w-auto max-w-none"
-              loading="eager"
-            />
-            <div className="absolute right-4 bottom-4 sm:right-8 sm:bottom-6">
-              <ECard compact />
-            </div>
-          </div>
-          </div>
+          {/* Perspective name (desktop) */}
+          <PerspectiveName className="hidden lg:block relative z-[2] mt-auto -mr-[3vw] pl-[7vw] text-[clamp(120px,16vw,280px)]" />
 
-          {/* Section shortcut cards */}
-          <nav aria-label="Portfolio sections" className="relative z-10 mt-6 lg:mt-8 xl:mt-auto xl:pt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 xl:gap-6">
-            {shortcuts.map(card => (
-              <a
-                key={card.href}
-                href={card.href}
-                className="group relative block overflow-hidden rounded-2xl xl:rounded-[22px] bg-[#dfe4e4] aspect-[4/3] sm:aspect-[16/9] shadow-[0_18px_36px_-24px_rgba(10,30,34,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66]"
-              >
-                <img
-                  src={withBase(card.img)}
-                  alt=""
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover object-[50%_30%] transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
-                />
-                <span className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-3 sm:px-4 py-3 bg-[rgba(16,38,43,0.78)] backdrop-blur-md text-white min-h-[56%] sm:min-h-[48%]">
-                  <Icon name={card.icon} className="hidden sm:block lg:hidden xl:block flex-none w-7 h-7 text-[#6fd0d7]" />
-                  <span className="flex-1 min-w-0">
-                    <span className="block font-semibold leading-tight text-[15px] sm:text-[17px]">{card.title}</span>
-                    <span className="block mt-1 text-[12px] sm:text-[13px] text-white/75 leading-snug">{card.sub}</span>
-                  </span>
-                  <span className="hidden sm:flex lg:hidden xl:flex flex-none w-9 h-9 rounded-full border border-white/60 items-center justify-center transition-colors group-hover:bg-white group-hover:text-[#10262b]">
-                    <Icon name="arrow" className="w-4 h-4" />
-                  </span>
-                </span>
-              </a>
-            ))}
-          </nav>
-
-          {/* Core skills strip — glass */}
-          <div className="relative z-10 my-5 xl:mt-6 xl:mb-7 hero-glass-light rounded-[28px] xl:rounded-full px-5 xl:px-8 py-4 xl:py-3.5 flex flex-col xl:flex-row xl:items-center gap-3 xl:gap-6">
-            <p className="font-semibold text-[16px] xl:text-[18px] whitespace-nowrap text-[#121417]">Core Skills &amp; Tools</p>
-            <span className="hidden xl:block w-px h-8 bg-[#121417]/15" aria-hidden="true" />
-            <ul className="flex flex-wrap gap-x-5 gap-y-2.5 xl:flex-1 xl:justify-between">
+          {/* Core skills — desktop glass strip */}
+          <div className="hidden lg:flex relative mb-[clamp(20px,3vh,32px)] mt-1 hero-glass-light rounded-full px-[clamp(20px,2.4vw,36px)] py-3 items-center gap-[clamp(12px,1.6vw,24px)]">
+            <p className="font-semibold italic text-[clamp(16px,1.35vw,20px)] whitespace-nowrap text-[#121417]">Core Skills &amp; Tools</p>
+            <span className="w-px h-8 bg-[#121417]/15 flex-none" aria-hidden="true" />
+            <ul className="flex flex-1 items-center justify-between gap-x-[clamp(10px,1.2vw,20px)]">
               {coreSkills.map(({ name, Icon: SkillIcon, color }) => (
-                <li key={name} className="flex items-center gap-2 text-[14px] xl:text-[15px] text-[#26302f]">
-                  <SkillIcon className="w-[18px] h-[18px] xl:w-5 xl:h-5" style={{ color }} aria-hidden="true" />
+                <li key={name} className="flex items-center gap-2 text-[clamp(13px,1vw,15px)] text-[#26302f] whitespace-nowrap">
+                  <SkillIcon className="w-5 h-5 flex-none" style={{ color }} aria-hidden="true" />
                   {name}
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Core skills — phone / tablet: one link to the full list in About */}
+          <a
+            href="#skills"
+            className="lg:hidden relative mt-4 mb-8 hero-glass-light rounded-full min-h-[56px] px-7 flex items-center justify-center gap-4 font-semibold italic text-[18px] text-[#121417] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
+          >
+            Core Skills &amp; Tools
+            <Icon name="arrow" className="w-5 h-5 not-italic" />
+          </a>
         </div>
       </div>
 
