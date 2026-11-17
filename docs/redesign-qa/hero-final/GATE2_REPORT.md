@@ -3,7 +3,7 @@
 **Date:** 17 Nov 2026 · **Branch:** `redesign/hero-final` · **Rollback:** tag `checkpoint/before-hero-final` (= main `92bd613`, pushed)
 **Visual authority:** `Ndumiso_Hero_Approved_Reference_Pack_2026-11-17/references/01_FINAL_HERO_APPROVED.png` (02 used for glass-block placement only)
 **Standard:** ED-WEB-001 **v1.0** (active) — `D:\Digital Agency\Embark Digitals\Embark_Digitals_Living_Web_Experience_Playbook_v1.0.docx`. v1.1 consolidated/AI-design candidates were read for the mask-verification and material-realism practices; both are marked "candidate, not approved".
-**Status:** static only, no motion (Gate 3 not started). **Not merged or deployed; awaiting owner Gate 2 decision.**
+**Status:** Gate 2 static design approved by the owner (17 Nov 2026: "Approve, start motion"). Gate 3 motion built — see below. **Not merged or deployed; awaiting owner Gate 3 decision.**
 
 ## Gate 0 findings
 - Active hero: `src/features/modern/HeroModern.jsx` (rendered by `AppModern.jsx`); nav is the separate `FloatingNav.jsx` (unchanged).
@@ -57,5 +57,32 @@ The owner asked to correct the AI wording, add software to "What I do" and fix t
 - `src/content/hero.json` still holds the old hero copy; it is not rendered.
 - Proof cards for the software work (row 8) need design approval and client permission.
 
+## Gate 3 — motion (per `MOTION_SPEC.md`)
+
+### Audit: what was adopted and why
+| Candidate | Decision | Notes |
+|---|---|---|
+| Glass-block drift | **Adopted** | 6 blocks, 4–8 px, 16–26 s asynchronous cycles with phase offsets, ease-in-out. Transform only, pointer-events none. |
+| Sheen | **Adopted, one surface** | Skills glass: one sweep at 1.3 s after load, and again on hover. Never over the face or the CTAs. |
+| Entrance | **Adopted** | Copy rises 10 px with a 70 ms stagger; portrait opacity settle with no scale; name rises 12 px. All done by ~1.1 s. Controls are clickable throughout. |
+| CTA hover lift | **Adopted** | 2 px lift on View Work and Get in Touch. |
+| Cursor parallax | **Rejected** | The drift already gives depth. Parallax adds motion without information and could push blocks toward the face. |
+| Nav sheen | **Rejected** | The spec allows one sheen surface. |
+
+Files: `src/features/modern/HeroModern.jsx` (classes and per-block drift values), `src/styles/modern.css` (keyframes and reduced-motion overrides).
+
+### Evidence (headless Chrome over CDP, dev build)
+| Check | 1440 | 390 | 390, CPU ×4 |
+|---|---|---|---|
+| Frame rate during motion | 59.9 fps | 59.4 fps | 59.9 fps |
+| 95th-percentile frame time | 16.8 ms | 16.8 ms | 16.8 ms |
+| Layout shift (CLS) | 0 | 0 | 0 |
+| Glass blocks over the face | 0 | 0 | 0 |
+| Horizontal overflow | none | none | none |
+
+- **Reduced motion** (`prefers-reduced-motion: reduce` emulated at 1440 and 390): 0 animations run, and the layout is the same as the static Gate 2 composition.
+- **Frames** (animations paused at set times): `motion-entrance-1440.png`, `motion-entrance-390.png`, `motion-drift-1440.png`. A video/GIF was not produced; paused frames are the evidence.
+- **Limits of this evidence:** CPU ×4 throttling stands in for a low-power phone; no physical device was tested. The sheen is deliberately faint and barely shows at filmstrip size.
+
 ## Next
-Owner Gate 2 decision → Gate 3 motion audit per `MOTION_SPEC.md` (glass drift, one sheen, soft entrance, reduced-motion) → merge/deploy only after owner sign-off.
+Owner Gate 3 decision → merge and deploy (Gate 5) only after owner sign-off. Rollback: tag `checkpoint/before-hero-final`.

@@ -51,13 +51,14 @@ const coreSkills = [
 
 // Glass blocks, positioned in % of the portrait box (measured from the reference).
 // "front" blocks sit over the shoulders only — never the face, copy or controls.
+// Gate 3: each block drifts 4–8 px on its own slow cycle (k = path, s = seconds, o = phase).
 const glassBlocks = [
-  { l: 19, t: 20, w: 13, h: 15, front: false },
-  { l: 76, t: 10, w: 29, h: 37, front: false },
-  { l: 96, t: 2, w: 11, h: 11, front: false },
-  { l: 92, t: 37, w: 19, h: 26, front: false },
-  { l: 85, t: 59, w: 9, h: 10, front: true },
-  { l: 68, t: 66, w: 20, h: 13, front: true }
+  { l: 19, t: 20, w: 13, h: 15, front: false, k: 'a', s: 19, o: -3 },
+  { l: 76, t: 10, w: 29, h: 37, front: false, k: 'b', s: 24, o: -11 },
+  { l: 96, t: 2, w: 11, h: 11, front: false, k: 'c', s: 16, o: -7 },
+  { l: 92, t: 37, w: 19, h: 26, front: false, k: 'a', s: 22, o: -15 },
+  { l: 85, t: 59, w: 9, h: 10, front: true, k: 'c', s: 17, o: -2 },
+  { l: 68, t: 66, w: 20, h: 13, front: true, k: 'b', s: 26, o: -9 }
 ]
 
 const icons = {
@@ -75,13 +76,18 @@ function Icon({ name, className = 'w-5 h-5' }) {
   )
 }
 
+const blockStyle = b => ({
+  left: `${b.l}%`, top: `${b.t}%`, width: `${b.w}%`, height: `${b.h}%`,
+  animationName: `hero-drift-${b.k}`, animationDuration: `${b.s}s`, animationDelay: `${b.o}s`
+})
+
 // Portrait with glass blocks behind and in front of the shoulders.
 function PortraitStage({ className = '', eager = true }) {
   return (
     <div className={className}>
       {glassBlocks.filter(b => !b.front).map((b, i) => (
         <span key={`b${i}`} aria-hidden="true" className="hero-glass-block"
-          style={{ left: `${b.l}%`, top: `${b.t}%`, width: `${b.w}%`, height: `${b.h}%` }} />
+          style={blockStyle(b)} />
       ))}
       <img
         src={withBase('/assets/ndu-hero-cutout.webp')}
@@ -94,7 +100,7 @@ function PortraitStage({ className = '', eager = true }) {
       />
       {glassBlocks.filter(b => b.front).map((b, i) => (
         <span key={`f${i}`} aria-hidden="true" className="hero-glass-block hero-glass-block--front"
-          style={{ left: `${b.l}%`, top: `${b.t}%`, width: `${b.w}%`, height: `${b.h}%` }} />
+          style={blockStyle(b)} />
       ))}
     </div>
   )
@@ -130,34 +136,34 @@ export default function HeroModern() {
         <div className="hidden lg:block absolute inset-0 hero-grid" aria-hidden="true" />
 
         {/* Portrait (desktop) */}
-        <PortraitStage className="hidden lg:block absolute z-[1] left-[64%] -translate-x-1/2 bottom-[clamp(120px,10vw,170px)] w-[min(52vw,calc(max(100svh,760px)-230px),800px)] aspect-square pointer-events-none" />
+        <PortraitStage className="hero-settle hidden lg:block absolute z-[1] left-[64%] -translate-x-1/2 bottom-[clamp(120px,10vw,170px)] w-[min(52vw,calc(max(100svh,760px)-230px),800px)] aspect-square pointer-events-none" />
 
         <div className="relative z-[2] w-full max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-[clamp(32px,5vw,88px)] pt-[100px] lg:pt-[clamp(120px,15vh,156px)] flex-1 flex flex-col">
           {/* Copy */}
           <div className="lg:max-w-[54%]">
-            <p className="flex items-start sm:items-center gap-3 sm:gap-4 text-[12px] sm:text-[13px] xl:text-[14px] font-bold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-[#1d2a2e]">
+            <p style={{ '--i': 0 }} className="hero-enter flex items-start sm:items-center gap-3 sm:gap-4 text-[12px] sm:text-[13px] xl:text-[14px] font-bold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-[#1d2a2e]">
               <span className="block w-9 xl:w-12 h-[4px] mt-[6px] sm:mt-0 bg-[#1c8c97] rounded-full flex-none" aria-hidden="true" />
               <span>Websites · Business Software<span className="xl:hidden"><br /></span><span className="hidden xl:inline"> · </span>AI-Assisted Development</span>
             </p>
 
-            <h1 className="hero-display mt-4 lg:mt-5 uppercase leading-[0.95] tracking-[-0.03em] text-[clamp(40px,11.4vw,64px)] lg:text-[clamp(42px,4.3vw,80px)]">
+            <h1 style={{ '--i': 1 }} className="hero-enter hero-display mt-4 lg:mt-5 uppercase leading-[0.95] tracking-[-0.03em] text-[clamp(40px,11.4vw,64px)] lg:text-[clamp(42px,4.3vw,80px)]">
               <span className="sr-only">Ndumiso Yedwa: </span>
               <span className="block lg:whitespace-nowrap text-[#121417]">Websites &amp;</span>{' '}
               <span className="block lg:whitespace-nowrap text-[#0e6d78]">Business Software</span>
             </h1>
 
-            <p className="hero-display mt-3 lg:mt-4 text-[20px] sm:text-[22px] lg:text-[clamp(20px,1.9vw,32px)] leading-tight tracking-[-0.01em] text-[#121417]" style={{ fontWeight: 700 }}>
+            <p className="hero-enter hero-display mt-3 lg:mt-4 text-[20px] sm:text-[22px] lg:text-[clamp(20px,1.9vw,32px)] leading-tight tracking-[-0.01em] text-[#121417]" style={{ fontWeight: 700, '--i': 2 }}>
               Custom Apps, Dashboards &amp; Business&nbsp;Systems
             </p>
-            <p className="mt-2.5 max-w-[38ch] sm:max-w-[44ch] text-[16px] sm:text-[18px] lg:text-[clamp(17px,1.45vw,23px)] leading-snug text-[#2b3336]">
+            <p style={{ '--i': 3 }} className="hero-enter mt-2.5 max-w-[38ch] sm:max-w-[44ch] text-[16px] sm:text-[18px] lg:text-[clamp(17px,1.45vw,23px)] leading-snug text-[#2b3336]">
               I build the websites your customers see and the software that helps you run your business.
             </p>
 
-            <div className="mt-6 lg:mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div style={{ '--i': 4 }} className="hero-enter mt-6 lg:mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <a
                 href="#websites"
                 onClick={trackViewWorkClick}
-                className="group inline-flex items-center justify-center gap-3 min-h-[52px] px-9 rounded-full bg-gradient-to-b from-[#16808b] to-[#0b5a63] text-white text-[17px] font-semibold shadow-[0_12px_26px_-12px_rgba(14,92,102,0.85)] hover:from-[#13737d] hover:to-[#094d55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
+                className="group inline-flex items-center justify-center gap-3 min-h-[52px] px-9 rounded-full bg-gradient-to-b from-[#16808b] to-[#0b5a63] text-white text-[17px] font-semibold shadow-[0_12px_26px_-12px_rgba(14,92,102,0.85)] hover:from-[#13737d] hover:to-[#094d55] hover:-translate-y-0.5 transition motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
               >
                 View Work
                 <Icon name="arrow" className="w-5 h-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
@@ -165,14 +171,14 @@ export default function HeroModern() {
               <a
                 href="#contact"
                 onClick={trackGetInTouchClick}
-                className="inline-flex items-center justify-center gap-3 min-h-[52px] px-8 rounded-full border-[1.5px] border-[#121417] bg-white/40 text-[#121417] text-[17px] font-semibold hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
+                className="inline-flex items-center justify-center gap-3 min-h-[52px] px-8 rounded-full border-[1.5px] border-[#121417] bg-white/40 text-[#121417] text-[17px] font-semibold hover:bg-white hover:-translate-y-0.5 transition motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
               >
                 <Icon name="send" className="w-5 h-5" />
                 Get in Touch
               </a>
             </div>
 
-            <ul className="mt-5 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[13px] sm:text-[15px] text-[#2b3336]">
+            <ul style={{ '--i': 5 }} className="hero-enter mt-5 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[13px] sm:text-[15px] text-[#2b3336]">
               <li className="flex items-center gap-2"><Icon name="building" className="w-[18px] h-[18px] text-[#3b4448]" />Embark Digitals</li>
               <li className="w-px h-5 bg-[#121417]/25" aria-hidden="true" />
               <li className="flex items-center gap-2"><Icon name="pin" className="w-[18px] h-[18px] text-[#3b4448]" />{location}</li>
@@ -182,15 +188,15 @@ export default function HeroModern() {
           {/* Portrait stage (phone / tablet): composed separately, not a scaled desktop */}
           <div className="lg:hidden relative mt-8 -mx-5 sm:-mx-8 overflow-x-clip">
             <div className="absolute inset-0 hero-teal-field hero-teal-field--stage" aria-hidden="true" />
-            <PortraitStage className="relative mx-auto w-[86%] max-w-[560px] aspect-square" />
-            <PerspectiveName className="relative -mt-[19%] sm:-mt-[15%] px-3 text-[clamp(60px,19vw,140px)]" />
+            <PortraitStage className="hero-settle relative mx-auto w-[86%] max-w-[560px] aspect-square" />
+            <PerspectiveName className="hero-name-enter relative -mt-[19%] sm:-mt-[15%] px-3 text-[clamp(60px,19vw,140px)]" />
           </div>
 
           {/* Perspective name (desktop) */}
-          <PerspectiveName className="hidden lg:block relative z-[2] mt-auto -mr-[3vw] pl-[7vw] text-[clamp(120px,16vw,280px)]" />
+          <PerspectiveName className="hero-name-enter hidden lg:block relative z-[2] mt-auto -mr-[3vw] pl-[7vw] text-[clamp(120px,16vw,280px)]" />
 
           {/* Core skills — desktop glass strip */}
-          <div className="hidden lg:flex relative mb-[clamp(20px,3vh,32px)] mt-1 hero-glass-light rounded-full px-[clamp(20px,2.4vw,36px)] py-3 items-center gap-[clamp(12px,1.6vw,24px)]">
+          <div className="hero-sheen hidden lg:flex relative mb-[clamp(20px,3vh,32px)] mt-1 hero-glass-light rounded-full px-[clamp(20px,2.4vw,36px)] py-3 items-center gap-[clamp(12px,1.6vw,24px)]">
             <p className="font-semibold italic text-[clamp(16px,1.35vw,20px)] whitespace-nowrap text-[#121417]">Core Skills &amp; Tools</p>
             <span className="w-px h-8 bg-[#121417]/15 flex-none" aria-hidden="true" />
             <ul className="flex flex-1 items-center justify-between gap-x-[clamp(10px,1.2vw,20px)]">
@@ -206,7 +212,7 @@ export default function HeroModern() {
           {/* Core skills — phone / tablet: one link to the full list in About */}
           <a
             href="#skills"
-            className="lg:hidden relative mt-4 mb-8 hero-glass-light rounded-full min-h-[56px] px-7 flex items-center justify-center gap-4 font-semibold italic text-[18px] text-[#121417] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
+            className="hero-sheen lg:hidden relative mt-4 mb-8 hero-glass-light rounded-full min-h-[56px] px-7 flex items-center justify-center gap-4 font-semibold italic text-[18px] text-[#121417] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
           >
             Core Skills &amp; Tools
             <Icon name="arrow" className="w-5 h-5 not-italic" />
