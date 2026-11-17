@@ -170,7 +170,7 @@ export default function AboutModern() {
         </div>
 
         {/* ===== Skills & Tools ===== */}
-        <div className="mt-14 lg:mt-28 pt-10 lg:pt-20 border-t border-[#121417]/10">
+        <div id="skills" className="scroll-mt-24 mt-14 lg:mt-28 pt-10 lg:pt-20 border-t border-[#121417]/10">
           <div className="grid gap-6 lg:grid-cols-[5fr_7fr] lg:gap-16 xl:gap-24 items-end">
             <div>
               <Eyebrow>Skills &amp; Tools</Eyebrow>
