@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
-  SiReact, SiTailwindcss, SiJavascript, SiHtml5,
-  SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiCanva
+  SiReact, SiTailwindcss, SiJavascript, SiHtml5, SiCss3,
+  SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiCanva, SiClaude
 } from 'react-icons/si'
 import { trackGetInTouchClick, trackViewWorkClick } from '../../lib/analytics'
 import { content } from '../../content'
@@ -36,18 +36,62 @@ const services = [
 
 const proofPoints = ['Clean UI & brand consistency', 'Conversion-focused messaging', 'Reliable delivery']
 
-// Curated preview only — the full list of 11 skills stays in About → Skills & Tools.
-// (The reference shows Figma, which is not one of Ndumiso's listed skills; HTML is shown instead.)
+// All 11 skills from About → Skills & Tools, shown as a slow continuous ticker (owner, 17 Nov 2026).
+// Lovable has no brand icon in the icon set, so it gets a plain dot rather than an invented logo.
 const coreSkills = [
   { name: 'React', Icon: SiReact, color: '#149eca' },
   { name: 'Tailwind', Icon: SiTailwindcss, color: '#0ea5e9' },
   { name: 'JavaScript', Icon: SiJavascript, color: '#d9b400' },
   { name: 'HTML', Icon: SiHtml5, color: '#E34F26' },
+  { name: 'CSS', Icon: SiCss3, color: '#1572B6' },
   { name: 'Photoshop', Icon: SiAdobephotoshop, color: '#1f7ad6' },
   { name: 'Illustrator', Icon: SiAdobeillustrator, color: '#e68a00' },
   { name: 'InDesign', Icon: SiAdobeindesign, color: '#e2335c' },
-  { name: 'Canva', Icon: SiCanva, color: '#00a8b0' }
+  { name: 'Canva', Icon: SiCanva, color: '#00a8b0' },
+  { name: 'Claude Code', Icon: SiClaude, color: '#d97757' },
+  { name: 'Lovable', Icon: null, color: '#e0457b' }
 ]
+
+function SkillList({ hidden = false }) {
+  return (
+    <ul className="skills-ticker__list" aria-hidden={hidden || undefined}>
+      {coreSkills.map(({ name, Icon: SkillIcon, color }) => (
+        <li key={name} className="flex items-center gap-2 text-[15px] text-[#26302f] whitespace-nowrap">
+          {SkillIcon
+            ? <SkillIcon className="w-5 h-5 flex-none" style={{ color }} aria-hidden="true" />
+            : <span className="w-2.5 h-2.5 mx-[5px] rounded-full flex-none" style={{ background: color }} aria-hidden="true" />}
+          {name}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// Slow news-style ticker. Pauses on hover/focus and with the button (WCAG 2.2.2);
+// with reduced motion it stops and the row can be scrolled by hand instead.
+function SkillsTicker({ className = '' }) {
+  const [paused, setPaused] = useState(false)
+  return (
+    <div className={`flex items-center gap-2 min-w-0 ${className}`}>
+      <div className={`skills-ticker flex-1 min-w-0 ${paused ? 'is-paused' : ''}`}>
+        <div className="skills-ticker__track">
+          <SkillList />
+          <SkillList hidden />
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={() => setPaused(p => !p)}
+        aria-label={paused ? 'Play the skills ticker' : 'Pause the skills ticker'}
+        className="skills-ticker__toggle flex-none w-11 h-11 rounded-full flex items-center justify-center text-[#26302f] hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
+      >
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          {paused ? <path d="M8 5v14l11-7z" /> : <path d="M7 5h4v14H7zM13 5h4v14h-4z" />}
+        </svg>
+      </button>
+    </div>
+  )
+}
 
 // Glass blocks, positioned in % of the portrait box (measured from the reference).
 // "front" blocks sit over the shoulders only — never the face, copy or controls.
@@ -196,27 +240,23 @@ export default function HeroModern() {
           <PerspectiveName className="hero-name-enter hidden lg:block relative z-[2] mt-auto -mr-[3vw] pl-[7vw] text-[clamp(120px,16vw,280px)]" />
 
           {/* Core skills — desktop glass strip */}
-          <div className="hero-sheen hidden lg:flex relative mb-[clamp(20px,3vh,32px)] mt-1 hero-glass-light rounded-full px-[clamp(20px,2.4vw,36px)] py-3 items-center gap-[clamp(12px,1.6vw,24px)]">
-            <p className="font-semibold italic text-[clamp(16px,1.35vw,20px)] whitespace-nowrap text-[#121417]">Core Skills &amp; Tools</p>
+          <div className="hero-sheen hidden lg:flex relative mb-[clamp(20px,3vh,32px)] mt-1 hero-glass-light rounded-full pl-[clamp(20px,2.4vw,36px)] pr-2 py-1.5 items-center gap-[clamp(12px,1.6vw,24px)]">
+            <a href="#skills" className="font-semibold italic text-[clamp(16px,1.35vw,20px)] whitespace-nowrap text-[#121417] min-h-[44px] flex items-center hover:text-[#0e5c66] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66] rounded-full">Core Skills &amp; Tools</a>
             <span className="w-px h-8 bg-[#121417]/15 flex-none" aria-hidden="true" />
-            <ul className="flex flex-1 items-center justify-between gap-x-[clamp(10px,1.2vw,20px)]">
-              {coreSkills.map(({ name, Icon: SkillIcon, color }) => (
-                <li key={name} className="flex items-center gap-2 text-[clamp(13px,1vw,15px)] text-[#26302f] whitespace-nowrap">
-                  <SkillIcon className="w-5 h-5 flex-none" style={{ color }} aria-hidden="true" />
-                  {name}
-                </li>
-              ))}
-            </ul>
+            <SkillsTicker className="flex-1" />
           </div>
 
-          {/* Core skills — phone / tablet: one link to the full list in About */}
-          <a
-            href="#skills"
-            className="hero-sheen lg:hidden relative mt-4 mb-8 hero-glass-light rounded-full min-h-[56px] px-7 flex items-center justify-center gap-4 font-semibold italic text-[18px] text-[#121417] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
-          >
-            Core Skills &amp; Tools
-            <Icon name="arrow" className="w-5 h-5 not-italic" />
-          </a>
+          {/* Core skills — phone / tablet: link to the full list in About + the same ticker */}
+          <div className="hero-sheen lg:hidden relative mt-4 mb-8 hero-glass-light rounded-[28px] px-4 pt-2 pb-2">
+            <a
+              href="#skills"
+              className="min-h-[48px] px-3 flex items-center justify-center gap-4 font-semibold italic text-[18px] text-[#121417] rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
+            >
+              Core Skills &amp; Tools
+              <Icon name="arrow" className="w-5 h-5 not-italic" />
+            </a>
+            <SkillsTicker className="border-t border-[#121417]/10 pt-1" />
+          </div>
         </div>
       </div>
 

@@ -22,6 +22,14 @@ const RATIO = {
   '/assets/hakem-bike.jpg': 1920 / 1344
 }
 
+function SlidesIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4M10 8.5v5l4-2.5-4-2.5z" />
+    </svg>
+  )
+}
+
 function PdfIcon() {
   return (
     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -95,9 +103,16 @@ export default function GraphicsModern() {
   const closeRef = useRef(null)
   const lastTrigger = useRef(null)
   const openGallery = (itemIdx, startAt, el) => { lastTrigger.current = el; setModal({ open: true, mode: 'gallery', itemIdx, imgIdx: startAt, scale: 1 }) }
+  // Logo slides open in the same viewer, view-only (no PDF link)
+  const openSlides = (it, el) => {
+    lastTrigger.current = el
+    setModal({ open: true, mode: 'gallery', itemIdx: -1, imgIdx: 0, scale: 1,
+      item: { title: `${it.name || 'Logo'} — slides`, galleryTitle: it.name || 'Logo slides', gallery: it.slides } })
+  }
   const openZoom = (itemIdx, el) => { lastTrigger.current = el; setModal({ open: true, mode: 'zoom', itemIdx, imgIdx: 0, scale: 1 }) }
   const close = () => { setModal({ open: false, mode: null, itemIdx: -1, imgIdx: 0, scale: 1 }); lastTrigger.current?.focus?.() }
-  const galleryLen = modal.mode === 'gallery' ? (tvei[modal.itemIdx]?.gallery?.length || 0) : 0
+  const current = modal.open ? (modal.item || tvei[modal.itemIdx]) : null
+  const galleryLen = modal.mode === 'gallery' ? (current?.gallery?.length || 0) : 0
   const go = d => galleryLen && setModal(m => ({ ...m, imgIdx: (m.imgIdx + d + galleryLen) % galleryLen, scale: 1 }))
   const zoom = v => setModal(m => ({ ...m, scale: Math.max(1, Math.min(3, +v.toFixed(2))) }))
 
@@ -111,8 +126,6 @@ export default function GraphicsModern() {
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [modal.open, modal.mode, galleryLen])
-
-  const current = modal.open ? tvei[modal.itemIdx] : null
 
   // Design-work tile (native aspect ratio; flex-grow = ratio so a row shares one height)
   // Called as a function (not <DesignTile/>) so carousel updates don't remount it and drop focus
@@ -199,12 +212,12 @@ export default function GraphicsModern() {
                     </div>
                     <h4 className="hero-display mt-2 text-[22px] leading-tight">{it.name || '—'}</h4>
                     {it.note && <p className="mt-2 text-[15px] leading-relaxed text-[#4a5357]">{it.note}</p>}
-                    {(it.download || it.brief) && (
+                    {(it.slides?.length || it.brief) && (
                       <div className="mt-auto pt-5 flex flex-wrap gap-2.5">
-                        {it.download && (
-                          <a href={withBase(it.download)} onClick={() => trackGraphicsSlidesClick(it.name || 'Logo design')} target="_blank" rel="noreferrer" className={pillSolid}>
-                            <PdfIcon /> Slides <span className="sr-only">(PDF, opens in a new tab)</span>
-                          </a>
+                        {it.slides?.length > 0 && (
+                          <button type="button" onClick={e => { trackGraphicsSlidesClick(it.name || 'Logo design'); openSlides(it, e.currentTarget) }} className={pillSolid}>
+                            <SlidesIcon /> View slides <span className="sr-only">({it.slides.length} pages, opens a viewer)</span>
+                          </button>
                         )}
                         {it.brief && (
                           <a href={withBase(it.brief)} onClick={() => trackGraphicsSlidesClick(`${it.name || 'Logo'} - Brief`)} target="_blank" rel="noreferrer" className={pillLine}>
@@ -264,7 +277,9 @@ export default function GraphicsModern() {
                 <img
                   src={src(modal.mode === 'gallery' ? current.gallery[modal.imgIdx] : (current.src || '/assets/nduproj-02.jpg'))}
                   alt={modal.mode === 'gallery' ? `${current.galleryTitle || current.title} — image ${modal.imgIdx + 1} of ${galleryLen}` : current.title || 'Design'}
-                  className="max-w-full max-h-[64vh] object-contain"
+                  draggable={false}
+                  onContextMenu={e => e.preventDefault()}
+                  className="max-w-full max-h-[64vh] object-contain select-none"
                   style={{ transform: `scale(${modal.scale})`, transformOrigin: 'center center', transition: 'transform 120ms ease' }}
                 />
               </div>
@@ -281,7 +296,7 @@ export default function GraphicsModern() {
                 {current.gallery.map((g, idx) => (
                   <button key={idx} type="button" onClick={() => setModal(m => ({ ...m, imgIdx: idx, scale: 1 }))} aria-label={`Show image ${idx + 1}`} aria-current={idx === modal.imgIdx ? 'true' : undefined}
                     className={`shrink-0 rounded-lg p-1 border-2 ${idx === modal.imgIdx ? 'border-[#0e5c66]' : 'border-transparent hover:border-[#c9d0d1]'}`}>
-                    <img src={src(g)} alt="" className="w-14 h-14 object-contain bg-white rounded" />
+                    <img src={src(g)} alt="" draggable={false} onContextMenu={e => e.preventDefault()} className="w-14 h-14 object-contain bg-white rounded select-none" />
                   </button>
                 ))}
               </div>

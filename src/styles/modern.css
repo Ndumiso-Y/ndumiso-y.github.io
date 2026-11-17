@@ -217,6 +217,35 @@ body {
   .hero-sheen::after { display: none; }
 }
 
+/* ---- Hero skills ticker: slow continuous loop (two identical lists, track moves -50%) ---- */
+.skills-ticker {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.skills-ticker__track {
+  display: flex;
+  width: max-content;
+  animation: skills-ticker 60s linear infinite;
+}
+.skills-ticker__list {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+  min-height: 44px;
+}
+.skills-ticker:hover .skills-ticker__track,
+.skills-ticker:focus-within .skills-ticker__track,
+.skills-ticker.is-paused .skills-ticker__track { animation-play-state: paused; }
+@keyframes skills-ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .skills-ticker { overflow-x: auto; }
+  .skills-ticker__track { animation: none !important; }
+  .skills-ticker__list[aria-hidden="true"] { display: none; }
+  .skills-ticker__toggle { display: none; }
+}
+
 /* Dark frosted glass for the nav once it sits over the dark sections */
 .nav-glass-dark {
   background: rgba(14, 16, 17, 0.72);
