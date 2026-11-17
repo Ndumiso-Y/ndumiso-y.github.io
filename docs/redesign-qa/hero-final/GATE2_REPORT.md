@@ -3,7 +3,7 @@
 **Date:** 17 Nov 2026 · **Branch:** `redesign/hero-final` · **Rollback:** tag `checkpoint/before-hero-final` (= main `92bd613`, pushed)
 **Visual authority:** `Ndumiso_Hero_Approved_Reference_Pack_2026-11-17/references/01_FINAL_HERO_APPROVED.png` (02 used for glass-block placement only)
 **Standard:** ED-WEB-001 **v1.0** (active) — `D:\Digital Agency\Embark Digitals\Embark_Digitals_Living_Web_Experience_Playbook_v1.0.docx`. v1.1 consolidated/AI-design candidates were read for the mask-verification and material-realism practices; both are marked "candidate, not approved".
-**Status:** Gate 2 static design approved by the owner (17 Nov 2026: "Approve, start motion"). Gate 3 motion built — see below. **Not merged or deployed; awaiting owner Gate 3 decision.**
+**Status:** Gate 2 static design approved by the owner (17 Nov 2026: "Approve, start motion"). Gate 3 motion approved by the owner after a phone preview (17 Nov 2026: the glass-block drift was the intended effect — "I like that"). Merged and deployed the same day (Gate 5).
 
 ## Gate 0 findings
 - Active hero: `src/features/modern/HeroModern.jsx` (rendered by `AppModern.jsx`); nav is the separate `FloatingNav.jsx` (unchanged).
@@ -85,4 +85,4 @@ Files: `src/features/modern/HeroModern.jsx` (classes and per-block drift values)
 - **Limits of this evidence:** CPU ×4 throttling stands in for a low-power phone; no physical device was tested. The sheen is deliberately faint and barely shows at filmstrip size.
 
 ## Next
-Owner Gate 3 decision → merge and deploy (Gate 5) only after owner sign-off. Rollback: tag `checkpoint/before-hero-final`.
+Deployed. Rollback: tag `checkpoint/before-hero-final`. Possible later work: motion elsewhere on the page (owner open to it), software proof cards (row 8).
