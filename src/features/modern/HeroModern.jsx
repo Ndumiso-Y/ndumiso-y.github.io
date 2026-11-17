@@ -3,7 +3,7 @@ import {
   SiReact, SiTailwindcss, SiJavascript, SiHtml5, SiCss3,
   SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiCanva, SiClaude
 } from 'react-icons/si'
-import { trackGetInTouchClick, trackViewWorkClick } from '../../lib/analytics'
+import { trackGetInTouchClick, trackViewWorkClick, trackEvent } from '../../lib/analytics'
 import { content } from '../../content'
 import { withBase } from '../../lib/withBase'
 
@@ -109,7 +109,9 @@ const icons = {
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
   send: <path d="M21 3L10 14M21 3l-7 18-4-7-7-4 18-7z" />,
   building: <path d="M4 21V5l8-2v18M12 8h8v13M4 21h17M7 8h2M7 12h2M7 16h2M15 12h2M15 16h2" />,
-  pin: <path d="M12 21s-7-6.2-7-11.5A7 7 0 0112 2.5a7 7 0 017 7C19 14.8 12 21 12 21zm0-9a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+  pin: <path d="M12 21s-7-6.2-7-11.5A7 7 0 0112 2.5a7 7 0 017 7C19 14.8 12 21 12 21zm0-9a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />,
+  globe: <path d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 010 18M12 3a14 14 0 000 18" />,
+  external: <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
 }
 
 function Icon({ name, className = 'w-5 h-5' }) {
@@ -170,7 +172,7 @@ function PerspectiveName({ className = '' }) {
 }
 
 export default function HeroModern() {
-  const location = content?.contact?.location || 'Johannesburg, South Africa'
+  const location = content?.contact?.location || 'Remote'
 
   return (
     <section id="hero" aria-label="Hero section" className="relative bg-[#f3f3f1] text-[#121417] overflow-hidden">
@@ -223,9 +225,22 @@ export default function HeroModern() {
             </div>
 
             <ul style={{ '--i': 5 }} className="hero-enter mt-5 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[13px] sm:text-[15px] text-[#2b3336]">
-              <li className="flex items-center gap-2"><Icon name="building" className="w-[18px] h-[18px] text-[#3b4448]" />Embark Digitals</li>
+              <li>
+                <a
+                  href="https://www.embarkdigitals.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('embark_digitals_click', { link_location: 'hero' })}
+                  className="group inline-flex items-center gap-2 min-h-[44px] -my-[11px] rounded-full text-[#2b3336] underline decoration-[#121417]/25 underline-offset-4 hover:text-[#0e5c66] hover:decoration-[#0e5c66] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e5c66]"
+                >
+                  <Icon name="building" className="w-[18px] h-[18px] text-[#3b4448] group-hover:text-[#0e5c66]" />
+                  Embark Digitals
+                  <Icon name="external" className="w-3.5 h-3.5 opacity-60" />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </li>
               <li className="w-px h-5 bg-[#121417]/25" aria-hidden="true" />
-              <li className="flex items-center gap-2"><Icon name="pin" className="w-[18px] h-[18px] text-[#3b4448]" />{location}</li>
+              <li className="flex items-center gap-2"><Icon name={/remote/i.test(location) ? 'globe' : 'pin'} className="w-[18px] h-[18px] text-[#3b4448]" />{location}</li>
             </ul>
           </div>
 
