@@ -11,6 +11,7 @@ const TARGETS = [
   '#graphics article',
   '#social article',
   '#about article',
+  '#about [data-venture]',
   '#contact figure'
 ]
 

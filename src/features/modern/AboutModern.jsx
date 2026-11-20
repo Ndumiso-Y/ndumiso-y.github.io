@@ -159,6 +159,26 @@ export default function AboutModern() {
               ))}
             </ul>
 
+            {/* Venture: no logo exists yet (21 Nov 2026), so the name is set as a wordmark; no link until launch */}
+            {aboutData.venture && (
+              <div data-venture className="mt-7 rounded-[22px] bg-white border border-[#121417]/10 shadow-[0_18px_36px_-28px_rgba(10,30,34,0.5)] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                <div className="flex-none w-16 h-16 rounded-2xl bg-[#0e5c66] text-white flex items-center justify-center hero-display text-[30px] leading-none" aria-hidden="true">
+                  {aboutData.venture.name.charAt(0)}
+                </div>
+                <div className="min-w-0">
+                  <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <span className="hero-display text-[22px] sm:text-[24px] leading-tight text-[#121417]">{aboutData.venture.name}</span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#41b3bc]/15 text-[#0b4c55] px-3 py-1 text-[12px] font-semibold tracking-[0.12em] uppercase">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0e5c66]" aria-hidden="true" />
+                      {aboutData.venture.status}
+                    </span>
+                  </p>
+                  <p className="mt-1 text-[14px] font-semibold tracking-[0.14em] uppercase text-[#0e5c66]">{aboutData.venture.role}</p>
+                  <p className="mt-2 text-[16px] leading-relaxed text-[#3b4448]">{aboutData.venture.desc}</p>
+                </div>
+              </div>
+            )}
+
             <a
               href="#contact"
               className="group mt-8 inline-flex items-center gap-3 min-h-[52px] px-8 rounded-full bg-[#0e5c66] text-white text-[16px] font-semibold shadow-[0_10px_24px_-12px_rgba(14,92,102,0.8)] hover:bg-[#0b4c55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66]"
