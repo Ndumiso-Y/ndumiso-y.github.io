@@ -159,11 +159,11 @@ export default function AboutModern() {
               ))}
             </ul>
 
-            {/* Venture: no logo exists yet (21 Nov 2026), so the name is set as a wordmark; no link until launch */}
+            {/* Venture: only the radar mark is shown, not the full logo (owner, 21 Nov 2026); no link until launch */}
             {aboutData.venture && (
               <div data-venture className="mt-7 rounded-[22px] bg-white border border-[#121417]/10 shadow-[0_18px_36px_-28px_rgba(10,30,34,0.5)] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                <div className="flex-none w-16 h-16 rounded-2xl bg-[#0e5c66] text-white flex items-center justify-center hero-display text-[30px] leading-none" aria-hidden="true">
-                  {aboutData.venture.name.charAt(0)}
+                <div className="flex-none w-16 h-16 rounded-2xl bg-[#f4f6f6] border border-[#121417]/[0.06] flex items-center justify-center">
+                  <img src={withBase(aboutData.venture.mark)} alt={`${aboutData.venture.name} logo mark`} width="44" height="44" loading="lazy" decoding="async" className="w-11 h-11" draggable={false} />
                 </div>
                 <div className="min-w-0">
                   <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
