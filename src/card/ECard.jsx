@@ -3,10 +3,10 @@ import { content } from '../content'
 import { withBase } from '../lib/withBase'
 import { trackEvent, trackWhatsAppClick, trackEmailClick } from '../lib/analytics'
 
-// Gate 1 (static): owner approved 23 Nov 2026. Wording follows the site;
-// Website opens embarkdigitals.com, View Profile opens the portfolio; no verified tick.
+// Gate 1 (static): owner approved 23 Nov 2026. Wording follows the site; no verified tick.
+// 24 Nov 2026, owner: the card's Website is the GitHub portfolio, not embarkdigitals.com,
+// so the separate View Profile button (same destination) was removed.
 const { contact } = content
-const EMBARK_URL = 'https://www.embarkdigitals.com'
 
 const Arrow = () => (
   <svg className="ec-arrow" viewBox="0 0 24 24" aria-hidden="true">
@@ -33,12 +33,6 @@ const icons = {
       <path d="m4 7 8 6 8-6" />
     </svg>
   ),
-  user: (
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6" />
-    </svg>
-  ),
   save: (
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
@@ -47,14 +41,12 @@ const icons = {
 }
 
 const actions = [
-  { key: 'website', label: 'Website', icon: icons.globe, href: EMBARK_URL, external: true, primary: true,
-    onClick: () => trackEvent('ecard_website_click', { label: 'E-card Website' }) },
+  { key: 'website', label: 'Website', icon: icons.globe, href: withBase('/'), primary: true,
+    onClick: () => trackEvent('ecard_website_click', { label: 'E-card Website (portfolio)' }) },
   { key: 'whatsapp', label: 'WhatsApp', icon: icons.whatsapp, href: contact.whatsapp, external: true,
     onClick: trackWhatsAppClick },
   { key: 'email', label: 'Email', icon: icons.mail, href: `mailto:${contact.email}`,
     onClick: trackEmailClick },
-  { key: 'profile', label: 'View Profile', icon: icons.user, href: withBase('/'),
-    onClick: () => trackEvent('ecard_profile_click', { label: 'E-card View Profile' }) },
 ]
 
 export default function ECard() {
