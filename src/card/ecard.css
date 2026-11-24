@@ -194,6 +194,7 @@ body {
 }
 
 .ec-btn--primary {
+  grid-column: 1 / -1; /* Website (portfolio) spans the row; WhatsApp and Email sit below */
   background: linear-gradient(135deg, var(--ec-btn-a) 0%, var(--ec-btn-b) 100%);
   border-color: transparent;
   color: #ffffff;
