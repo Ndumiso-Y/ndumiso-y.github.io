@@ -106,7 +106,7 @@ export default function ContactModern() {
             {c.ecard && (
               <figure className="mt-6 flex items-center gap-4 rounded-2xl bg-white/[0.04] border border-white/10 p-3">
                 <span className="flex-none w-[104px] bg-white rounded-xl p-1.5">
-                  <img src={withBase('/assets/QRcodeBusiness.jpg')} alt="QR code that opens Ndumiso's e-card" width="370" height="370" loading="lazy" className="w-full h-auto rounded-md" />
+                  <img src={withBase('/assets/QRcodeECard.png')} alt="QR code that opens Ndumiso's e-card" width="574" height="574" loading="lazy" className="w-full h-auto rounded-md" />
                 </span>
                 <figcaption>
                   <span className="block text-[16px] font-semibold">My e-card</span>

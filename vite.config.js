@@ -14,6 +14,15 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
+  // Second page: standalone e-card at /card/ (own static link-preview tags)
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        card: path.resolve(__dirname, 'card/index.html')
+      }
+    }
+  },
   define: {
     'import.meta.env.VITE_HOST_TARGET': JSON.stringify(target)
   }

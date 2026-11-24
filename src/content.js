@@ -421,7 +421,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     twitter: "https://x.com/EmbarkDigitals?t=do3jV9xUNbQMcIrGY-xglQ&s=08",
     location: "", // no location shown for now (owner, 17 Nov 2026)
     icon: "/assets/ndu-icon.png",                 // navbar/footer logo
-    ecard: "https://www.embarkdigitals.com/ecard", // e-card button
+    ecard: "https://ndumiso-y.github.io/card/", // e-card button + QR (was embarkdigitals.com/ecard, a 404; owner Gate 4, 24 Nov 2026)
     vcf: "/assets/Embark-Digitals.vcf"            // VCF contact file
   },
 };
