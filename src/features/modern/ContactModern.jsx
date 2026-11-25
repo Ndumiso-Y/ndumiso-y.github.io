@@ -77,7 +77,7 @@ export default function ContactModern() {
             </div>
 
             {UPWORK ? (
-              // Upwork build: no means of direct contact; all conversation stays on Upwork
+              // Upwork/Fiverr build: no means of direct contact; all conversation stays on the platform
               <div className="mt-7">
                 {UPWORK_PROFILE_URL ? (
                   <a href={UPWORK_PROFILE_URL} target="_blank" rel="noopener noreferrer"
@@ -87,7 +87,7 @@ export default function ContactModern() {
                   </a>
                 ) : null}
                 <p className={`${UPWORK_PROFILE_URL ? 'mt-5' : ''} text-[16px] text-white/75 leading-relaxed`}>
-                  Send me a message or an invitation on Upwork and I'll reply there.
+                  Send me a message on the platform where you found me, and I'll reply there.
                 </p>
               </div>
             ) : (<>
