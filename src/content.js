@@ -62,7 +62,7 @@ export const content = {
       brief:
         "Personal brand site for Dr. Benzi — clear messaging, modern UI, and fast performance.",
       thumb: "/assets/benzi-shot.jpg",
-      url: "https://ndumiso-y.github.io/Dr--Benzi--Nkabinde/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Dr--Benzi--Nkabinde/",
       repo: "",
     },
     {
@@ -94,7 +94,7 @@ export const content = {
       brief:
         "Agency site for Embark Digitals — services, case studies, and contact.",
       thumb: "/assets/embark-shot.jpg",
-      url: "https://www.embarkdigitals.com",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://www.embarkdigitals.com",
       repo: "",
     },
   ],
@@ -166,7 +166,7 @@ export const content = {
     {
       name: "01 — Personal Profile Page",
       thumb: "/assets/p1-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project-1--Personal-Profile-Page/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project-1--Personal-Profile-Page/",
       audio: "/assets/p1.mp3",
       audioDesc: "What this project is about",
       desc:
@@ -177,7 +177,7 @@ I also practiced using GitHub, an important tool used by millions of developers 
     {
       name: "02 — Mobile-first Layout",
       thumb: "/assets/p2-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project2--MobileFirstResponsiveLayout/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project2--MobileFirstResponsiveLayout/",
       audio: "/assets/p2.mp3",
       audioDesc: "Mobile-first responsive layout",
       // exact preview ends after “…large screen sizes.”
@@ -193,7 +193,7 @@ To complete each part of this project, I used ONLY the concepts and techniques l
     {
       name: "03 — Interactive Registration Form",
       thumb: "/assets/p3-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project-3/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project-3/",
       audio: "/assets/p3.mp3",
       audioDesc: "Responsive form & inputs",
       desc:
@@ -204,7 +204,7 @@ To complete each part of this project, I used ONLY the concepts and techniques l
     {
       name: "04 — Web Style Guide (Sass)",
       thumb: "/assets/p4-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project4---Web/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project4---Web/",
       audio: "/assets/p4.mp3",
       audioDesc: "Sass variables & partials",
       desc:
@@ -213,7 +213,7 @@ To complete each part of this project, I used ONLY the concepts and techniques l
     {
       name: "05 — Photo Gallery",
       thumb: "/assets/p5-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project5--photogallery/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project5--photogallery/",
       audio: "/assets/p5.mp3",
       audioDesc: "JS lightbox & search",
       desc:
@@ -222,7 +222,7 @@ To complete each part of this project, I used ONLY the concepts and techniques l
     {
       name: "06 — Game Show App",
       thumb: "/assets/p6-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project6--GameShowApp/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project6--GameShowApp/",
       audio: "/assets/p6.mp3",
       audioDesc: "Word guessing game",
       // Preview ends EXACTLY after “random phrase.”
@@ -242,7 +242,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     {
       name: "07 — Web App Dashboard",
       thumb: "/assets/p7-thumb.jpg",
-      url: "https://ndumiso-y.github.io/https---github.com-Ndumiso-Y-Project7--WebAppDashBoard/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/https---github.com-Ndumiso-Y-Project7--WebAppDashBoard/",
       audio: "/assets/p7.mp3",
       audioDesc: "Charts & forms",
       desc:
@@ -251,7 +251,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     {
       name: "08 — API Employee Directory",
       thumb: "/assets/p8-thumb.jpg",
-      url: "https://ndumiso-y.github.io/Project-8--API--Employee---Directory/",
+      url: import.meta.env.VITE_UPWORK ? "" : "https://ndumiso-y.github.io/Project-8--API--Employee---Directory/",
       audio: "/assets/p8.mp3",
       audioDesc: "Fetch API & modals",
       desc:
@@ -344,7 +344,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
           type: "facebook",
           url: "https://www.facebook.com/profile.php?id=61578253415232",
         },
-        { type: "instagram", url: "https://www.instagram.com/your-easy-docs-handle" },
+        ...(import.meta.env.VITE_UPWORK ? [] : [{ type: "instagram", url: "https://www.instagram.com/your-easy-docs-handle" }]),
       ],
       thumb: "/assets/easy-docs-social.jpg"
     },
@@ -390,7 +390,7 @@ I could guess a letter only once. After I guessed a letter, my programming disab
     {
       key: "treehouse",
       name: "Treehouse – Awarded to study Front-End Web Dev",
-      post: "https://www.linkedin.com/posts/treehouse-island-inc-_treehouse-is-delighted-to-showcase-the-seven-activity-7224036065089568769-WYI9?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA8QhccB0R82FWW4D7H_Xjk0eGCD2T6BvcM",
+      post: import.meta.env.VITE_UPWORK ? "" : "https://www.linkedin.com/posts/treehouse-island-inc-_treehouse-is-delighted-to-showcase-the-seven-activity-7224036065089568769-WYI9?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA8QhccB0R82FWW4D7H_Xjk0eGCD2T6BvcM",
       img: "/assets/treehouse-with-ndu.jpg",              // grid thumbnail
       modalImg: "/assets/treehouse-with-ndu-large.jpg",   // higher-res for zoom
       zoom: true,
@@ -410,7 +410,12 @@ I could guess a letter only once. After I guessed a letter, my programming disab
   ],
 
   // --- Contact ---
-  contact: {
+  // Upwork build: no means of direct contact (Upwork ToS §7.2). Name and icon only.
+  contact: import.meta.env.VITE_UPWORK ? {
+    name: "Ndumiso Yedwa",
+    location: "",
+    icon: "/assets/ndu-icon.png",
+  } : {
     name: "Ndumiso Yedwa",
     email: "contact@embarkdigitals.com",
     phone: "+27 60 714 7939",

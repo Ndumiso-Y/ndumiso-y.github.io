@@ -2,6 +2,7 @@ import React from 'react'
 import { content } from '../content'
 import { withBase } from '../lib/withBase'
 import { trackEvent, trackWhatsAppClick, trackEmailClick } from '../lib/analytics'
+import { UPWORK, UPWORK_PROFILE_URL } from '../lib/upwork'
 
 // Gate 1 (static): owner approved 23 Nov 2026. Wording follows the site; no verified tick.
 // 24 Nov 2026, owner: the card's Website is the GitHub portfolio, not embarkdigitals.com,
@@ -40,7 +41,16 @@ const icons = {
   ),
 }
 
-const actions = [
+// Upwork build (25 Nov 2026): same card, no means of direct contact. View Portfolio opens
+// the Upwork version of the portfolio; Hire me on Upwork appears once the profile link is set.
+const upworkActions = [
+  UPWORK_PROFILE_URL && { key: 'upwork', label: 'Hire me on Upwork', icon: icons.globe, href: UPWORK_PROFILE_URL, external: true, primary: true,
+    onClick: () => trackEvent('ecard_upwork_click', { label: 'E-card Upwork' }) },
+  { key: 'website', label: 'View Portfolio', icon: icons.globe, href: withBase('/'), primary: !UPWORK_PROFILE_URL, wide: true,
+    onClick: () => trackEvent('ecard_website_click', { label: 'E-card Portfolio (Upwork)' }) },
+].filter(Boolean)
+
+const actions = UPWORK ? upworkActions : [
   { key: 'website', label: 'Website', icon: icons.globe, href: withBase('/'), primary: true,
     onClick: () => trackEvent('ecard_website_click', { label: 'E-card Website (portfolio)' }) },
   { key: 'whatsapp', label: 'WhatsApp', icon: icons.whatsapp, href: contact.whatsapp, external: true,
@@ -87,7 +97,7 @@ export default function ECard() {
               {actions.map(a => (
                 <a
                   key={a.key}
-                  className={`ec-btn${a.primary ? ' ec-btn--primary' : ''}`}
+                  className={`ec-btn${a.primary ? ' ec-btn--primary' : ''}${a.wide ? ' ec-btn--wide' : ''}`}
                   href={a.href}
                   onClick={a.onClick}
                   {...(a.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -99,6 +109,7 @@ export default function ECard() {
               ))}
             </nav>
 
+            {!UPWORK && (
             <a
               className="ec-save"
               href={withBase(contact.vcf)}
@@ -108,6 +119,7 @@ export default function ECard() {
               {icons.save}
               Save contact
             </a>
+            )}
           </section>
         </div>
       </article>

@@ -21,14 +21,17 @@ function hostOf(url) {
 
 function SiteCard({ site, index, featured = false, flip = false }) {
   const src = withBase(lighter[site.thumb] || site.thumb)
-  const host = hostOf(site.url)
+  const host = site.host || hostOf(site.url)
+  // Upwork build passes sites without a url: same card, shown as a screenshot only
+  const live = Boolean(site.url)
+  const Wrap = live ? 'a' : 'div'
+  const linkProps = live
+    ? { href: site.url, onClick: () => trackWebProjectClick(site.name), target: '_blank', rel: 'noopener noreferrer' }
+    : {}
 
   return (
-    <a
-      href={site.url}
-      onClick={() => trackWebProjectClick(site.name)}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Wrap
+      {...linkProps}
       className={`group block rounded-[24px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6fd0d7] focus-visible:ring-offset-4 focus-visible:ring-offset-[#10191b] ${
         featured
           ? `lg:grid lg:gap-12 xl:gap-16 lg:items-center ${flip ? 'lg:grid-cols-[5fr_7fr]' : 'lg:grid-cols-[7fr_5fr]'}`
@@ -66,6 +69,7 @@ function SiteCard({ site, index, featured = false, flip = false }) {
         <p className={`mt-2.5 text-white/70 leading-relaxed ${featured ? 'text-[17px] lg:text-[19px] max-w-[40ch]' : 'text-[16px] max-w-[46ch]'}`}>
           {site.outcome}
         </p>
+        {live && (
         <span className="mt-5 inline-flex items-center gap-2.5 min-h-[44px] px-5 rounded-full border border-white/25 text-white text-[15px] font-semibold transition-colors group-hover:bg-white group-hover:text-[#10191b]">
           View Website
           <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -73,8 +77,9 @@ function SiteCard({ site, index, featured = false, flip = false }) {
           </svg>
           <span className="sr-only">(opens {host} in a new tab)</span>
         </span>
+        )}
       </div>
-    </a>
+    </Wrap>
   )
 }
 

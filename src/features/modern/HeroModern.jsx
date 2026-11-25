@@ -5,6 +5,7 @@ import {
 } from 'react-icons/si'
 import { trackGetInTouchClick, trackViewWorkClick, trackEvent } from '../../lib/analytics'
 import { withBase } from '../../lib/withBase'
+import { UPWORK } from '../../lib/upwork'
 
 // Hero — Gate 1 static build of the owner-approved final reference
 // (Ndumiso_Hero_Approved_Reference_Pack_2026-11-17/references/01_FINAL_HERO_APPROVED.png).
@@ -218,12 +219,19 @@ export default function HeroModern() {
                 className="inline-flex items-center justify-center gap-3 min-h-[52px] px-8 rounded-full border-[1.5px] border-[#121417] bg-white/40 text-[#121417] text-[17px] font-semibold hover:bg-white hover:-translate-y-0.5 transition motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0e5c66] focus-visible:ring-offset-[#f3f3f1]"
               >
                 <Icon name="send" className="w-5 h-5" />
-                Get in Touch
+                {UPWORK ? 'Work With Me' : 'Get in Touch'}
               </a>
             </div>
 
             <ul style={{ '--i': 5 }} className="hero-enter mt-5 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[13px] sm:text-[15px] text-[#2b3336]">
               <li>
+                {UPWORK ? (
+                  // Upwork build: company name as text only (no link to the agency site)
+                  <span className="inline-flex items-center gap-2 min-h-[44px] -my-[11px] text-[#2b3336]">
+                    <Icon name="building" className="w-[18px] h-[18px] text-[#3b4448]" />
+                    Embark Digitals
+                  </span>
+                ) : (
                 <a
                   href="https://www.embarkdigitals.com"
                   target="_blank"
@@ -236,6 +244,7 @@ export default function HeroModern() {
                   <Icon name="external" className="w-3.5 h-3.5 opacity-60" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
+                )}
               </li>
             </ul>
           </div>
