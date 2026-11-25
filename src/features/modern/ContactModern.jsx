@@ -2,7 +2,8 @@ import React, { useMemo } from 'react'
 import { FaWhatsapp, FaEnvelope, FaPhone, FaLinkedin, FaFacebook, FaInstagram, FaDownload, FaIdCard } from 'react-icons/fa'
 import { content } from '../../content'
 import { withBase } from '../../lib/withBase'
-import { trackWhatsAppClick, trackEmailClick, trackLinkedInClick, trackECardClick } from '../../lib/analytics'
+import { UPWORK, UPWORK_PROFILE_URL } from '../../lib/upwork'
+import { trackWhatsAppClick, trackEmailClick, trackLinkedInClick, trackECardClick, trackEvent } from '../../lib/analytics'
 
 // Contact — static redesign. Charcoal closing band (pairs with Websites). WhatsApp-first,
 // then Email; Call, Save Contact (VCF) and the existing e-Card; then the three social profiles.
@@ -15,6 +16,7 @@ export default function ContactModern() {
 
   // Fallback vCard (only used if no VCF file is configured), as before
   const vcardUrl = useMemo(() => {
+    if (UPWORK) return ''
     const lines = [
       'BEGIN:VCARD', 'VERSION:3.0', 'N:Yedwa;Ndumiso;;;', `FN:${c.name || 'Ndumiso Yedwa'}`,
       c.title ? `TITLE:${c.title}` : '', c.email ? `EMAIL;TYPE=INTERNET:${c.email}` : '',
@@ -43,7 +45,7 @@ export default function ContactModern() {
           <div>
             <p className="flex items-center gap-4 text-[13px] font-semibold tracking-[0.22em] uppercase text-white/85">
               <span className="block w-10 h-[3px] bg-[#41b3bc] rounded-full" aria-hidden="true" />
-              Contact
+              {UPWORK ? 'Work With Me' : 'Contact'}
             </p>
             <h2 className="hero-display mt-5 text-[clamp(40px,10vw,56px)] lg:text-[clamp(52px,5vw,84px)] leading-[0.98] tracking-[-0.025em]">
               Let's work <span className="text-[#6fd0d7]">together</span><span className="text-[#41b3bc]" aria-hidden="true">.</span>
@@ -74,6 +76,21 @@ export default function ContactModern() {
               </div>
             </div>
 
+            {UPWORK ? (
+              // Upwork/Fiverr build: no means of direct contact; all conversation stays on the platform
+              <div className="mt-7">
+                {UPWORK_PROFILE_URL ? (
+                  <a href={UPWORK_PROFILE_URL} target="_blank" rel="noopener noreferrer"
+                    onClick={() => trackEvent('upwork_profile_click', { link_location: 'contact' })}
+                    className={`${btn} w-full bg-[#41b3bc] text-[#0b1214] hover:bg-[#6fd0d7]`}>
+                    Hire me on Upwork <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                ) : null}
+                <p className={`${UPWORK_PROFILE_URL ? 'mt-5' : ''} text-[16px] text-white/75 leading-relaxed`}>
+                  Send me a message on the platform where you found me, and I'll reply there.
+                </p>
+              </div>
+            ) : (<>
             <div className="mt-7 grid gap-3 sm:grid-cols-2">
               {c.whatsapp && (
                 <a href={c.whatsapp} onClick={trackWhatsAppClick} target="_blank" rel="noreferrer" aria-label="WhatsApp me"
@@ -128,6 +145,7 @@ export default function ContactModern() {
                 </div>
               </div>
             )}
+            </>)}
           </div>
         </div>
       </div>

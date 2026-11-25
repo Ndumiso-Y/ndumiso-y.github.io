@@ -8,7 +8,7 @@ import { trackPageView } from './lib/analytics'
 
 // Use HashRouter for GitHub Pages, BrowserRouter for cPanel/Netlify
 const target = import.meta.env.VITE_HOST_TARGET || 'gh'
-const Router = target === 'gh' ? HashRouter : BrowserRouter
+const Router = target === 'web' ? BrowserRouter : HashRouter // gh and upwork are static hosts
 
 // Component to track page views on route changes
 function AnalyticsTracker() {

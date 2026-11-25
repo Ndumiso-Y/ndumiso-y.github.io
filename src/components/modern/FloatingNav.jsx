@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { content } from '../../content'
 import { withBase } from '../../lib/withBase'
+import { UPWORK } from '../../lib/upwork'
 import { trackNavClick } from '../../lib/analytics'
 
 // Anchors and analytics section keys are unchanged; only the "projects" label
@@ -11,7 +12,7 @@ const navLinks = [
   { href: '#graphics', label: 'Graphics', section: 'graphics' },
   { href: '#social', label: 'Social', section: 'social' },
   { href: '#projects', label: 'Learning', section: 'projects' },
-  { href: '#contact', label: 'Contact', section: 'contact' },
+  { href: '#contact', label: UPWORK ? 'Hire Me' : 'Contact', section: 'contact' },
 ]
 
 export default function FloatingNav() {

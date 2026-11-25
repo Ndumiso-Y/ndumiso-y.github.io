@@ -10,7 +10,10 @@
     "optimize": "node scripts/optimize-images.mjs",
     "transcode": "node scripts/transcode-videos.mjs",
     "build:gh": "cross-env BUILD_TARGET=gh BASE_PATH=/ vite build && copy dist\\index.html dist\\404.html",
-    "build:web": "cross-env BUILD_TARGET=web BASE_PATH=/ vite build"
+    "build:web": "cross-env BUILD_TARGET=web BASE_PATH=/ vite build",
+    "build:upwork": "cross-env BUILD_TARGET=upwork BASE_PATH=/ vite build",
+    "build:upwork-gh": "cross-env BUILD_TARGET=upwork BASE_PATH=/ndu-portfolio-uw/ UPWORK_SITE_URL=https://ndumiso-y.github.io/ndu-portfolio-uw vite build",
+    "dev:upwork": "cross-env BUILD_TARGET=upwork vite --port 5175"
   },
   "dependencies": {
     "react": "^18.3.1",

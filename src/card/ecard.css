@@ -193,6 +193,8 @@ body {
   outline-offset: 2px;
 }
 
+.ec-btn--wide { grid-column: 1 / -1; } /* Upwork card: each button spans the row */
+
 .ec-btn--primary {
   grid-column: 1 / -1; /* Website (portfolio) spans the row; WhatsApp and Email sit below */
   background: linear-gradient(135deg, var(--ec-btn-a) 0%, var(--ec-btn-b) 100%);
